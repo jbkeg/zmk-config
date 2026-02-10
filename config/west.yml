@@ -1,6 +1,6 @@
 manifest:
   defaults:
-    revision: v0.3
+    revision: v0.3.0
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
@@ -8,6 +8,9 @@ manifest:
     # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
     - name: urob
       url-base: https://github.com/urob
+    # nice-view-gem
+    - name: m165437
+      url-base: https://github.com/M165437
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -32,5 +35,9 @@ manifest:
     - name: zmk-unicode
       path: modules/zmk/unicode
       remote: urob
+
+    - name: nice-view-gem
+      remote: m165437
+      revision: v0.3.0
   self:
     path: config

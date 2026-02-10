@@ -138,6 +138,21 @@ def override_zmk_revision(config_dir: Path, revision: str) -> None:
     )
 
 
+def remove_stale_git_locks(base_dir: Path) -> list[Path]:
+    removed: list[Path] = []
+
+    for git_dir in base_dir.rglob(".git"):
+        if not git_dir.is_dir():
+            continue
+        for lock_file in git_dir.rglob("*.lock"):
+            if not lock_file.is_file():
+                continue
+            lock_file.unlink(missing_ok=True)
+            removed.append(lock_file)
+
+    return removed
+
+
 def ensure_west_ready(base_dir: Path, config_dir: Path, skip_update: bool) -> None:
     if not (base_dir / ".west").exists():
         run(["west", "init", "-l", str(config_dir)], cwd=base_dir)
@@ -145,7 +160,17 @@ def ensure_west_ready(base_dir: Path, config_dir: Path, skip_update: bool) -> No
         run(["west", "config", "manifest.path", config_dir.name], cwd=base_dir)
 
     if not skip_update:
-        run(["west", "update", "--fetch-opt=--filter=tree:0"], cwd=base_dir)
+        try:
+            run(["west", "update", "--fetch-opt=--filter=tree:0"], cwd=base_dir)
+        except subprocess.CalledProcessError:
+            removed = remove_stale_git_locks(base_dir)
+            if not removed:
+                raise
+            print(
+                f"Detected stale git lock files. Removed {len(removed)} lock file(s) and retrying west update.",
+                flush=True,
+            )
+            run(["west", "update", "--fetch-opt=--filter=tree:0"], cwd=base_dir)
     run(["west", "zephyr-export"], cwd=base_dir)
 
 
@@ -169,11 +194,9 @@ def build_entry(
 
     artifact = artifact_name(entry)
     build_dir = build_root / artifact
-    if build_dir.exists():
-        shutil.rmtree(build_dir)
-    build_dir.mkdir(parents=True, exist_ok=True)
+    build_root.mkdir(parents=True, exist_ok=True)
 
-    cmd = ["west", "build", "-s", "zmk/app", "-d", str(build_dir), "-b", board]
+    cmd = ["west", "build", "-p", "-s", "zmk/app", "-d", str(build_dir), "-b", board]
     if snippet:
         cmd.extend(["-S", snippet])
     cmd.append("--")
@@ -272,7 +295,8 @@ def main() -> int:
     # if zephyr/module.yml exists in repo, build from isolated base_dir and load repo as extra module.
     if (REPO_ROOT / "zephyr" / "module.yml").exists():
         config_dir = ensure_config_copy(src_config_path, base_dir, src_config_path.name)
-        extra_modules_dir: Path | None = stage_extra_modules_from_git(REPO_ROOT, base_dir)
+        # Stage the extra module into container-local /tmp to avoid host-mounted FS race issues.
+        extra_modules_dir: Path | None = stage_extra_modules_from_git(REPO_ROOT, Path("/tmp"))
     else:
         base_dir = REPO_ROOT
         config_dir = src_config_path
