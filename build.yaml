@@ -54,3 +54,15 @@ include:
   - board: nice_nano_v2
     shield: settings_reset
     artifact-name: corne_reset
+
+  # Eyelash Corne
+  - board: eyelash_corne_right
+    shield: nice_view
+    artifact-name: eyelash_corne_right
+  - board: eyelash_corne_left
+    shield: nice_view
+    snippet: common-config studio-rpc-usb-uart
+    artifact-name: eyelash_corne_left
+  - board: nice_nano_v2
+    shield: settings_reset
+    artifact-name: eyelash_corne_reset
