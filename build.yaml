@@ -66,3 +66,27 @@ include:
   - board: nice_nano_v2
     shield: settings_reset
     artifact-name: eyelash_corne_reset
+
+  # Sofle
+  - board: nice_nano_v2
+    shield: sofle_left
+    snippet: common-config studio-rpc-usb-uart
+    artifact-name: sofle_left
+  - board: nice_nano_v2
+    shield: sofle_right
+    artifact-name: sofle_right
+  - board: nice_nano_v2
+    shield: settings_reset
+    artifact-name: sofle_reset
+
+  # Eyelash Sofle
+  - board: eyelash_sofle_right
+    shield: nice_view
+    artifact-name: eyelash_sofle_right
+  - board: eyelash_sofle_left
+    shield: nice_view
+    snippet: common-config studio-rpc-usb-uart
+    artifact-name: eyelash_sofle_left
+  - board: nice_nano_v2
+    shield: settings_reset
+    artifact-name: eyelash_sofle_reset
