@@ -1,7 +1,7 @@
 #include <physical_layouts.dtsi>
 
 / {
-    default_layout: physical_layout_0 {
+    urchin_layout: urchin_layout {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
 

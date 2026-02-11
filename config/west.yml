@@ -11,6 +11,8 @@ manifest:
     # nice-view-gem
     - name: m165437
       url-base: https://github.com/M165437
+    - name: caksoylar
+      url-base: https://github.com/caksoylar
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -39,5 +41,8 @@ manifest:
     - name: nice-view-gem
       remote: m165437
       revision: v0.3.0
+    - name: zmk-rgbled-widget
+      remote: caksoylar
+      revision: main
   self:
     path: config

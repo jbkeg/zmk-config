@@ -1,0 +1,27 @@
+/ {
+    aliases {
+        led-red = &led0;
+        led-green = &led1;
+        led-blue = &led2;
+    };
+
+    leds {
+        compatible = "gpio-leds";
+        status = "okay";
+        led0: led_0 {
+            gpios = <&gpio1 15 GPIO_ACTIVE_HIGH>;
+        };
+        led1: led_1 {
+            gpios = <&gpio1 14 GPIO_ACTIVE_HIGH>;
+        };
+        led2: led_2 {
+            gpios = <&gpio0 10 GPIO_ACTIVE_HIGH>;
+        };
+    };
+};
+&xiao_i2c {
+    status = "disabled";
+};
+&xiao_serial {
+    status = "disabled";
+};

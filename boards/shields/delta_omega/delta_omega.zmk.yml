@@ -1,0 +1,12 @@
+file_format: "1"
+id: delta_omega
+name: delta_omega
+type: shield
+url: https://github.com/unspecworks/delta-omega
+requires:
+  - seeeduino_xiao_ble
+features:
+  - keys
+siblings:
+  - delta_omega_left
+  - delta_omega_right

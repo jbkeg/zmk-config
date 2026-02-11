@@ -14,5 +14,5 @@
     )
 
 #include "continuum/utils/encoders.h"
-#include "continuum/matrix/sofle.h"
+#include "continuum/matrix/eyelash_sofle.h"
 #include "continuum/base.keymap"

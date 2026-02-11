@@ -8,14 +8,14 @@
 
 #include "urchin-layouts.dtsi"
 
-&default_layout {
+&urchin_layout {
     transform = <&default_transform>;
 };
 
 / {
     chosen {
         zmk,kscan = &kscan0;
-        zmk,physical-layout = &default_layout;
+        zmk,physical-layout = &urchin_layout;
     };
 
     default_transform: keymap_transform_0 {
