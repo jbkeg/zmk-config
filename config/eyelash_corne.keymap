@@ -1,13 +1,15 @@
-#define CONFIG_WIRELESS
+#define CONFIG_WIRELESS  
 
-#define ZMK_BASE_LAYER(name, LT, RT, LM, RM, LB, RB, LH, RH)                   \
-    ZMK_LAYER(                                                                 \
-        name,                                                                  \
-        &none       LT  RT   &none                                             \
-        &none       LM  RM   &none                                             \
-        &kp ESC     LB  RB   &kp BSPC                                          \
-        &kp ENTER   LH  RH   &kp SPACE                                         \
+#define ZMK_BASE_LAYER(name, LT, RT, LM, RM, LB, RB, LH, RH)                                  \
+    ZMK_LAYER(                                                                                \
+        name,                                                                                 \
+        &none       LT                            JS0_BINDING               RT  &none         \
+        &none       LM               JS1_BINDING  JS2_BINDING  JS3_BINDING  RM  &none         \
+        &kp ESC     LB  LEC_BINDING(&kp C_MUTE)   JS4_BINDING               RB  &kp BSPC      \
+        &kp ENTER   LH                                                      RH  &kp SPACE,    \
+        SENSOR_VOLUME_BINDING                                                                 \
     )
 
+#include "continuum/utils/encoders.h"
 #include "continuum/matrix/eyelash_corne42.h"
 #include "continuum/base.keymap"

@@ -1,15 +1,15 @@
-// When using wireless, define CONFIG_WIRELESS before including base keymap
-#define CONFIG_WIRELESS
+#define CONFIG_WIRELESS  
 
-// Extra keymap definitions
-#define ZMK_BASE_LAYER(name, LT, RT, LM, RM, LB, RB, LH, RH)                   \
-    ZMK_LAYER(                                                                 \
-        name,                                                                  \
-                    LT  RT                                                     \
-                    LM  RM                                                     \
-        &kp ESC     LB  RB   &kp BSPC                                          \
-        &kp ENTER   LH  RH   &kp SPACE                                         \
+#define ZMK_BASE_LAYER(name, LT, RT, LM, RM, LB, RB, LH, RH)                                  \
+    ZMK_LAYER(                                                                                \
+        name,                                                                                 \
+        &none       LT                            JS0_BINDING               RT  &none         \
+        &none       LM               JS1_BINDING  JS2_BINDING  JS3_BINDING  RM  &none         \
+        &kp ESC     LB  SENSOR_CLICK(LEC_BINDING) JS4_BINDING               RB  &kp BSPC      \
+        &kp ENTER   LH                                                      RH  &kp SPACE,    \
+        SENSOR_VOLUME_BINDING                                                                 \
     )
 
-#include "continuum/matrix/totem.h"
+#include "continuum/utils/encoders.h"
+#include "continuum/matrix/eyelash_corne42.h"
 #include "continuum/base.keymap"

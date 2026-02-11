@@ -65,7 +65,7 @@ Relevant paths for Corne integration:
   - Continuum framework documentation
 - `config/continuum/base.keymap`
   - Shared layers and behaviors
-- `config/continuum/helper.h`
+- `config/continuum/utils/helper.h`
   - Shared macro helpers and behavior utilities
 - `config/continuum/matrix/36.h`
   - 36-key position mapping

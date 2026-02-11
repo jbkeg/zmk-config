@@ -141,6 +141,7 @@ Reference:
 - [Urchin](docs/urchin.md): 34-key low-profile Bluetooth split keyboard.
 - [Totem](docs/totem.md): 38-key low-profile split keyboard using KLP Lame keycaps.
 - [Corne](docs/corne.md): 36(3x5+3), 42(3x6+3) keys most favored split keyboard.
+  - Eyelash Corne: Eyelash modified Corne with screen, roller and joystick.
 - [Cornix](docs/cornix.md): Corne-style prebuilt 48-key low-profile split keyboard.
 - [Sofle](docs/sofle.md): 68-key low-profile split keyboard with OLED screen and roller.
   - Eyelash Sofle: Eyelash modified Sofle with joystick.
