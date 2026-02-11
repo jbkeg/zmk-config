@@ -47,7 +47,8 @@ Role switching is a reflash workflow, not a runtime toggle.
 
 ## Concrete Build Examples
 
-These examples map directly to targets in `build.yaml`.
+These examples define target patterns used in this repository.
+They are used as ready templates when dongle targets are enabled in `build.yaml`.
 
 1. `central` role (multi-keyboard central)
    - `board: nice_nano_v2`
@@ -66,11 +67,15 @@ These examples map directly to targets in `build.yaml`.
 
 ## Current Build Coverage
 
-Current state from `build.yaml`:
+Current state from `build.yaml` (checked on February 11, 2026):
 
-- `zdd` + `dongle` role: build targets exist (`totem_dongle`, `urchin_dongle`, `corne_dongle`, `eyelash_corne_dongle`, `sofle_dongle`, `eyelash_sofle_dongle`, `cornix_dongle`, `delta_omega_dongle`)
-- `zdd` + `central` role: shared build target exists (`dongle_central`)
-- `zdd` + `scanner` role: shared build target exists (`dongle_scanner`)
+- Active matrix entries for dongle roles are not enabled yet in the current `build.yaml`.
+
+Planned matrix coverage:
+
+- `zdd` + `dongle` role targets: `totem_dongle`, `urchin_dongle`, `corne_dongle`, `eyelash_corne_dongle`, `sofle_dongle`, `eyelash_sofle_dongle`, `cornix_dongle`, `delta_omega_dongle`
+- `zdd` + `central` role target: `dongle_central`
+- `zdd` + `scanner` role target: `dongle_scanner`
 - `prospector` hardware + YADS firmware track: planned (not yet in matrix)
 
 > [!NOTE]

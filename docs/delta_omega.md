@@ -4,6 +4,23 @@
 
 This document covers Delta Omega support as integrated in this repository.
 
+## Support Snapshot
+
+Implemented matrix targets:
+
+| Target | Board | Shield | Snippet | Artifact Name | Status |
+| --- | --- | --- | --- | --- | --- |
+| Left half | `seeeduino_xiao_ble` | `delta_omega_left` | `common-config studio-rpc-usb-uart` | `delta_omega_left` | Active |
+| Right half | `seeeduino_xiao_ble` | `delta_omega_right` | none | `delta_omega_right` | Active |
+| Reset | `seeeduino_xiao_ble` | `settings_reset` | none | `delta_omega_reset` | Active |
+
+Planned targets (not active in current build matrix):
+
+| Target | Planned Artifact Name | Status |
+| --- | --- | --- |
+| Dongle | `delta_omega_dongle` | Planned |
+| Left with dongle | `delta_omega_left_w_dongle` | Planned |
+
 ## Reference Material
 
 - Delta Omega hardware: <https://github.com/unspecworks/delta-omega>
@@ -14,7 +31,7 @@ This document covers Delta Omega support as integrated in this repository.
 
 - 34-key (3x5+2) split keyboard
 - Ultra-low-profile design
-- Module provides upstream shield definitions; this repo focuses on user config and build matrix wiring
+- Upstream references exist; this repo currently keeps Delta Omega shield/config files in-tree
 
 ## Layout
 
@@ -30,44 +47,80 @@ This document covers Delta Omega support as integrated in this repository.
 
 ## Firmware Structure
 
-Relevant paths in this repo:
+Implemented paths in this repo:
 
+- `boards/shields/delta_omega/`
 - `config/delta_omega.keymap`
 - `config/delta_omega.conf`
-- `config/delta_omega_dongle.keymap`
-- `boards/shields/delta_omega_variants/`
+- `config/delta_omega.json`
 - `build.yaml`
 - `config/west.yml`
 
-Module-provided hardware path after `west update`:
+Planned/legacy references kept for continuity:
 
-- `modules/keyboards/delta-omega/boards/shields/delta_omega/`
+- `config/delta_omega_dongle.keymap` (planned target path)
+- `modules/keyboards/delta-omega/boards/shields/delta_omega/` (upstream historical reference)
+- `boards/shields/delta_omega_variants/` (planned variants path)
 
 ## How to Use
 
 ### Build
 
-1. Ensure dependencies are updated: `west update`.
-2. Edit user behavior in `config/delta_omega.keymap` and `config/delta_omega.conf`.
-3. Build or run CI using matrix entries in `build.yaml`.
+1. Ensure dependencies are updated:
 
-Current active targets:
+```bash
+west update
+```
 
-- `delta_omega_left`
-- `delta_omega_right`
-- `delta_omega_reset`
-- `delta_omega_dongle`
-- `delta_omega_left_w_dongle`
+2. Edit behavior in:
+   - `config/delta_omega.keymap`
+   - `config/delta_omega.conf`
+3. Build with matrix artifact names from `build.yaml`.
+
+Local Docker (recommended):
+
+```bash
+# list artifacts
+docker compose run --rm zmk-build-release --list
+
+# build only Delta Omega targets
+docker compose run --rm zmk-build-release --artifact-names delta_omega_left,delta_omega_right,delta_omega_reset
+```
+
+CI/GitHub Actions:
+
+1. Push changes.
+2. Run matrix build workflow.
+3. Download `delta_omega_left`, `delta_omega_right`, `delta_omega_reset` artifacts.
 
 ### Flashing
 
-1. Put left or right target into bootloader mode.
-2. Flash matching UF2 artifact for that target.
-3. For split operation, flash both halves with matching firmware batch.
-4. If BLE state is stale after topology changes, flash reset and re-pair.
+1. Put the target board into bootloader mode (double-reset).
+2. Flash matching UF2 for each side.
+3. For split operation, flash both halves from the same build batch.
+4. If BLE state is stale, flash reset firmware and re-pair.
+
+Artifact-to-device mapping:
+
+| Artifact | Flash To |
+| --- | --- |
+| `delta_omega_left.uf2` | Left half |
+| `delta_omega_right.uf2` | Right half |
+| `delta_omega_reset.uf2` | Any side when clearing settings/bonds |
+
+## Troubleshooting
+
+- Build cannot find target:
+  - Run `docker compose run --rm zmk-build-release --list` and confirm artifact names.
+- Flash appears successful but split does not reconnect:
+  - Flash `delta_omega_reset` on both halves, then re-pair.
+- Wrong behavior after flashing one side:
+  - Reflash left and right from the same CI/local build batch.
+- Studio connection issue on left build:
+  - Confirm `common-config studio-rpc-usb-uart` is still applied for `delta_omega_left` in `build.yaml`.
 
 ## Status
 
-- Delta Omega support is active via upstream module integration.
-- Dedicated dongle-side overlay/config exists in `boards/shields/delta_omega_variants/`.
-- Build matrix entries are present in `build.yaml`.
+- Delta Omega split support is active with in-repo shield/config wiring.
+- Build matrix entries are present for `delta_omega_left`, `delta_omega_right`, and `delta_omega_reset`.
+- Dongle-related targets and variants references are documented as planned follow-up.

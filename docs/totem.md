@@ -10,6 +10,21 @@ This document defines the ZMK configuration for the Totem keyboard as implemente
 
 TOTEM is a 38-key column-staggered split keyboard. In this repository it is treated strictly as a ZMK-based, BLE peripheral device. Typical builds use a XIAO BLE with a UF2-capable bootloader.
 
+## Support Snapshot
+
+Implemented matrix targets:
+
+| Target | Board | Shield | Snippet | Artifact Name | Status |
+| --- | --- | --- | --- | --- | --- |
+| Left half | `seeeduino_xiao_ble` | `totem_left` | `common-config studio-rpc-usb-uart` | `totem_left` | Active |
+| Right half | `seeeduino_xiao_ble` | `totem_right` | none | `totem_right` | Active |
+| Reset | `seeeduino_xiao_ble` | `settings_reset` | none | `totem_reset` | Active |
+
+Planned targets (not active in current build matrix):
+
+- `totem_dongle`
+- `totem_left_w_dongle`
+
 ## Reference Material
 
 - Build Guide: [https://github.com/GEIGEIGEIST/totem](https://github.com/GEIGEIGEIST/totem)
@@ -28,6 +43,7 @@ TOTEM is a 38-key column-staggered split keyboard. In this repository it is trea
 ### Physical Layout
 
 Physical switch arrangement. Visual reference only.
+
 ![TOTEM layout](/docs/images/totem_layout.svg)
 
 ### Keymap
@@ -38,7 +54,7 @@ Physical switch arrangement. Visual reference only.
 
 TOTEM uses a split shield with a shared matrix transform and side-specific GPIO overlays.
 
-Relevant paths.
+Implemented paths:
 
 - `boards/shields/totem/`
   Hardware definition, matrix transform, overlays, and metadata.
@@ -46,6 +62,12 @@ Relevant paths.
   User-level feature and system configuration.
 - `config/totem.keymap`
   Authoritative keymap. Layers, behaviors, HRM, combos, macros.
+- `build.yaml`
+  CI/local artifact matrix entries.
+
+Planned/legacy references kept for continuity:
+
+- `config/totem_dongle.keymap` (planned target path)
 
 The shield-level keymap under `boards/shields/totem/` is treated as a factory fallback only. It is not intended for customization.
 
@@ -69,26 +91,45 @@ The shield-level keymap under `boards/shields/totem/` is treated as a factory fa
 
 ### Build
 
-1. Fork the repository.
-2. Clone the fork locally.
-3. Modify `config/totem.keymap` and `config/totem.conf`.
-4. Commit and push to trigger CI.
-5. Download firmware artifacts from the successful GitHub Actions run.
+1. Fork and clone the repository.
+2. Modify `config/totem.keymap` and `config/totem.conf`.
+3. Build using CI or local Docker.
+4. Download artifacts for the target you flash.
 
-The expected artifacts are `totem_left.uf2` and `totem_right.uf2`.
+Local Docker (recommended):
+
+```bash
+# list artifacts
+docker compose run --rm zmk-build-release --list
+
+# build only Totem targets
+docker compose run --rm zmk-build-release --artifact-names totem_left,totem_right,totem_reset
+```
+
+Expected active artifacts:
+
+- `totem_left.uf2`
+- `totem_right.uf2`
+- `totem_reset.uf2`
 
 ### Flashing
 
 Assumes XIAO BLE with UF2 bootloader.
 
 1. Connect the left half to the PC via USB.
-2. Double-tap the reset button to enter bootloader mode.
-3. A removable storage device appears.
-4. Optional. Flash `totem_reset.uf2` to clear state.
-5. Copy `totem_left.uf2` to the mounted drive.
-6. Repeat the process for the right half using `totem_right.uf2`.
+2. Double-tap reset to enter bootloader mode.
+3. Optional: flash `totem_reset.uf2` to clear state.
+4. Copy `totem_left.uf2` to the mounted drive.
+5. Repeat for the right half using `totem_right.uf2`.
+6. Disconnect USB and power halves normally.
 
-After flashing, disconnect USB and power the halves normally.
+Artifact-to-device mapping:
+
+| Artifact | Flash To |
+| --- | --- |
+| `totem_left.uf2` | Left half |
+| `totem_right.uf2` | Right half |
+| `totem_reset.uf2` | Any side when clearing settings/bonds |
 
 ## Configuration
 
@@ -96,7 +137,7 @@ After flashing, disconnect USB and power the halves normally.
 
 User-level system configuration. Typical concerns include BLE behavior, sleep tuning, and feature flags.
 
-Example baseline.
+Example baseline:
 
 ```conf
 # Totem user configuration
@@ -113,7 +154,7 @@ CONFIG_ZMK_IDLE_SLEEP_TIMEOUT=600000
 CONFIG_ZMK_STUDIO=y
 ```
 
-Notes.
+Notes:
 
 - ZMK Studio support is optional.
 - Enabling Studio increases firmware size and may affect power usage.
@@ -123,7 +164,7 @@ Notes.
 
 Authoritative keymap definition.
 
-Rules.
+Rules:
 
 - All layout logic lives here.
 - HRM, combos, macros, and layers are defined here.
@@ -134,14 +175,15 @@ No changes are required if the current layout matches intended behavior.
 
 ## Troubleshooting
 
-- If halves do not connect, clear state using totem_reset.uf2 and reflash both sides.
-- If BLE pairing fails, remove existing bonds on the host and re-pair after reflashing.
-- Uneven sleep or wake behavior typically indicates mismatched firmware or stale state.
+- If halves do not connect, flash `totem_reset.uf2` and then reflash both sides.
+- If BLE pairing fails, remove host bonds and re-pair after reflashing.
+- Uneven sleep or wake behavior usually indicates mismatched firmware batch or stale state.
+- If Studio does not connect on left side, confirm `totem_left` still uses `common-config studio-rpc-usb-uart` in `build.yaml`.
 
 Successful operation is indicated by stable split communication followed by host BLE connection.
 
 ## Status
 
-- Passes repository CI.
-- No known open defects.
-- Canonical reference for TOTEM within this repository.
+- Totem split targets are active in `build.yaml`.
+- Dongle-related Totem targets are documented as planned follow-up.
+- Canonical reference for Totem within this repository.

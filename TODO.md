@@ -14,11 +14,11 @@ Rule of done for each firmware target:
 
 ### 1.0 Naming / baseline
 
-- [ ] Freeze naming convention
-  - [ ] Single: `<keyboard>_<hardware>_<role>` : This allows to build with wildcard for single keyboard
-  - [ ] central/scanner: `<hardware>_<role>`
-- [ ] Freeze hardware IDs (`zdd`, `prospector`)
-- [ ] Freeze role names (`dongle`, `central`, `scanner`)
+- [x] Freeze naming convention
+  - [x] Single: `<keyboard>_<hardware>_<role>` : This allows to build with wildcard for single keyboard
+  - [x] central/scanner: `<hardware>_<role>`
+- [x] Freeze hardware IDs (`zdd`, `prospector`)
+- [x] Freeze role names (`dongle`, `central`, `scanner`)
 
 ### ZMK Dongle Display(`zdd`)
 
@@ -82,7 +82,7 @@ Rule of done for each firmware target:
 - [x] Sofle: verify left/right/reset targets
 - [x] Corne: verify target status and doc status
 - [ ] Cornix: verify target status and doc status
-- [ ] Delta Omega: verify target status and doc status
+- [x] Delta Omega: verify target status and doc status
 
 - [ ] `*_left_w_dongle` targets: verify display config is correct for each keyboard
 - [x] Continuum integration: remove duplicated per-keyboard keymap logic
@@ -94,7 +94,7 @@ Rule of done for each firmware target:
 - [x] Keep `README.md` and `README_KO.md` synchronized after each feature batch
 - [x] Keep dongle role wording consistent (`dongle`, `central`, `scanner`)
 - [x] Update `docs/dongle.md` matrix and examples after each new target
-- [ ] Run docs sanity pass against `docs/docs_rules.md`
+- [x] Run docs sanity pass against `docs/docs_rules.md` (used as baseline template, expanded where needed)
 - [x] Keep `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and docs rules aligned
 - [ ] Ensure each keyboard doc has current build/flash/troubleshooting sections
 

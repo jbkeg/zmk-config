@@ -6,9 +6,24 @@ This document describes the Urchin keyboard: its hardware, design philosophy, la
 
 The Urchin keyboard was originally designed by Duccio (duckyb) as a 34-key wireless-only split keyboard optimized for ZMK and nice!nano controllers. It is a derivative of the Sweep/Swoop family with native support for nice!view displays and hotswappable sockets.
 
+## Support Snapshot
+
+Implemented matrix targets:
+
+| Target | Board | Shield | Snippet | Artifact Name | Status |
+| --- | --- | --- | --- | --- | --- |
+| Left half | `nice_nano_v2` | `urchin_left nice_view_adapter nice_view_gem` | `common-config studio-rpc-usb-uart` | `urchin_left` | Active |
+| Right half | `nice_nano_v2` | `urchin_right nice_view_adapter nice_view_gem` | none | `urchin_right` | Active |
+| Reset | `nice_nano_v2` | `settings_reset` | none | `urchin_reset` | Active |
+
+Planned targets (not active in current build matrix):
+
+- `urchin_dongle`
+- `urchin_left_w_dongle`
+
 ## Reference Material
 
-- Original Urchin hardware & firmware: <https://github.com/duckyb/urchin>
+- Original Urchin hardware and firmware: <https://github.com/duckyb/urchin>
   - Original makers firmware: <https://github.com/duckyb/urchin-zmk-firmware>
   - Original makers shield: <https://github.com/duckyb/urchin-zmk-module>
 - Variant ZMK configurations and community forks: <https://github.com/theearp/zmk-urchin>
@@ -26,7 +41,7 @@ The Urchin keyboard was originally designed by Duccio (duckyb) as a 34-key wirel
 
 ### Physical Layout
 
-The Urchin uses a compact 3×5+2 split layout per half with a thumb cluster.
+The Urchin uses a compact 3x5+2 split layout per half with a thumb cluster.
 
 ![Urchin Render](/docs/images/urchin_render.png)
 
@@ -49,20 +64,50 @@ The original ZMK firmware for Urchin includes:
 
 Community forks modify keymaps and layer logic, but the core hardware support remains in the original repo structure.
 
+Implemented paths in this repo:
+
+- `boards/shields/urchin/`
+- `config/urchin.keymap`
+- `config/urchin.conf`
+- `build.yaml`
+
+Planned/legacy references kept for continuity:
+
+- `config/urchin_dongle.keymap` (planned target path)
+
 ## How to Use
 
 ### Build
 
-1. Clone the Urchin ZMK repo (or use this repo’s Urchin integration).
-2. Adjust config/urchin.conf for features like sleep, display, and Bluetooth power.
-3. Customize config/urchin.keymap for your preferred layers.
-4. Build using GitHub Actions or a local ZMK build environment.
+1. Use this repo's Urchin integration.
+2. Adjust `config/urchin.conf` for features like sleep, display, and Bluetooth power.
+3. Customize `config/urchin.keymap` for your preferred layers.
+4. Build using GitHub Actions or local Docker.
+
+Local Docker (recommended):
+
+```bash
+# list artifacts
+docker compose run --rm zmk-build-release --list
+
+# build only Urchin targets
+docker compose run --rm zmk-build-release --artifact-names urchin_left,urchin_right,urchin_reset
+```
 
 ### Flashing
 
-1. Flash the left half first using the appropriate UF2 (urchin_left.uf2).
-2. Flash the right half next (urchin_right.uf2).
-3. Power both halves on and ensure Bluetooth pairing with your host.
+1. Flash `urchin_left.uf2` to the left half.
+2. Flash `urchin_right.uf2` to the right half.
+3. If needed, flash `urchin_reset.uf2` to clear settings and bonds.
+4. Power both halves and pair to host.
+
+Artifact-to-device mapping:
+
+| Artifact | Flash To |
+| --- | --- |
+| `urchin_left.uf2` | Left half |
+| `urchin_right.uf2` | Right half |
+| `urchin_reset.uf2` | Any side when clearing settings/bonds |
 
 ## Display and Power
 
@@ -78,9 +123,16 @@ Urchin is used by split keyboard enthusiasts who want:
 - Layer-based number and symbol access
 - Display feedback for connection and battery status
 
-Many users report the split 3×5 layout feels fast once the muscle memory develops.
+Many users report the split 3x5 layout feels fast once the muscle memory develops.
+
+## Troubleshooting
+
+- If halves do not reconnect, flash `urchin_reset.uf2` and re-pair.
+- If one half behaves differently, reflash both halves from the same build batch.
+- If display status is missing, verify `nice_view_adapter nice_view_gem` are still in the shield list for Urchin targets in `build.yaml`.
+- If Studio does not connect on left side, confirm `urchin_left` keeps `common-config studio-rpc-usb-uart`.
 
 ## Status
 
-- Urchin targets are active in `build.yaml`.
-- Dongle role targets are present as `urchin_dongle` and `urchin_left_w_dongle`.
+- Urchin split targets are active in `build.yaml`.
+- Dongle role targets for Urchin are documented as planned follow-up.

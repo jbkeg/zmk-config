@@ -114,22 +114,6 @@ Customized base-layer pattern:
 #include "continuum/base.keymap"
 ```
 
-### Current Integrations in This Repo
-
-- `config/urchin.keymap`
-- `config/totem.keymap`
-- `config/sofle.keymap`
-- `config/eyelash_sofle_dongle.keymap`
-- `config/corne.keymap`
-- `config/eyelash_corne.keymap`
-- `config/cornix.keymap`
-- `config/cornix_dongle_adapter.keymap`
-- `config/delta_omega.keymap`
-- `config/delta_omega_dongle.keymap`
-- `config/continuum/example.keymap`
-
-Other keyboards can be added by selecting a compatible matrix header and optionally overriding `ZMK_BASE_LAYER(...)`.
-
 ## Required Modules
 
 Continuum depends on modules already declared in `config/west.yml`:
