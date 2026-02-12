@@ -1,6 +1,19 @@
-layout: {zmk_keyboard: totem}
+layout: {zmk_keyboard: sofle}
 layers:
   Base:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
   - Q
   - W
   - E
@@ -11,6 +24,8 @@ layers:
   - I
   - O
   - P
+  - ''
+  - ''
   - {t: A, h: Gui}
   - {t: S, h: Alt}
   - {t: D, h: Shift}
@@ -21,25 +36,45 @@ layers:
   - {t: K, h: Shift}
   - {t: L, h: Alt}
   - {t: '''', h: Gui}
-  - Esc
+  - ''
+  - ''
   - {t: Z, h: Btn}
   - X
   - C
   - V
   - B
+  - $$mdi:volume-off$$
+  - ''
   - N
   - M
   - {t: ',', s: ;}
   - {t: ., s: ':'}
   - {t: '?', h: Sym, s: '!'}
-  - Bspc
+  - ''
+  - ''
+  - Esc
   - ENTER
   - {t: Spc, h: Nav, s: '&dot_spc'}
   - {t: Enter, h: Fn}
   - {t: '&num_dance', h: Num}
   - {t: '&shift_repeat', h: Shift, s: Caps Word}
   - Spc
+  - Bspc
+  - ''
   Extra:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
   - Q
   - W
   - F
@@ -50,6 +85,8 @@ layers:
   - U
   - Y
   - ''''
+  - ''
+  - ''
   - {t: A, h: Gui}
   - {t: R, h: Alt}
   - {t: S, h: Shift}
@@ -60,25 +97,45 @@ layers:
   - {t: E, h: Shift}
   - {t: I, h: Alt}
   - {t: O, h: Gui}
-  - Esc
+  - ''
+  - ''
   - {t: Z, h: Btn}
   - X
   - C
   - D
   - V
+  - $$mdi:volume-off$$
+  - ''
   - K
   - H
   - {t: ',', s: ;}
   - {t: ., s: ':'}
   - {t: '?', h: Sym, s: '!'}
-  - Bspc
+  - ''
+  - ''
+  - Esc
   - ENTER
   - {t: Spc, h: Nav, s: '&dot_spc'}
   - {t: Enter, h: Fn}
   - {t: '&num_dance', h: Num}
   - {t: '&shift_repeat', h: Shift, s: Caps Word}
   - Spc
+  - Bspc
+  - ''
   Tap:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
   - Q
   - W
   - E
@@ -89,6 +146,8 @@ layers:
   - I
   - O
   - P
+  - ''
+  - ''
   - A
   - S
   - D
@@ -99,25 +158,45 @@ layers:
   - K
   - L
   - ''''
-  - Esc
+  - ''
+  - ''
   - Z
   - X
   - C
   - V
   - B
+  - $$mdi:volume-off$$
+  - ''
   - N
   - M
   - ','
   - .
   - '?'
-  - Bspc
+  - ''
+  - ''
+  - Esc
   - ENTER
   - Spc
   - Enter
   - {t: '&num_dance', h: Num}
   - {t: '&shift_repeat', h: Shift, s: Caps Word}
   - Spc
+  - Bspc
+  - ''
   Btn:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
   - Undo
   - Cut
   - Copy
@@ -128,6 +207,8 @@ layers:
   - Copy
   - Cut
   - Undo
+  - ''
+  - ''
   - Gui
   - Alt
   - Ctrl
@@ -138,25 +219,45 @@ layers:
   - Ctrl
   - Alt
   - Gui
-  - Esc
+  - ''
+  - ''
   - {t: TaskSW ←, type: held}
   - Home
   - End
   - Tab
   - PgDn
+  - $$mdi:volume-off$$
+  - ''
   - PgDn
   - Tab
   - End
   - Home
   - TaskSW ←
-  - Bspc
+  - ''
+  - ''
+  - Esc
   - ENTER
   - {type: trans}
   - {type: trans}
   - {type: trans}
   - CANCEL
   - Spc
+  - Bspc
+  - ''
   Sym:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
   - '!'
   - '@'
   - '#'
@@ -167,6 +268,8 @@ layers:
   - '*'
   - (
   - )
+  - ''
+  - ''
   - '`'
   - '~'
   - '-'
@@ -177,25 +280,45 @@ layers:
   - '}'
   - '['
   - ']'
-  - Esc
+  - ''
+  - ''
   - <
   - '>'
   - ''''
   - Sft+'
   - ;
+  - $$mdi:volume-off$$
+  - ''
   - ':'
   - ','
   - .
   - '?'
   - {t: /, h: Sym, type: held}
-  - Bspc
+  - ''
+  - ''
+  - Esc
   - ENTER
   - {type: trans}
   - {type: trans}
   - {type: trans}
   - CANCEL
   - Spc
+  - Bspc
+  - ''
   Nav:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
   - Win Close
   - {type: trans}
   - TaskSW ←
@@ -206,6 +329,8 @@ layers:
   - {t: ↑, h: Ctl+Home}
   - {t: Del, h: Ctl+Del}
   - {type: trans}
+  - ''
+  - ''
   - {t: Gui, h: sticky}
   - {t: Alt, h: sticky}
   - {t: Shift, h: sticky}
@@ -216,25 +341,45 @@ layers:
   - {t: ↓, h: Ctl+End}
   - {t: →, h: End}
   - Enter
-  - Esc
+  - ''
+  - ''
   - {type: trans}
   - {type: trans}
   - {type: trans}
   - {type: trans}
   - {type: trans}
+  - $$mdi:volume-off$$
+  - ''
   - Ins
   - Tab
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - Bspc
+  - ''
+  - ''
+  - Esc
   - ENTER
   - {type: held}
   - {type: trans}
   - {type: trans}
   - CANCEL
   - Spc
+  - Bspc
+  - ''
   Fn:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
   - F12
   - F7
   - F8
@@ -245,6 +390,8 @@ layers:
   - $$mdi:volume-high$$
   - $$mdi:skip-forward$$
   - {type: trans}
+  - ''
+  - ''
   - {t: F11, h: Gui}
   - {t: F4, h: Alt}
   - {t: F5, h: Shift}
@@ -255,25 +402,45 @@ layers:
   - {t: '$$mdi:volume-medium$$', h: Shift}
   - {t: Next Desk, h: Alt}
   - {type: trans}
-  - Esc
+  - ''
+  - ''
   - F10
   - F1
   - F2
   - F3
   - {type: trans}
+  - $$mdi:volume-off$$
+  - ''
   - Pin App
   - Pin Win
   - Alt+`
   - {type: trans}
   - {type: trans}
-  - Bspc
+  - ''
+  - ''
+  - Esc
   - ENTER
   - {type: trans}
   - {type: held}
   - $$mdi:volume-off$$
   - $$mdi:play-pause$$
   - Spc
+  - Bspc
+  - ''
   Mouse:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
   - {type: trans}
   - {type: trans}
   - {type: trans}
@@ -284,6 +451,8 @@ layers:
   - Mouse ↑
   - PgDn
   - {type: trans}
+  - ''
+  - ''
   - {type: trans}
   - {type: trans}
   - {type: trans}
@@ -294,25 +463,45 @@ layers:
   - Mouse ↓
   - Mouse →
   - Scroll →
-  - Esc
+  - ''
+  - ''
   - {type: trans}
   - {type: trans}
   - {type: trans}
   - {type: trans}
   - {type: trans}
+  - $$mdi:volume-off$$
+  - ''
   - {type: trans}
   - Left Click
   - Middle Click
   - Right Click
   - {type: trans}
-  - Bspc
+  - ''
+  - ''
+  - Esc
   - ENTER
   - {type: held}
   - {type: held}
   - Scroll ↑
   - Scroll ↓
   - Spc
+  - Bspc
+  - ''
   Num:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
   - {type: trans}
   - '7'
   - '8'
@@ -323,6 +512,8 @@ layers:
   - '*'
   - '-'
   - +
+  - ''
+  - ''
   - {type: trans}
   - '4'
   - '5'
@@ -333,25 +524,45 @@ layers:
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - Esc
+  - ''
+  - ''
   - {type: trans}
   - '1'
   - '2'
   - '3'
   - {type: trans}
+  - $$mdi:volume-off$$
+  - ''
   - {type: trans}
   - {type: trans}
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - Bspc
+  - ''
+  - ''
+  - Esc
   - ENTER
   - '0'
   - .
   - {type: held}
   - {type: trans}
   - Spc
+  - Bspc
+  - ''
   Sys:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
   - BT 1
   - BT 2
   - BT 3
@@ -362,6 +573,8 @@ layers:
   - {t: Tap, h: toggle}
   - {t: Game, h: toggle}
   - {type: trans}
+  - ''
+  - ''
   - Reset
   - Boot
   - BT PRV
@@ -372,25 +585,45 @@ layers:
   - OUT BLE
   - {type: trans}
   - Studio Unlock
+  - ''
+  - ''
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - $$mdi:volume-off$$
+  - ''
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - {type: trans}
+  - ''
+  - ''
   - Esc
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - Bspc
   - ENTER
   - {type: trans}
   - {type: held}
   - {type: held}
   - CANCEL
   - Spc
+  - Bspc
+  - ''
   Game:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - ''
+  - ''
   - Tab
   - Q
   - W
@@ -401,6 +634,8 @@ layers:
   - {type: trans}
   - {type: trans}
   - {type: trans}
+  - ''
+  - ''
   - Ctrl
   - A
   - S
@@ -411,133 +646,140 @@ layers:
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - Esc
+  - ''
+  - ''
   - Shift
   - Z
   - X
   - C
   - V
+  - $$mdi:volume-off$$
+  - ''
   - {type: trans}
   - {type: trans}
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - Bspc
+  - ''
+  - ''
+  - Esc
   - ENTER
   - B
   - Spc
   - {type: trans}
   - {type: trans}
   - Spc
+  - Bspc
+  - ''
 combos:
-- p: [1, 2]
+- p: [14, 15]
   k: Esc
   l: [Base, Extra, Nav, Num]
-- p: [2, 3]
+- p: [15, 16]
   k: '&smart_mouse'
   l: [Base, Extra, Nav, Num]
-- p: [11, 12]
+- p: [26, 27]
   k: Tab
   l: [Base, Extra, Nav, Num]
   a: bottom
   o: 0.9
-- p: [12, 13]
+- p: [27, 28]
   k: {t: '&leader', h: Sft+Ctrl}
   l: [Base, Extra, Nav, Num]
-- p: [11, 12, 13]
+- p: [26, 27, 28]
   k: {t: '&leader_sft', h: Sft+Ctl+Alt}
   l: [Base, Extra, Nav, Num]
-- p: [22, 24]
+- p: [38, 40]
   k: Cut
   l: [Base, Extra, Nav, Num]
-- p: [22, 23]
+- p: [38, 39]
   k: Copy
   l: [Base, Extra, Nav, Num]
-- p: [23, 24]
+- p: [39, 40]
   k: Paste
   l: [Base, Extra, Nav, Num]
-- p: [6, 7]
+- p: [19, 20]
   k: Bspc
   l: [Base, Extra, Nav, Num]
-- p: [7, 8]
+- p: [20, 21]
   k: Del
   l: [Base, Extra, Nav, Num]
-- p: [16, 17]
+- p: [31, 32]
   k: {t: (, h: Sft+Ctrl, s: <}
   l: [Base, Extra, Num]
-- p: [17, 18]
+- p: [32, 33]
   k: {t: ), h: Sft+Alt, s: '>'}
   l: [Base, Extra, Num]
-- p: [16, 17]
+- p: [31, 32]
   k: <
   l: [Nav]
-- p: [17, 18]
+- p: [32, 33]
   k: '>'
   l: [Nav]
-- p: [27, 28]
+- p: [45, 46]
   k: '['
   l: [Base, Extra, Num]
-- p: [28, 29]
+- p: [46, 47]
   k: ']'
   l: [Base, Extra, Num]
-- p: [27, 28]
+- p: [45, 46]
   k: '{'
   l: [Nav]
-- p: [28, 29]
+- p: [46, 47]
   k: '}'
   l: [Nav]
-- p: [1, 11]
+- p: [14, 26]
   k: '@'
   l: [Base, Extra, Nav, Num]
-- p: [2, 12]
+- p: [15, 27]
   k: '#'
   l: [Base, Extra, Nav, Num]
-- p: [3, 13]
+- p: [16, 28]
   k: $
   l: [Base, Extra, Nav, Num]
-- p: [4, 14]
+- p: [17, 29]
   k: '%'
   l: [Base, Extra, Nav, Num]
-- p: [11, 22]
+- p: [26, 38]
   k: '`'
   l: [Base, Extra, Nav, Num]
-- p: [12, 23]
+- p: [27, 39]
   k: \
   l: [Base, Extra, Nav, Num]
-- p: [13, 24]
+- p: [28, 40]
   k: '='
   l: [Base, Extra, Nav, Num]
-- p: [14, 25]
+- p: [29, 41]
   k: '~'
   l: [Base, Extra, Nav, Num]
-- p: [5, 15]
+- p: [18, 30]
   k: ^
   l: [Base, Extra, Nav, Num]
-- p: [6, 16]
+- p: [19, 31]
   k: +
   l: [Base, Extra, Nav, Num]
-- p: [7, 17]
+- p: [20, 32]
   k: '*'
   l: [Base, Extra, Nav, Num]
   a: top
-- p: [8, 18]
+- p: [21, 33]
   k: '&'
   l: [Base, Extra, Nav, Num]
-- p: [15, 26]
+- p: [30, 44]
   k: _
   l: [Base, Extra, Nav, Num]
-- p: [16, 27]
+- p: [31, 45]
   k: '-'
   l: [Base, Extra, Nav, Num]
-- p: [17, 28]
+- p: [32, 46]
   k: /
   l: [Base, Extra, Nav, Num]
-- p: [18, 29]
+- p: [33, 47]
   k: '|'
   l: [Base, Extra, Nav, Num]
-- p: [5, 6]
+- p: [18, 19]
   k: LANG1
   l: [Base, Extra, Tap]
-- p: [4, 3]
+- p: [17, 16]
   k: LANG1
   l: [Base, Extra, Tap]

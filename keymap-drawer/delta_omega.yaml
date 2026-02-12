@@ -1,4 +1,4 @@
-layout: {zmk_keyboard: totem}
+layout: {zmk_keyboard: delta_omega}
 layers:
   Base:
   - Q
@@ -21,7 +21,6 @@ layers:
   - {t: K, h: Shift}
   - {t: L, h: Alt}
   - {t: '''', h: Gui}
-  - Esc
   - {t: Z, h: Btn}
   - X
   - C
@@ -32,13 +31,10 @@ layers:
   - {t: ',', s: ;}
   - {t: ., s: ':'}
   - {t: '?', h: Sym, s: '!'}
-  - Bspc
-  - ENTER
   - {t: Spc, h: Nav, s: '&dot_spc'}
   - {t: Enter, h: Fn}
   - {t: '&num_dance', h: Num}
   - {t: '&shift_repeat', h: Shift, s: Caps Word}
-  - Spc
   Extra:
   - Q
   - W
@@ -60,7 +56,6 @@ layers:
   - {t: E, h: Shift}
   - {t: I, h: Alt}
   - {t: O, h: Gui}
-  - Esc
   - {t: Z, h: Btn}
   - X
   - C
@@ -71,13 +66,10 @@ layers:
   - {t: ',', s: ;}
   - {t: ., s: ':'}
   - {t: '?', h: Sym, s: '!'}
-  - Bspc
-  - ENTER
   - {t: Spc, h: Nav, s: '&dot_spc'}
   - {t: Enter, h: Fn}
   - {t: '&num_dance', h: Num}
   - {t: '&shift_repeat', h: Shift, s: Caps Word}
-  - Spc
   Tap:
   - Q
   - W
@@ -99,7 +91,6 @@ layers:
   - K
   - L
   - ''''
-  - Esc
   - Z
   - X
   - C
@@ -110,13 +101,10 @@ layers:
   - ','
   - .
   - '?'
-  - Bspc
-  - ENTER
   - Spc
   - Enter
   - {t: '&num_dance', h: Num}
   - {t: '&shift_repeat', h: Shift, s: Caps Word}
-  - Spc
   Btn:
   - Undo
   - Cut
@@ -138,7 +126,6 @@ layers:
   - Ctrl
   - Alt
   - Gui
-  - Esc
   - {t: TaskSW ←, type: held}
   - Home
   - End
@@ -149,13 +136,10 @@ layers:
   - End
   - Home
   - TaskSW ←
-  - Bspc
-  - ENTER
   - {type: trans}
   - {type: trans}
   - {type: trans}
   - CANCEL
-  - Spc
   Sym:
   - '!'
   - '@'
@@ -177,7 +161,6 @@ layers:
   - '}'
   - '['
   - ']'
-  - Esc
   - <
   - '>'
   - ''''
@@ -188,13 +171,10 @@ layers:
   - .
   - '?'
   - {t: /, h: Sym, type: held}
-  - Bspc
-  - ENTER
   - {type: trans}
   - {type: trans}
   - {type: trans}
   - CANCEL
-  - Spc
   Nav:
   - Win Close
   - {type: trans}
@@ -216,7 +196,6 @@ layers:
   - {t: ↓, h: Ctl+End}
   - {t: →, h: End}
   - Enter
-  - Esc
   - {type: trans}
   - {type: trans}
   - {type: trans}
@@ -227,13 +206,10 @@ layers:
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - Bspc
-  - ENTER
   - {type: held}
   - {type: trans}
   - {type: trans}
   - CANCEL
-  - Spc
   Fn:
   - F12
   - F7
@@ -255,7 +231,6 @@ layers:
   - {t: '$$mdi:volume-medium$$', h: Shift}
   - {t: Next Desk, h: Alt}
   - {type: trans}
-  - Esc
   - F10
   - F1
   - F2
@@ -266,13 +241,10 @@ layers:
   - Alt+`
   - {type: trans}
   - {type: trans}
-  - Bspc
-  - ENTER
   - {type: trans}
   - {type: held}
   - $$mdi:volume-off$$
   - $$mdi:play-pause$$
-  - Spc
   Mouse:
   - {type: trans}
   - {type: trans}
@@ -294,7 +266,6 @@ layers:
   - Mouse ↓
   - Mouse →
   - Scroll →
-  - Esc
   - {type: trans}
   - {type: trans}
   - {type: trans}
@@ -305,13 +276,10 @@ layers:
   - Middle Click
   - Right Click
   - {type: trans}
-  - Bspc
-  - ENTER
   - {type: held}
   - {type: held}
   - Scroll ↑
   - Scroll ↓
-  - Spc
   Num:
   - {type: trans}
   - '7'
@@ -333,7 +301,6 @@ layers:
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - Esc
   - {type: trans}
   - '1'
   - '2'
@@ -344,13 +311,10 @@ layers:
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - Bspc
-  - ENTER
   - '0'
   - .
   - {type: held}
   - {type: trans}
-  - Spc
   Sys:
   - BT 1
   - BT 2
@@ -372,7 +336,6 @@ layers:
   - OUT BLE
   - {type: trans}
   - Studio Unlock
-  - Esc
   - {type: trans}
   - {type: trans}
   - {type: trans}
@@ -383,13 +346,10 @@ layers:
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - Bspc
-  - ENTER
   - {type: trans}
   - {type: held}
   - {type: held}
   - CANCEL
-  - Spc
   Game:
   - Tab
   - Q
@@ -411,7 +371,6 @@ layers:
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - Esc
   - Shift
   - Z
   - X
@@ -422,13 +381,10 @@ layers:
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - Bspc
-  - ENTER
   - B
   - Spc
   - {type: trans}
   - {type: trans}
-  - Spc
 combos:
 - p: [1, 2]
   k: Esc
@@ -447,13 +403,13 @@ combos:
 - p: [11, 12, 13]
   k: {t: '&leader_sft', h: Sft+Ctl+Alt}
   l: [Base, Extra, Nav, Num]
-- p: [22, 24]
+- p: [21, 23]
   k: Cut
   l: [Base, Extra, Nav, Num]
-- p: [22, 23]
+- p: [21, 22]
   k: Copy
   l: [Base, Extra, Nav, Num]
-- p: [23, 24]
+- p: [22, 23]
   k: Paste
   l: [Base, Extra, Nav, Num]
 - p: [6, 7]
@@ -474,16 +430,16 @@ combos:
 - p: [17, 18]
   k: '>'
   l: [Nav]
-- p: [27, 28]
+- p: [26, 27]
   k: '['
   l: [Base, Extra, Num]
-- p: [28, 29]
+- p: [27, 28]
   k: ']'
   l: [Base, Extra, Num]
-- p: [27, 28]
+- p: [26, 27]
   k: '{'
   l: [Nav]
-- p: [28, 29]
+- p: [27, 28]
   k: '}'
   l: [Nav]
 - p: [1, 11]
@@ -498,16 +454,16 @@ combos:
 - p: [4, 14]
   k: '%'
   l: [Base, Extra, Nav, Num]
-- p: [11, 22]
+- p: [11, 21]
   k: '`'
   l: [Base, Extra, Nav, Num]
-- p: [12, 23]
+- p: [12, 22]
   k: \
   l: [Base, Extra, Nav, Num]
-- p: [13, 24]
+- p: [13, 23]
   k: '='
   l: [Base, Extra, Nav, Num]
-- p: [14, 25]
+- p: [14, 24]
   k: '~'
   l: [Base, Extra, Nav, Num]
 - p: [5, 15]
@@ -523,16 +479,16 @@ combos:
 - p: [8, 18]
   k: '&'
   l: [Base, Extra, Nav, Num]
-- p: [15, 26]
+- p: [15, 25]
   k: _
   l: [Base, Extra, Nav, Num]
-- p: [16, 27]
+- p: [16, 26]
   k: '-'
   l: [Base, Extra, Nav, Num]
-- p: [17, 28]
+- p: [17, 27]
   k: /
   l: [Base, Extra, Nav, Num]
-- p: [18, 29]
+- p: [18, 28]
   k: '|'
   l: [Base, Extra, Nav, Num]
 - p: [5, 6]
