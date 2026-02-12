@@ -96,10 +96,10 @@ jobs:
 
           if [ ! -f CHANGELOG.md ]; then
             cat > CHANGELOG.md <<'EOF'
-# Changelog
+          # Changelog
 
-All notable firmware changes are documented here.
-EOF
+          All notable firmware changes are documented here.
+          EOF
           fi
 
           if grep -q "^## ${TAG} - " CHANGELOG.md; then

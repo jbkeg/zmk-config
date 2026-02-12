@@ -39,36 +39,87 @@ jobs:
     name: Create keymap drawing PR
     needs: keymap-drawer
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref != 'refs/heads/prepare-keymap-drawings' }}
     permissions:
       contents: write
       pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ZMK_ACTIONS_TOKEN != '' && secrets.ZMK_ACTIONS_TOKEN || github.token }}
+          fetch-depth: 0
 
       - name: Download keymap drawings
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v4
         with:
           name: keymap-drawings
           path: .
 
-      - name: Create or update PR
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.ZMK_ACTIONS_TOKEN != '' && secrets.ZMK_ACTIONS_TOKEN || github.token }}
-          branch: prepare-keymap-drawings
-          base: ${{ github.ref_name }}
-          delete-branch: true
-          title: "[Draw] Refresh keymap diagrams"
-          commit-message: "[Draw] Refresh keymap diagrams"
-          body: |
-            Automated keymap drawing refresh.
+      - name: Normalize drawing paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p keymap-drawer
 
-            Source run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          labels: |
-            dependencies
-            automation
-          add-paths: |
-            keymap-drawer/*.svg
-            keymap-drawer/*.yaml
+          shopt -s nullglob
+          for f in ./*.svg ./*.yaml; do
+            mv "$f" keymap-drawer/
+          done
+
+          echo "Staged drawing files:"
+          ls -la keymap-drawer || true
+
+      - name: Detect changes
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add keymap-drawer/*.svg keymap-drawer/*.yaml 2>/dev/null || true
+          echo "count=$(git status --porcelain=v1 -- keymap-drawer | wc -l)" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push changes
+        if: steps.changes.outputs.count > 0
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git checkout -B prepare-keymap-drawings
+          git commit -m "[Draw] Refresh keymap diagrams"
+          git push -f origin HEAD:prepare-keymap-drawings
+
+      - name: Open pull request if needed
+        if: steps.changes.outputs.count > 0
+        env:
+          GH_TOKEN: ${{ secrets.ZMK_ACTIONS_TOKEN != '' && secrets.ZMK_ACTIONS_TOKEN || github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          PR=$(gh pr list \
+            --head prepare-keymap-drawings \
+            --base "${{ github.event.repository.default_branch }}" \
+            --json number -q '.[0].number')
+
+          if [ -z "$PR" ]; then
+            PR_BODY=$(printf 'Automated keymap drawing refresh.\n\nSource run: https://github.com/%s/actions/runs/%s\n' "${{ github.repository }}" "${{ github.run_id }}")
+            LABEL_ARGS=()
+            EXISTING_LABELS="$(gh label list --limit 200 --json name -q '.[].name' || true)"
+
+            for label in dependencies automation; do
+              if printf '%s\n' "$EXISTING_LABELS" | grep -Fxq "$label"; then
+                LABEL_ARGS+=(--label "$label")
+              else
+                echo "Label '$label' not found; creating PR without it."
+              fi
+            done
+
+            gh pr create \
+              --base "${{ github.event.repository.default_branch }}" \
+              --head prepare-keymap-drawings \
+              --title "[Draw] Refresh keymap diagrams" \
+              "${LABEL_ARGS[@]}" \
+              --body "$PR_BODY"
+          else
+            echo "Pull request already exists (#$PR), skipped creating a new one."
+          fi
