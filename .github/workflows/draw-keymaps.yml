@@ -54,7 +54,7 @@ jobs:
           path: .
 
       - name: Create or update PR
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.ZMK_ACTIONS_TOKEN != '' && secrets.ZMK_ACTIONS_TOKEN || github.token }}
           branch: prepare-keymap-drawings
