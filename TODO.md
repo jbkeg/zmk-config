@@ -81,7 +81,7 @@ Rule of done for each firmware target:
 - [x] Urchin: verify left/right/reset targets
 - [x] Sofle: verify left/right/reset targets
 - [x] Corne: verify target status and doc status
-- [ ] Cornix: verify target status and doc status
+- [x] Cornix: verify target status and doc status
 - [x] Delta Omega: verify target status and doc status
 
 - [ ] `*_left_w_dongle` targets: verify display config is correct for each keyboard
@@ -109,7 +109,7 @@ Rule of done for each firmware target:
 ## 5. Nice to Have
 
 - [ ] Add standalone compatibility matrix doc (`keyboard x hardware x role`)
-- [ ] Add changelog template focused on firmware behavior changes
+- [x] Add changelog template focused on firmware behavior changes
 - [ ] Add simple architecture diagrams for each dongle role
 - [x] Deep sleep rollout (`CONFIG_ZMK_SLEEP`, `CONFIG_ZMK_IDLE_SLEEP_TIMEOUT`) and per-keyboard wakeup-source validation
 - [x] Soft-off UX (`CONFIG_ZMK_PM_SOFT_OFF`, `&soft_off`) with hold-time and wake strategy per board

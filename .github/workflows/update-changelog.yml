@@ -1,0 +1,143 @@
+name: Update Changelog
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: "Release tag (example: v1.2.3)"
+        required: true
+        type: string
+      release_name:
+        description: "Release title override"
+        required: false
+        type: string
+      release_url:
+        description: "Release URL override"
+        required: false
+        type: string
+      release_body:
+        description: "Release notes markdown override"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: changelog-${{ github.event.release.tag_name || github.event.inputs.tag_name || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve release metadata
+        id: meta
+        shell: bash
+        env:
+          EVENT_TAG: ${{ github.event.release.tag_name }}
+          EVENT_NAME: ${{ github.event.release.name }}
+          EVENT_URL: ${{ github.event.release.html_url }}
+          EVENT_BODY: ${{ github.event.release.body }}
+          INPUT_TAG: ${{ github.event.inputs.tag_name }}
+          INPUT_NAME: ${{ github.event.inputs.release_name }}
+          INPUT_URL: ${{ github.event.inputs.release_url }}
+          INPUT_BODY: ${{ github.event.inputs.release_body }}
+        run: |
+          set -euo pipefail
+
+          tag="${EVENT_TAG:-${INPUT_TAG:-}}"
+          name="${EVENT_NAME:-${INPUT_NAME:-}}"
+          url="${EVENT_URL:-${INPUT_URL:-}}"
+          body="${EVENT_BODY:-${INPUT_BODY:-}}"
+
+          if [ -z "${tag}" ]; then
+            echo "::error::No release tag was provided."
+            exit 1
+          fi
+
+          if [ -z "${name}" ]; then
+            name="${tag}"
+          fi
+
+          if [ -z "${url}" ]; then
+            url="https://github.com/${GITHUB_REPOSITORY}/releases/tag/${tag}"
+          fi
+
+          safe_tag="$(printf '%s' "${tag}" | tr -c 'A-Za-z0-9._-' '-')"
+
+          {
+            echo "tag=${tag}"
+            echo "name=${name}"
+            echo "url=${url}"
+            echo "safe_tag=${safe_tag}"
+            echo "body<<EOF"
+            printf '%s\n' "${body}"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Append release section to changelog
+        id: changelog
+        shell: bash
+        env:
+          TAG: ${{ steps.meta.outputs.tag }}
+          NAME: ${{ steps.meta.outputs.name }}
+          URL: ${{ steps.meta.outputs.url }}
+          BODY: ${{ steps.meta.outputs.body }}
+        run: |
+          set -euo pipefail
+
+          if [ ! -f CHANGELOG.md ]; then
+            cat > CHANGELOG.md <<'EOF'
+# Changelog
+
+All notable firmware changes are documented here.
+EOF
+          fi
+
+          if grep -q "^## ${TAG} - " CHANGELOG.md; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "Entry for ${TAG} already exists."
+            exit 0
+          fi
+
+          release_date="$(date -u +%Y-%m-%d)"
+
+          {
+            printf "\n## %s - %s\n\n" "${TAG}" "${release_date}"
+            printf "Release: [%s](%s)\n\n" "${NAME}" "${URL}"
+            printf "### Notes\n\n"
+            if [ -n "${BODY}" ]; then
+              printf "%s\n" "${BODY}"
+            else
+              printf "_No release notes were provided._\n"
+            fi
+            printf "\n### Firmware Behavior Follow-up\n\n"
+            printf -- "- Expand behavior-impact notes as needed using \`docs/changelog_template.md\`.\n"
+          } >> CHANGELOG.md
+
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+
+      - name: Create or update changelog PR
+        if: steps.changelog.outputs.skip != 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.ZMK_ACTIONS_TOKEN != '' && secrets.ZMK_ACTIONS_TOKEN || github.token }}
+          branch: changelog/${{ steps.meta.outputs.safe_tag }}
+          base: ${{ github.event.repository.default_branch }}
+          delete-branch: true
+          title: "docs(changelog): add ${{ steps.meta.outputs.tag }} release notes"
+          commit-message: "docs(changelog): add ${{ steps.meta.outputs.tag }} release notes"
+          body: |
+            Automated changelog update from release `${{ steps.meta.outputs.tag }}`.
+
+            Source run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          add-paths: |
+            CHANGELOG.md

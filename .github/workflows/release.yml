@@ -129,4 +129,4 @@ jobs:
             Firmware binaries are attached as release assets (`zmk-firmware-*.zip` and `SHA256SUMS`).
             GitHub auto-generates source code archives for every release; those links cannot be disabled.
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ZMK_ACTIONS_TOKEN != '' && secrets.ZMK_ACTIONS_TOKEN || secrets.GITHUB_TOKEN }}
