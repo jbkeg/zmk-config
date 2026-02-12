@@ -1,0 +1,15 @@
+#define CONFIG_WIRELESS
+
+#define ZMK_BASE_LAYER(name, LT, RT, LM, RM, LB, RB, LH, RH)                                       \
+    ZMK_LAYER(                                                                                      \
+        name,                                                                                       \
+        &kp TAB     LT                                      RT                              &kp BSPC \
+        &none       LM                                      RM                              &none    \
+        &none       LB                  LEC_BINDING(&kp C_MUTE)  REC_BINDING(&none)  RB  &none \
+        &none       &none   &kp LGUI    &none               LH             RH  &none        &kp RALT &none &none, \
+        SENSOR_VOLUME_BINDING  SENSOR_SCROLL_BINDING                                                  \
+    )
+
+#include "continuum/utils/encoders.h"
+#include "continuum/matrix/cornix.h"
+#include "continuum/base.keymap"

@@ -14,7 +14,7 @@ This document covers the Cornix integration used in this repository.
 
 - 48-key column-staggered split keyboard
 - Wireless split operation via dedicated left/right boards
-- Upstream module provides board definitions and dongle-adapter shields
+- Optional RGB indicator shield is available via `cornix_indicator`
 
 ## Layout
 
@@ -35,7 +35,7 @@ This document covers the Cornix integration used in this repository.
 ### Flashing/Resetting Default Firmware
 
 The original Cornix firmware is available at [Original firmware](/docs/files/cornix_firmwareV1.11.zip).
-Flash this firmware to the dongle to update/recover the Cornix keyboard.
+Flash this firmware to the keyboard halves to update/recover the Cornix keyboard.
 
 ### Bootloader Recovery
 
@@ -176,23 +176,11 @@ Use your preferred method to build
 
    > [!NOTE]
    >
-   > 1. If you are using (default) cornix without dongle, choose "cornix_left", "cornix_right" and "reset".
-   > 2. If you are using cornix with dongle, choose "cornix_dongle". "cornix_left_for_dongle", "cornix_right" and "reset".
-   > 3. Add "cornix_indicator" shield to enable RGB led light. It consumes much more power, use at your own risk.
+   > 1. Use `cornix_left`, `cornix_right`, and `cornix_reset`.
+   > 2. Add `cornix_indicator` shield to enable RGB LED (higher power use).
 
    ```yaml
    include:
-     # Use cornix with dongle
-     - board: nice_nano
-       shield: cornix_dongle_adaptor cornix_dongle dongle_display
-       snippet: studio-rpc-usb-uart
-       artifact-name: cornix_dongle
-
-     - board: cornix_ph_left
-       # shield: cornix_indicator
-       artifact-name: cornix_left_for_dongle
-
-     # Use cornix without dongle
      - board: cornix_left
        # shield: cornix_indicator
        artifact-name: cornix_left
@@ -219,68 +207,3 @@ Use your preferred method to build
    Flash the generated `.uf2` files to the corresponding microcontroller:
    - Left half: `build/left/zephyr/zmk.uf2`
    - Right half: `build/right/zephyr/zmk.uf2`
-
-#### Dongle Adapter Shield
-
-For users who want to create their own custom dongle configurations, this repository provides a adapter shield. The complete configuration for the Cornix dongle can use multiple shields:
-
-1. **`cornix_dongle_adapter`** - This is the common shield for the matrix and Bluetooth functionality
-2. **`dongle_display`** - This is the display module for the dongle screen (or another display project)
-3. **`cornix_dongle`** - This is an example shield for setting up display device for the board (if the board already has `zephyr,display` in the device tree, this display overlay shield is not needed)
-
-The configuration in the `build.yaml` file shows how to use these shields for the dongle:
-
-```yaml
-include:
-  # Use cornix with dongle
-  - board: nice_nano
-    shield: cornix_dongle_adapter cornix_dongle dongle_display
-    snippet: studio-rpc-usb-uart
-    artifact-name: cornix_dongle
-```
-
-To create a custom shield for the display part:
-
-1. The `dongle_display` module is a module contains display widgets, included as part of the project dependencies via west or locally
-2. If you need to create a custom shield for your display hardware, you can create a new shield that provides the appropriate display configuration. Here shows `cornix_dongle` as an example
-3. If your board already has `zephyr,display` in the device tree, you can omit the `cornix_dongle` shield
-4. Include your custom shield in the build configuration
-
-For custom dongle screens, add a new target in build.yaml for your custom dongle:
-
-```yaml
-- board: nice_nano
-  shield: cornix_dongle_adapter cornix_dongle dongle_display
-  snippet: studio-rpc-usb-uart zmk-usb-logging
-  artifact-name: cornix_dongle
-```
-
-To create a custom shield for your display:
-
-1. Use `cornix_dongle_adapter` as the base shield for the matrix and Bluetooth functionality
-2. Add your custom shield in the `build.yaml` file with the appropriate board and configuration
-3. Use `cornix_dongle` as an example and modify the display parts to match your custom board
-4. You can copy the `cornix_dongle` into your project's `boards/shield/` directory, and use the same name or rename it as a new shield
-
-The configuration in the `west.yml` file remains the same:
-
-```yaml
-remotes:
-  - name: zmkfirmware
-    url-base: https://github.com/zmkfirmware
-  - name: cornix-shield
-    url-base: https://github.com/hitsmaxft
-  - name: urob
-    url-base: https://github.com/urob
-```
-
-```yaml
-projects:
-  - name: zmk
-    remote: zmkfirmware
-    import: app/west.yml
-  - name: zmk-keyboard-cornix
-    remote: cornix-shield
-  - name: zmk-helpers
-    remote: urob
-```

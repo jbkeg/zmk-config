@@ -102,3 +102,15 @@ include:
   - board: seeeduino_xiao_ble
     shield: settings_reset
     artifact-name: delta_omega_reset
+
+  # Cornix
+  - board: cornix_left
+    shield: cornix_indicator
+    snippet: common-config studio-rpc-usb-uart
+    artifact-name: cornix_left
+  - board: cornix_right
+    shield: cornix_indicator
+    artifact-name: cornix_right
+  - board: cornix_right
+    shield: settings_reset
+    artifact-name: cornix_reset
