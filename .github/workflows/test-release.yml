@@ -41,6 +41,6 @@ concurrency:
 
 jobs:
   test:
-    uses: urob/zmk-actions/.github/workflows/run-tests.yml@v7.2.0
+    uses: urob/zmk-actions/.github/workflows/run-tests.yml@v9.1.1
     with:
       toolchain: gnuarmemb
