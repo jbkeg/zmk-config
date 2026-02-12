@@ -23,15 +23,52 @@ jobs:
   keymap-drawer:
     uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
     permissions:
-      contents: write
+      contents: read
     with:
-      commit_message: "[Draw] ${{ github.event.head_commit.message }}"
-      amend_commit: true
       fail_on_error: true
       install_branch: "main"
       keymap_patterns: "config/*.keymap"
       config_path: "keymap-drawer/config.yaml"
       json_path: "boards/shields/${keyboard}"
       output_folder: "keymap-drawer"
-      destination: "both"
+      destination: "artifact"
+      artifact_name: "keymap-drawings"
       draw_args: "rommana:'--ghost-keys 0 9 26 29'"
+
+  keymap-pr:
+    name: Create keymap drawing PR
+    needs: keymap-drawer
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' }}
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download keymap drawings
+        uses: actions/download-artifact@v4
+        with:
+          name: keymap-drawings
+          path: .
+
+      - name: Create or update PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.ZMK_ACTIONS_TOKEN != '' && secrets.ZMK_ACTIONS_TOKEN || github.token }}
+          branch: prepare-keymap-drawings
+          base: ${{ github.ref_name }}
+          delete-branch: true
+          title: "[Draw] Refresh keymap diagrams"
+          commit-message: "[Draw] Refresh keymap diagrams"
+          body: |
+            Automated keymap drawing refresh.
+
+            Source run: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          labels: |
+            dependencies
+            automation
+          add-paths: |
+            keymap-drawer/*.svg
+            keymap-drawer/*.yaml
