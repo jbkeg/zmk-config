@@ -48,7 +48,7 @@ jobs:
       build_matrix: ${{ steps.filter.outputs.build_matrix }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Filter build matrix
         id: filter
