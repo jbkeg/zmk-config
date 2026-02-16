@@ -43,10 +43,10 @@ layers:
   - ''
   - Gui
   - ''
-  - {t: Spc, h: Nav, s: '&dot_spc'}
+  - {t: Spc, h: Nav, s: Sentence}
   - {t: Enter, h: Fn}
-  - {t: '&num_dance', h: Num}
-  - {t: '&shift_repeat', h: Shift, s: Caps Word}
+  - {t: NumWord, h: Num, s: Sticky Num}
+  - {t: Repeat, h: Shift, s: Caps Word}
   - ''
   - Alt
   - ''
@@ -94,10 +94,10 @@ layers:
   - ''
   - Gui
   - ''
-  - {t: Spc, h: Nav, s: '&dot_spc'}
+  - {t: Spc, h: Nav, s: Sentence}
   - {t: Enter, h: Fn}
-  - {t: '&num_dance', h: Num}
-  - {t: '&shift_repeat', h: Shift, s: Caps Word}
+  - {t: NumWord, h: Num, s: Sticky Num}
+  - {t: Repeat, h: Shift, s: Caps Word}
   - ''
   - Alt
   - ''
@@ -147,8 +147,8 @@ layers:
   - ''
   - Spc
   - Enter
-  - {t: '&num_dance', h: Num}
-  - {t: '&shift_repeat', h: Shift, s: Caps Word}
+  - {t: NumWord, h: Num, s: Sticky Num}
+  - {t: Repeat, h: Shift, s: Caps Word}
   - ''
   - Alt
   - ''
@@ -179,7 +179,7 @@ layers:
   - Gui
   - ''
   - ''
-  - {t: TaskSW ←, type: held}
+  - TaskSW ←
   - Home
   - End
   - Tab
@@ -199,7 +199,7 @@ layers:
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - CANCEL
+  - Cancel
   - ''
   - Alt
   - ''
@@ -226,14 +226,14 @@ layers:
   - '|'
   - '{'
   - '}'
-  - '['
-  - ']'
+  - {t: '[', right: '{'}
+  - {t: ']', right: '}'}
   - ''
   - ''
   - <
   - '>'
   - ''''
-  - Sft+'
+  - Shift+'
   - ;
   - $$mdi:volume-off$$
   - ''
@@ -241,7 +241,7 @@ layers:
   - ','
   - .
   - '?'
-  - {t: /, h: Sym, type: held}
+  - {t: /, h: Sym}
   - ''
   - ''
   - ''
@@ -250,7 +250,7 @@ layers:
   - {type: trans}
   - {type: trans}
   - {type: trans}
-  - CANCEL
+  - Cancel
   - ''
   - Alt
   - ''
@@ -260,12 +260,12 @@ layers:
   - Win Close
   - {type: trans}
   - TaskSW ←
-  - '&swapper'
+  - Next Win
   - {type: trans}
   - PgUp
-  - {t: Bspc, h: Ctl+Bspc}
-  - {t: ↑, h: Ctl+Home}
-  - {t: Del, h: Ctl+Del}
+  - {t: Bspc, h: Ctrl+Bspc}
+  - {t: ↑, h: Ctrl+Home}
+  - {t: Del, h: Ctrl+Del}
   - {type: trans}
   - Bspc
   - ''
@@ -276,7 +276,7 @@ layers:
   - {type: trans}
   - PgDn
   - {t: ←, h: Home}
-  - {t: ↓, h: Ctl+End}
+  - {t: ↓, h: Ctrl+End}
   - {t: →, h: End}
   - Enter
   - ''
@@ -298,10 +298,10 @@ layers:
   - ''
   - Gui
   - ''
-  - {type: held}
   - {type: trans}
   - {type: trans}
-  - CANCEL
+  - {type: trans}
+  - Cancel
   - ''
   - Alt
   - ''
@@ -341,7 +341,7 @@ layers:
   - ''
   - Pin App
   - Pin Win
-  - Alt+`
+  - Desk Mgr
   - {type: trans}
   - {type: trans}
   - ''
@@ -400,7 +400,7 @@ layers:
   - ''
   - Gui
   - ''
-  - {type: held}
+  - {type: trans}
   - {type: held}
   - Scroll ↑
   - Scroll ↓
@@ -453,7 +453,7 @@ layers:
   - ''
   - '0'
   - .
-  - {type: held}
+  - {type: trans}
   - {type: trans}
   - ''
   - Alt
@@ -465,7 +465,7 @@ layers:
   - BT 2
   - BT 3
   - BT 4
-  - BT CLR
+  - BT Clear
   - {t: Base, h: toggle}
   - {t: Extra, h: toggle}
   - {t: Tap, h: toggle}
@@ -475,12 +475,12 @@ layers:
   - ''
   - Reset
   - Boot
-  - BT PRV
-  - BT NXT
-  - BT CLR
-  - OUT TOG
-  - OUT USB
-  - OUT BLE
+  - BT Prev
+  - BT Next
+  - BT Clear
+  - Out Toggle
+  - USB
+  - BLE
   - {type: trans}
   - Studio Unlock
   - ''
@@ -504,8 +504,8 @@ layers:
   - ''
   - {type: trans}
   - {type: held}
-  - {type: held}
-  - CANCEL
+  - {type: trans}
+  - Cancel
   - ''
   - Alt
   - ''
@@ -566,22 +566,24 @@ combos:
   k: Esc
   l: [Base, Extra, Nav, Num]
 - p: [3, 4]
-  k: '&smart_mouse'
+  k: Smart Mouse
   l: [Base, Extra, Nav, Num]
 - p: [14, 15]
   k: Tab
   l: [Base, Extra, Nav, Num]
-  a: bottom
-  o: 0.9
 - p: [15, 16]
-  k: {t: '&leader', h: Sft+Ctrl}
+  k: Leader
   l: [Base, Extra, Nav, Num]
 - p: [14, 15, 16]
-  k: {t: '&leader_sft', h: Sft+Ctl+Alt}
+  k: Shift+Leader
   l: [Base, Extra, Nav, Num]
+  a: top
+  o: 1.35
 - p: [26, 28]
   k: Cut
   l: [Base, Extra, Nav, Num]
+  a: bottom
+  o: 0.1
 - p: [26, 27]
   k: Copy
   l: [Base, Extra, Nav, Num]
@@ -595,29 +597,33 @@ combos:
   k: Del
   l: [Base, Extra, Nav, Num]
 - p: [19, 20]
-  k: {t: (, h: Sft+Ctrl, s: <}
+  k: {t: (, right: <}
   l: [Base, Extra, Num]
 - p: [20, 21]
-  k: {t: ), h: Sft+Alt, s: '>'}
+  k: {t: ), right: '>'}
   l: [Base, Extra, Num]
 - p: [19, 20]
   k: <
   l: [Nav]
+  hidden: true
 - p: [20, 21]
   k: '>'
   l: [Nav]
+  hidden: true
 - p: [33, 34]
-  k: '['
+  k: {t: '[', right: '{'}
   l: [Base, Extra, Num]
 - p: [34, 35]
-  k: ']'
+  k: {t: ']', right: '}'}
   l: [Base, Extra, Num]
 - p: [33, 34]
   k: '{'
   l: [Nav]
+  hidden: true
 - p: [34, 35]
   k: '}'
   l: [Nav]
+  hidden: true
 - p: [2, 14]
   k: '@'
   l: [Base, Extra, Nav, Num]
@@ -651,7 +657,6 @@ combos:
 - p: [8, 20]
   k: '*'
   l: [Base, Extra, Nav, Num]
-  a: top
 - p: [9, 21]
   k: '&'
   l: [Base, Extra, Nav, Num]
