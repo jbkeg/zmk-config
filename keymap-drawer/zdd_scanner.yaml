@@ -1,5 +1,5 @@
 layout:
-  zmk_keyboard: urchin
+  zmk_keyboard: zdd_scanner
 layers:
   Base:
   - Q

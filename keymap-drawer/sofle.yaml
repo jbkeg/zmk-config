@@ -1,4 +1,5 @@
-layout: {zmk_keyboard: sofle}
+layout:
+  zmk_keyboard: sofle
 layers:
   Base:
   - '`'
@@ -12,8 +13,8 @@ layers:
   - '8'
   - '9'
   - '0'
-  - ''
-  - ''
+  - '-'
+  - Esc
   - Q
   - W
   - E
@@ -24,43 +25,65 @@ layers:
   - I
   - O
   - P
-  - ''
-  - ''
-  - {t: A, h: Gui}
-  - {t: S, h: Alt}
-  - {t: D, h: Shift}
-  - {t: F, h: Ctrl}
+  - t: '['
+    right: '{'
+  - Tab
+  - t: A
+    h: Gui
+  - t: S
+    h: Alt
+  - t: D
+    h: Shift
+  - t: F
+    h: Ctrl
   - G
   - H
-  - {t: J, h: Ctrl}
-  - {t: K, h: Shift}
-  - {t: L, h: Alt}
-  - {t: '''', h: Gui}
-  - ''
-  - ''
-  - {t: Z, h: Btn}
+  - t: J
+    h: Ctrl
+  - t: K
+    h: Shift
+  - t: L
+    h: Alt
+  - t: ''''
+    h: Gui
+  - t: ']'
+    right: '}'
+  - Caps
+  - t: Z
+    h: Btn
   - X
   - C
   - V
   - B
   - $$mdi:volume-off$$
-  - ''
+  - PrtSc
   - N
   - M
-  - {t: ',', s: ;}
-  - {t: ., s: ':'}
-  - {t: '?', h: Sym, s: '!'}
+  - t: ','
+    s: ;
+  - t: .
+    s: ':'
+  - t: '?'
+    h: Sym
+    s: '!'
+  - \
   - ''
-  - ''
-  - Esc
-  - ENTER
-  - {t: Spc, h: Nav, s: Sentence}
-  - {t: Enter, h: Fn}
-  - {t: NumWord, h: Num, s: Sticky Num}
-  - {t: Repeat, h: Shift, s: Caps Word}
-  - Spc
+  - Alt
+  - Gui
+  - t: Spc
+    h: Nav
+    s: Sentence
+  - t: Enter
+    h: Fn
+  - t: NumWord
+    h: Num
+    s: Sticky Num
+  - t: Magic
+    h: Shift
+    s: Caps Word
+  - Enter
   - Bspc
-  - ''
+  - Del
   Extra:
   - '`'
   - '1'
@@ -73,8 +96,8 @@ layers:
   - '8'
   - '9'
   - '0'
-  - ''
-  - ''
+  - '-'
+  - Esc
   - Q
   - W
   - F
@@ -85,43 +108,65 @@ layers:
   - U
   - Y
   - ''''
-  - ''
-  - ''
-  - {t: A, h: Gui}
-  - {t: R, h: Alt}
-  - {t: S, h: Shift}
-  - {t: T, h: Ctrl}
+  - t: '['
+    right: '{'
+  - Tab
+  - t: A
+    h: Gui
+  - t: R
+    h: Alt
+  - t: S
+    h: Shift
+  - t: T
+    h: Ctrl
   - G
   - M
-  - {t: N, h: Ctrl}
-  - {t: E, h: Shift}
-  - {t: I, h: Alt}
-  - {t: O, h: Gui}
-  - ''
-  - ''
-  - {t: Z, h: Btn}
+  - t: N
+    h: Ctrl
+  - t: E
+    h: Shift
+  - t: I
+    h: Alt
+  - t: O
+    h: Gui
+  - t: ']'
+    right: '}'
+  - Caps
+  - t: Z
+    h: Btn
   - X
   - C
   - D
   - V
   - $$mdi:volume-off$$
-  - ''
+  - PrtSc
   - K
   - H
-  - {t: ',', s: ;}
-  - {t: ., s: ':'}
-  - {t: '?', h: Sym, s: '!'}
+  - t: ','
+    s: ;
+  - t: .
+    s: ':'
+  - t: '?'
+    h: Sym
+    s: '!'
+  - \
   - ''
-  - ''
-  - Esc
-  - ENTER
-  - {t: Spc, h: Nav, s: Sentence}
-  - {t: Enter, h: Fn}
-  - {t: NumWord, h: Num, s: Sticky Num}
-  - {t: Repeat, h: Shift, s: Caps Word}
-  - Spc
+  - Alt
+  - Gui
+  - t: Spc
+    h: Nav
+    s: Sentence
+  - t: Enter
+    h: Fn
+  - t: NumWord
+    h: Num
+    s: Sticky Num
+  - t: Magic
+    h: Shift
+    s: Caps Word
+  - Enter
   - Bspc
-  - ''
+  - Del
   Tap:
   - '`'
   - '1'
@@ -134,8 +179,8 @@ layers:
   - '8'
   - '9'
   - '0'
-  - ''
-  - ''
+  - '-'
+  - Esc
   - Q
   - W
   - E
@@ -146,8 +191,9 @@ layers:
   - I
   - O
   - P
-  - ''
-  - ''
+  - t: '['
+    right: '{'
+  - Tab
   - A
   - S
   - D
@@ -158,31 +204,36 @@ layers:
   - K
   - L
   - ''''
-  - ''
-  - ''
+  - t: ']'
+    right: '}'
+  - Caps
   - Z
   - X
   - C
   - V
   - B
   - $$mdi:volume-off$$
-  - ''
+  - PrtSc
   - N
   - M
   - ','
   - .
   - '?'
+  - \
   - ''
-  - ''
-  - Esc
-  - ENTER
+  - Alt
+  - Gui
   - Spc
   - Enter
-  - {t: NumWord, h: Num, s: Sticky Num}
-  - {t: Repeat, h: Shift, s: Caps Word}
-  - Spc
+  - t: NumWord
+    h: Num
+    s: Sticky Num
+  - t: Magic
+    h: Shift
+    s: Caps Word
+  - Enter
   - Bspc
-  - ''
+  - Del
   Btn:
   - '`'
   - '1'
@@ -195,8 +246,8 @@ layers:
   - '8'
   - '9'
   - '0'
-  - ''
-  - ''
+  - '-'
+  - Esc
   - Undo
   - Cut
   - Copy
@@ -207,43 +258,45 @@ layers:
   - Copy
   - Cut
   - Undo
-  - ''
-  - ''
+  - t: '['
+    right: '{'
+  - Tab
   - Gui
   - Alt
-  - Ctrl
-  - Shift
-  - PgUp
-  - PgUp
   - Shift
   - Ctrl
+  - PgUp
+  - PgUp
+  - Ctrl
+  - Shift
   - Alt
   - Gui
-  - ''
-  - ''
-  - TaskSW ←
+  - t: ']'
+    right: '}'
+  - Caps
+  - type: trans
   - Home
   - End
   - Tab
   - PgDn
   - $$mdi:volume-off$$
-  - ''
+  - PrtSc
   - PgDn
   - Tab
   - End
   - Home
-  - TaskSW ←
+  - type: trans
+  - \
   - ''
-  - ''
-  - Esc
-  - ENTER
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
+  - Alt
+  - Gui
+  - type: trans
+  - type: trans
+  - type: trans
   - Cancel
-  - Spc
+  - Enter
   - Bspc
-  - ''
+  - Del
   Sym:
   - '`'
   - '1'
@@ -256,55 +309,61 @@ layers:
   - '8'
   - '9'
   - '0'
-  - ''
-  - ''
-  - '!'
-  - '@'
-  - '#'
-  - $
-  - '%'
-  - ^
+  - '-'
+  - Esc
+  - '~'
   - '&'
   - '*'
   - (
   - )
-  - ''
-  - ''
   - '`'
-  - '~'
   - '-'
   - '='
   - \
-  - '|'
+  - ''''
+  - t: '['
+    right: '{'
+  - Tab
   - '{'
+  - $
+  - '%'
+  - ^
   - '}'
-  - {t: '[', right: '{'}
-  - {t: ']', right: '}'}
-  - ''
-  - ''
+  - '|'
+  - t: '['
+    h: Ctrl
+  - t: '{'
+    h: Shift
+  - t: '}'
+    h: Alt
+  - t: ']'
+    h: Gui
+  - t: ']'
+    right: '}'
+  - Caps
+  - type: trans
+  - '!'
+  - '@'
+  - '#'
+  - type: trans
+  - $$mdi:volume-off$$
+  - PrtSc
+  - ;
+  - ':'
   - <
   - '>'
-  - ''''
-  - Shift+'
-  - ;
-  - $$mdi:volume-off$$
+  - type: trans
+  - \
   - ''
-  - ':'
-  - ','
-  - .
-  - '?'
-  - {t: /, h: Sym}
-  - ''
-  - ''
-  - Esc
-  - ENTER
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
+  - Alt
+  - Gui
+  - type: trans
+  - type: trans
+  - type: trans
   - Cancel
-  - Spc
+  - Enter
   - Bspc
-  - ''
+  - Del
   Nav:
   - '`'
   - '1'
@@ -317,55 +376,67 @@ layers:
   - '8'
   - '9'
   - '0'
-  - ''
-  - ''
+  - '-'
+  - Esc
   - Win Close
-  - {type: trans}
+  - type: trans
   - TaskSW ←
   - Next Win
-  - {type: trans}
+  - TaskSW →
   - PgUp
-  - {t: Bspc, h: Ctrl+Bspc}
-  - {t: ↑, h: Ctrl+Home}
-  - {t: Del, h: Ctrl+Del}
-  - {type: trans}
-  - ''
-  - ''
-  - {t: Gui, h: sticky}
-  - {t: Alt, h: sticky}
-  - {t: Shift, h: sticky}
-  - {t: Ctrl, h: sticky}
-  - {type: trans}
+  - t: Bspc
+    h: Ctrl+Bspc
+  - t: ↑
+    h: Ctrl+Home
+  - t: Del
+    h: Ctrl+Del
+  - type: trans
+  - t: '['
+    right: '{'
+  - Tab
+  - t: Gui
+    h: sticky
+  - t: Alt
+    h: sticky
+  - t: Shift
+    h: sticky
+  - t: Ctrl
+    h: sticky
+  - type: trans
   - PgDn
-  - {t: ←, h: Home}
-  - {t: ↓, h: Ctrl+End}
-  - {t: →, h: End}
+  - t: ←
+    h: Home
+  - t: ↓
+    h: Ctrl+End
+  - t: →
+    h: End
   - Enter
-  - ''
-  - ''
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
+  - t: ']'
+    right: '}'
+  - Caps
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
   - $$mdi:volume-off$$
-  - ''
+  - PrtSc
   - Ins
   - Tab
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
+  - type: trans
+  - type: trans
+  - type: trans
+  - \
   - ''
-  - ''
-  - Esc
-  - ENTER
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
+  - Alt
+  - Gui
+  - type: trans
+  - type: trans
+  - type: trans
   - Cancel
-  - Spc
+  - Enter
   - Bspc
-  - ''
+  - Del
   Fn:
   - '`'
   - '1'
@@ -378,55 +449,65 @@ layers:
   - '8'
   - '9'
   - '0'
-  - ''
-  - ''
+  - '-'
+  - Esc
   - F12
   - F7
   - F8
   - F9
-  - {type: trans}
-  - {type: trans}
+  - type: trans
+  - type: trans
   - $$mdi:skip-backward$$
-  - $$mdi:volume-high$$
+  - $$mdi:play-pause$$
   - $$mdi:skip-forward$$
-  - {type: trans}
-  - ''
-  - ''
-  - {t: F11, h: Gui}
-  - {t: F4, h: Alt}
-  - {t: F5, h: Shift}
-  - {t: F6, h: Ctrl}
-  - {type: trans}
-  - {type: trans}
-  - {t: Prev Desk, h: Ctrl}
-  - {t: '$$mdi:volume-medium$$', h: Shift}
-  - {t: Next Desk, h: Alt}
-  - {type: trans}
-  - ''
-  - ''
+  - type: trans
+  - t: '['
+    right: '{'
+  - Tab
+  - t: F11
+    h: Gui
+  - t: F4
+    h: Alt
+  - t: F5
+    h: Shift
+  - t: F6
+    h: Ctrl
+  - type: trans
+  - Prev Desk
+  - t: $$mdi:volume-medium$$
+    h: Ctrl
+  - t: $$mdi:volume-off$$
+    h: Shift
+  - t: $$mdi:volume-high$$
+    h: Alt
+  - t: Next Desk
+    h: Gui
+  - t: ']'
+    right: '}'
+  - Caps
   - F10
   - F1
   - F2
   - F3
-  - {type: trans}
+  - type: trans
   - $$mdi:volume-off$$
-  - ''
+  - PrtSc
   - Pin App
   - Pin Win
   - Desk Mgr
-  - {type: trans}
-  - {type: trans}
+  - type: trans
+  - type: trans
+  - \
   - ''
-  - ''
-  - Esc
-  - ENTER
-  - {type: trans}
-  - {type: held}
-  - $$mdi:volume-off$$
-  - $$mdi:play-pause$$
-  - Spc
+  - Alt
+  - Gui
+  - type: trans
+  - type: held
+  - type: trans
+  - type: trans
+  - Enter
   - Bspc
-  - ''
+  - Del
   Mouse:
   - '`'
   - '1'
@@ -439,55 +520,57 @@ layers:
   - '8'
   - '9'
   - '0'
-  - ''
-  - ''
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
+  - '-'
+  - Esc
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
   - PgUp
   - Mouse ↑
   - PgDn
-  - {type: trans}
-  - ''
-  - ''
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
+  - type: trans
+  - t: '['
+    right: '{'
+  - Tab
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
   - Scroll ←
   - Mouse ←
   - Mouse ↓
   - Mouse →
   - Scroll →
-  - ''
-  - ''
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
+  - t: ']'
+    right: '}'
+  - Caps
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
   - $$mdi:volume-off$$
-  - ''
-  - {type: trans}
+  - PrtSc
+  - type: trans
   - Left Click
   - Middle Click
   - Right Click
-  - {type: trans}
+  - type: trans
+  - \
   - ''
-  - ''
-  - Esc
-  - ENTER
-  - {type: trans}
-  - {type: held}
+  - Alt
+  - Gui
+  - type: trans
+  - type: held
   - Scroll ↑
   - Scroll ↓
-  - Spc
+  - Enter
   - Bspc
-  - ''
+  - Del
   Num:
   - '`'
   - '1'
@@ -500,55 +583,57 @@ layers:
   - '8'
   - '9'
   - '0'
-  - ''
-  - ''
-  - {type: trans}
+  - '-'
+  - Esc
+  - /
   - '7'
   - '8'
   - '9'
-  - {type: trans}
-  - {type: trans}
-  - /
-  - '*'
   - '-'
-  - +
-  - ''
-  - ''
-  - {type: trans}
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - t: '['
+    right: '{'
+  - Tab
+  - '*'
   - '4'
   - '5'
   - '6'
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - ''
-  - ''
-  - {type: trans}
+  - +
+  - type: trans
+  - Ctrl
+  - Shift
+  - Alt
+  - Gui
+  - t: ']'
+    right: '}'
+  - Caps
+  - '='
   - '1'
   - '2'
   - '3'
-  - {type: trans}
-  - $$mdi:volume-off$$
-  - ''
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - ''
-  - ''
-  - Esc
-  - ENTER
-  - '0'
   - .
-  - {type: trans}
-  - {type: trans}
-  - Spc
-  - Bspc
+  - $$mdi:volume-off$$
+  - PrtSc
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - \
   - ''
+  - Alt
+  - Gui
+  - '0'
+  - type: trans
+  - type: trans
+  - type: trans
+  - Enter
+  - Bspc
+  - Del
   Sys:
   - '`'
   - '1'
@@ -561,20 +646,25 @@ layers:
   - '8'
   - '9'
   - '0'
-  - ''
-  - ''
+  - '-'
+  - Esc
   - BT 1
   - BT 2
   - BT 3
   - BT 4
   - BT Clear
-  - {t: Base, h: toggle}
-  - {t: Extra, h: toggle}
-  - {t: Tap, h: toggle}
-  - {t: Game, h: toggle}
-  - {type: trans}
-  - ''
-  - ''
+  - t: Base
+    h: toggle
+  - t: Extra
+    h: toggle
+  - t: Tap
+    h: toggle
+  - t: Game
+    h: toggle
+  - type: trans
+  - t: '['
+    right: '{'
+  - Tab
   - Reset
   - Boot
   - BT Prev
@@ -583,33 +673,34 @@ layers:
   - Out Toggle
   - USB
   - BLE
-  - {type: trans}
-  - Studio Unlock
-  - ''
-  - ''
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
+  - type: trans
+  - type: trans
+  - t: ']'
+    right: '}'
+  - Caps
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
   - $$mdi:volume-off$$
+  - PrtSc
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - \
   - ''
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - ''
-  - ''
-  - Esc
-  - ENTER
-  - {type: trans}
-  - {type: held}
-  - {type: trans}
+  - Alt
+  - Gui
+  - type: trans
+  - type: held
+  - type: trans
   - Cancel
-  - Spc
+  - Enter
   - Bspc
-  - ''
+  - Del
   Game:
   - '`'
   - '1'
@@ -622,169 +713,353 @@ layers:
   - '8'
   - '9'
   - '0'
-  - ''
-  - ''
+  - '-'
+  - Esc
   - Tab
   - Q
   - W
   - E
   - R
-  - {type: trans}
-  - {t: Game, h: toggle}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - ''
-  - ''
+  - t: Base
+    h: toggle
+  - t: Extra
+    h: toggle
+  - t: Tap
+    h: toggle
+  - t: Game
+    h: toggle
+  - type: trans
+  - t: '['
+    right: '{'
+  - Tab
   - Ctrl
   - A
   - S
   - D
   - F
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - ''
-  - ''
+  - Out Toggle
+  - USB
+  - BLE
+  - type: trans
+  - type: trans
+  - t: ']'
+    right: '}'
+  - Caps
   - Shift
   - Z
   - X
   - C
   - V
   - $$mdi:volume-off$$
+  - PrtSc
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - \
   - ''
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - {type: trans}
-  - ''
-  - ''
-  - Esc
-  - ENTER
+  - Alt
+  - Gui
   - B
   - Spc
-  - {type: trans}
-  - {type: trans}
-  - Spc
+  - type: trans
+  - Cancel
+  - Enter
   - Bspc
+  - Del
+  Combos:
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
   - ''
 combos:
-- p: [14, 15]
+- p:
+  - 14
+  - 15
   k: Esc
-  l: [Base, Extra, Nav, Num]
-- p: [15, 16]
+  l:
+  - Combos
+- p:
+  - 15
+  - 16
   k: Smart Mouse
-  l: [Base, Extra, Nav, Num]
-- p: [26, 27]
+  l:
+  - Combos
+- p:
+  - 26
+  - 27
   k: Tab
-  l: [Base, Extra, Nav, Num]
-- p: [27, 28]
+  l:
+  - Combos
+- p:
+  - 27
+  - 28
   k: Leader
-  l: [Base, Extra, Nav, Num]
-- p: [26, 27, 28]
+  l:
+  - Combos
+- p:
+  - 26
+  - 27
+  - 28
   k: Shift+Leader
-  l: [Base, Extra, Nav, Num]
+  l:
+  - Combos
   a: top
   o: 1.35
-- p: [38, 40]
+- p:
+  - 38
+  - 40
   k: Cut
-  l: [Base, Extra, Nav, Num]
+  l:
+  - Combos
   a: bottom
   o: 0.1
-- p: [38, 39]
+- p:
+  - 38
+  - 39
   k: Copy
-  l: [Base, Extra, Nav, Num]
-- p: [39, 40]
+  l:
+  - Combos
+- p:
+  - 39
+  - 40
   k: Paste
-  l: [Base, Extra, Nav, Num]
-- p: [19, 20]
+  l:
+  - Combos
+- p:
+  - 19
+  - 20
   k: Bspc
-  l: [Base, Extra, Nav, Num]
-- p: [20, 21]
+  l:
+  - Combos
+- p:
+  - 20
+  - 21
   k: Del
-  l: [Base, Extra, Nav, Num]
-- p: [31, 32]
-  k: {t: (, right: <}
-  l: [Base, Extra, Num]
-- p: [32, 33]
-  k: {t: ), right: '>'}
-  l: [Base, Extra, Num]
-- p: [31, 32]
+  l:
+  - Combos
+- p:
+  - 31
+  - 32
+  k:
+    t: (
+    right: <
+  l:
+  - Combos
+- p:
+  - 32
+  - 33
+  k:
+    t: )
+    right: '>'
+  l:
+  - Combos
+- p:
+  - 31
+  - 32
   k: <
-  l: [Nav]
+  l:
+  - Combos
   hidden: true
-- p: [32, 33]
+- p:
+  - 32
+  - 33
   k: '>'
-  l: [Nav]
+  l:
+  - Combos
   hidden: true
-- p: [45, 46]
-  k: {t: '[', right: '{'}
-  l: [Base, Extra, Num]
-- p: [46, 47]
-  k: {t: ']', right: '}'}
-  l: [Base, Extra, Num]
-- p: [45, 46]
+- p:
+  - 45
+  - 46
+  k:
+    t: '['
+    right: '{'
+  l:
+  - Combos
+- p:
+  - 46
+  - 47
+  k:
+    t: ']'
+    right: '}'
+  l:
+  - Combos
+- p:
+  - 45
+  - 46
   k: '{'
-  l: [Nav]
+  l:
+  - Combos
   hidden: true
-- p: [46, 47]
+- p:
+  - 46
+  - 47
   k: '}'
-  l: [Nav]
+  l:
+  - Combos
   hidden: true
-- p: [14, 26]
+- p:
+  - 14
+  - 26
   k: '@'
-  l: [Base, Extra, Nav, Num]
-- p: [15, 27]
+  l:
+  - Combos
+- p:
+  - 15
+  - 27
   k: '#'
-  l: [Base, Extra, Nav, Num]
-- p: [16, 28]
+  l:
+  - Combos
+- p:
+  - 16
+  - 28
   k: $
-  l: [Base, Extra, Nav, Num]
-- p: [17, 29]
+  l:
+  - Combos
+- p:
+  - 17
+  - 29
   k: '%'
-  l: [Base, Extra, Nav, Num]
-- p: [26, 38]
+  l:
+  - Combos
+- p:
+  - 26
+  - 38
   k: '`'
-  l: [Base, Extra, Nav, Num]
-- p: [27, 39]
+  l:
+  - Combos
+- p:
+  - 27
+  - 39
   k: \
-  l: [Base, Extra, Nav, Num]
-- p: [28, 40]
+  l:
+  - Combos
+- p:
+  - 28
+  - 40
   k: '='
-  l: [Base, Extra, Nav, Num]
-- p: [29, 41]
+  l:
+  - Combos
+- p:
+  - 29
+  - 41
   k: '~'
-  l: [Base, Extra, Nav, Num]
-- p: [18, 30]
+  l:
+  - Combos
+- p:
+  - 18
+  - 30
   k: ^
-  l: [Base, Extra, Nav, Num]
-- p: [19, 31]
+  l:
+  - Combos
+- p:
+  - 19
+  - 31
   k: +
-  l: [Base, Extra, Nav, Num]
-- p: [20, 32]
+  l:
+  - Combos
+- p:
+  - 20
+  - 32
   k: '*'
-  l: [Base, Extra, Nav, Num]
-- p: [21, 33]
+  l:
+  - Combos
+- p:
+  - 21
+  - 33
   k: '&'
-  l: [Base, Extra, Nav, Num]
-- p: [30, 44]
+  l:
+  - Combos
+- p:
+  - 30
+  - 44
   k: _
-  l: [Base, Extra, Nav, Num]
-- p: [31, 45]
+  l:
+  - Combos
+- p:
+  - 31
+  - 45
   k: '-'
-  l: [Base, Extra, Nav, Num]
-- p: [32, 46]
+  l:
+  - Combos
+- p:
+  - 32
+  - 46
   k: /
-  l: [Base, Extra, Nav, Num]
-- p: [33, 47]
+  l:
+  - Combos
+- p:
+  - 33
+  - 47
   k: '|'
-  l: [Base, Extra, Nav, Num]
-- p: [18, 19]
+  l:
+  - Combos
+- p:
+  - 18
+  - 19
   k: LANG1
-  l: [Base, Extra, Tap]
-- p: [17, 16]
+  l:
+  - Combos
+- p:
+  - 17
+  - 16
   k: LANG1
-  l: [Base, Extra, Tap]
+  l:
+  - Combos
