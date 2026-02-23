@@ -192,8 +192,11 @@ layers:
   - Alt
   - Gui
   - ''
-  - Spc
-  - Enter
+  - t: Spc
+    h: Nav
+    s: Sentence
+  - t: Enter
+    h: Fn
   - t: NumWord
     h: Num
     s: Sticky Num
