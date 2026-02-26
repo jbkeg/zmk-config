@@ -47,3 +47,24 @@ GitHub auto-generates source code archives for every release; those links cannot
 ### Firmware Behavior Follow-up
 
 - Expand behavior-impact notes as needed using `docs/changelog_template.md`.
+
+## v0.4.2 - 2026-02-26
+
+Release: [Firmware v0.4.2](https://github.com/jbkeg/zmk-config/releases/tag/v0.4.2)
+
+### Notes
+
+Automated ZMK firmware release for `v0.4.2`.
+Firmware binaries are attached as release assets (`zmk-firmware-*.zip` and `SHA256SUMS`).
+GitHub auto-generates source code archives for every release; those links cannot be disabled.
+
+
+## What's Changed
+* docs(changelog): add v0.4.1 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/15
+
+
+**Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v0.4.1...v0.4.2
+
+### Firmware Behavior Follow-up
+
+- Expand behavior-impact notes as needed using `docs/changelog_template.md`.
