@@ -68,3 +68,19 @@ GitHub auto-generates source code archives for every release; those links cannot
 ### Firmware Behavior Follow-up
 
 - Expand behavior-impact notes as needed using `docs/changelog_template.md`.
+
+## v1.0.0 - 2026-02-28
+
+Release: [v1.0.0](https://github.com/jbkeg/zmk-config/releases/tag/v1.0.0)
+
+### Notes
+
+## What's Changed
+* docs(changelog): add v0.4.2 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/16
+
+
+**Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v0.4.2...v1.0.0
+
+### Firmware Behavior Follow-up
+
+- Expand behavior-impact notes as needed using `docs/changelog_template.md`.
