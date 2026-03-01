@@ -50,7 +50,7 @@ jobs:
           echo "Using release tag: ${tag}"
 
       - name: Download built firmware artifacts
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           path: ./artifacts
           merge-multiple: true
