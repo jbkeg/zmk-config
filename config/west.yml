@@ -54,26 +54,16 @@ manifest:
     - name: zmk-dongle-display
       remote: englmaxi
 
-    ## Prospector Dongle
+    ## Prospector Scanner
     - name: prospector-zmk-module
-      remote: carrefinho
-      revision: main
-
-    # ## Prospector Dongle with new status screens
-    # - name: prospector-zmk-module
-    #   remote: carrefinho
-    #   revision: feat/new-status-screens
-
-    # ## Prospector Scanner
-    # - name: prospector-zmk-module
+      remote: togura
+      revision: v2.0.0
+      path: modules/prospector-zmk-module
+    # - name: prospector-scanner
     #   remote: togura
+    #   repo-path: prospector-zmk-module
     #   revision: v2.0.0
-    #   path: modules/prospector-zmk-module
-    # # - name: prospector-scanner
-    # #   remote: togura
-    # #   repo-path: prospector-zmk-module
-    # #   revision: v2.0.0
-    # #   path: modules/prospector-scanner
+    #   path: modules/prospector-scanner
 
     ## Yet Another Dongle Screen(YADS)
     - name: zmk-dongle-screen
