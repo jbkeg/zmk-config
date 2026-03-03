@@ -180,11 +180,6 @@ include:
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Cornix\ ZDD\"
     artifact-name: cornix_zdd_dongle
-  - board: seeeduino_xiao_ble
-    shield: cornix_dongle prospector_adapter
-    snippet: studio-rpc-usb-uart prospector-config
-    cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Cornix\ PRSP\"
-    artifact-name: cornix_prospector_dongle
 
   # Shared reset artifacts
   - board: nice_nano_v2
@@ -230,50 +225,8 @@ include:
     snippet: studio-rpc-usb-uart prospector-config
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"DeltaOmegaPRSP\"
     artifact-name: delta_omega_prospector_dongle
-
-  # # Scanner
-  # - board: seeeduino_xiao_ble
-  #   shield: prospector_scanner
-  #   snippet: scanner-config
-  #   artifact-name: prospector_scanner
-
-  # # Scanner target keyboard
-  # - board: seeeduino_xiao_ble
-  #   shield: totem_left
-  #   snippet: common-config studio-rpc-usb-uart scanner-target
-  #   cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"TOTEM\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
-  #   artifact-name: totem_left_w_scanner
-  # - board: nice_nano_v2
-  #   shield: urchin_left nice_view_adapter nice_view_gem
-  #   snippet: common-config studio-rpc-usb-uart scanner-target
-  #   cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"URCHIN\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
-  #   artifact-name: urchin_left_w_scanner
-  # - board: nice_nano_v2
-  #   shield: corne_left nice_view_adapter nice_view
-  #   snippet: common-config studio-rpc-usb-uart scanner-target
-  #   cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"CORNE\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
-  #   artifact-name: corne_left_w_scanner
-  # - board: eyelash_corne_left
-  #   shield: nice_view
-  #   snippet: common-config studio-rpc-usb-uart scanner-target
-  #   cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"ELCORNE\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
-  #   artifact-name: eyelash_corne_left_w_scanner
-  # - board: nice_nano_v2
-  #   shield: sofle_left nice_view_adapter nice_view
-  #   snippet: common-config sofle-sides-config studio-rpc-usb-uart scanner-target
-  #   cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"SOFLE\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
-  #   artifact-name: sofle_left_w_scanner
-  # - board: eyelash_sofle_left
-  #   shield: nice_view
-  #   snippet: common-config studio-rpc-usb-uart scanner-target
-  #   cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"ELSOFLE\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
-  #   artifact-name: eyelash_sofle_left_w_scanner
-  # - board: seeeduino_xiao_ble
-  #   shield: delta_omega_left
-  #   snippet: common-config studio-rpc-usb-uart scanner-target
-  #   cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"DOMEGA\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
-  #   artifact-name: delta_omega_left_w_scanner
-  # - board: cornix_left
-  #   snippet: common-config studio-rpc-usb-uart scanner-target
-  #   cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"CORNIX\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
-  #   artifact-name: cornix_left_w_scanner
+  - board: seeeduino_xiao_ble
+    shield: cornix_dongle prospector_adapter
+    snippet: studio-rpc-usb-uart prospector-config
+    cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Cornix\ PRSP\"
+    artifact-name: cornix_prospector_dongle

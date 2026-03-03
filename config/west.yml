@@ -1,6 +1,6 @@
 manifest:
   defaults:
-    revision: v0.3
+    revision: main
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
@@ -57,23 +57,7 @@ manifest:
     ## Prospector Dongle
     - name: prospector-zmk-module
       remote: carrefinho
-      revision: main
-
-    # ## Prospector Dongle with new status screens
-    # - name: prospector-zmk-module
-    #   remote: carrefinho
-    #   revision: feat/new-status-screens
-
-    # ## Prospector Scanner
-    # - name: prospector-zmk-module
-    #   remote: togura
-    #   revision: v2.0.0
-    #   path: modules/prospector-zmk-module
-    # # - name: prospector-scanner
-    # #   remote: togura
-    # #   repo-path: prospector-zmk-module
-    # #   revision: v2.0.0
-    # #   path: modules/prospector-scanner
+      revision: feat/new-status-screens
 
     ## Yet Another Dongle Screen(YADS)
     - name: zmk-dongle-screen
@@ -96,6 +80,6 @@ manifest:
       revision: main
     - name: nice-view-gem
       remote: m165437
-      revision: v0.3.0
+      revision: main
   self:
     path: config
