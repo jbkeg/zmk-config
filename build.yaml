@@ -20,64 +20,64 @@
 ---
 include:
   # TOTEM
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: totem_left
     snippet: common-config studio-rpc-usb-uart
     artifact-name: totem_left
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: totem_right
     artifact-name: totem_right
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: totem_left_w_dongle
     artifact-name: totem_left_w_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: totem_dongle
     snippet: studio-rpc-usb-uart
     artifact-name: totem_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: totem_dongle zdd_adapter dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"TOTEM\ ZDD\"
     artifact-name: totem_zdd_dongle
 
   # Urchin
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: urchin_left nice_view_adapter nice_view_gem
     snippet: common-config studio-rpc-usb-uart
     artifact-name: urchin_left
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: urchin_right nice_view_adapter nice_view_gem
     artifact-name: urchin_right
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: urchin_left_w_dongle nice_view_adapter nice_view_gem
     artifact-name: urchin_left_w_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: urchin_dongle
     snippet: studio-rpc-usb-uart
     artifact-name: urchin_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: urchin_dongle zdd_adapter dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Urchin\ ZDD\"
     artifact-name: urchin_zdd_dongle
 
   # Corne
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: corne_left nice_view_adapter nice_view
     snippet: common-config studio-rpc-usb-uart
     artifact-name: corne_left
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: corne_right nice_view_adapter nice_view
     artifact-name: corne_right
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: corne_left nice_view_adapter nice_view
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: corne_left_w_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: corne_dongle
     snippet: studio-rpc-usb-uart
     artifact-name: corne_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: corne_dongle zdd_adapter dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Corne\ ZDD\"
@@ -95,27 +95,27 @@ include:
     shield: nice_view
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: eyelash_corne_left_w_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: eyelash_corne_dongle zdd_adapter dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"EyelashCorneZDD\"
     artifact-name: eyelash_corne_zdd_dongle
 
   # Sofle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: sofle_left nice_view_adapter nice_view
     snippet: common-config sofle-sides-config studio-rpc-usb-uart
     artifact-name: sofle_left
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: sofle_right nice_view_adapter nice_view
     snippet: sofle-sides-config
     artifact-name: sofle_right
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: sofle_left nice_view_adapter nice_view
     snippet: sofle-sides-config
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: sofle_left_w_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: sofle_dongle zdd_adapter dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Sofle\ ZDD\"
@@ -133,28 +133,28 @@ include:
     shield: nice_view
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: eyelash_sofle_left_w_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: eyelash_sofle_dongle zdd_adapter dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"EyelashSofleZDD\"
     artifact-name: eyelash_sofle_zdd_dongle
 
   # Delta Omega
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: delta_omega_left
     snippet: common-config studio-rpc-usb-uart
     artifact-name: delta_omega_left
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: delta_omega_right
     artifact-name: delta_omega_right
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: delta_omega_left_w_dongle
     artifact-name: delta_omega_left_w_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: delta_omega_dongle
     snippet: studio-rpc-usb-uart
     artifact-name: delta_omega_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: delta_omega_dongle zdd_adapter dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Delta\ Omega\ ZDD\"
@@ -171,61 +171,61 @@ include:
   - board: cornix_left
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: cornix_left_w_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: cornix_dongle
     snippet: studio-rpc-usb-uart
     artifact-name: cornix_dongle
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: cornix_dongle zdd_adapter dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Cornix\ ZDD\"
     artifact-name: cornix_zdd_dongle
 
   # Shared reset artifacts
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: settings_reset
     artifact-name: reset_nice_nano_v2
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: settings_reset
     artifact-name: reset_seeeduino_xiao_ble
 
   # Prospector Dongle
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: totem_dongle prospector_adapter
     snippet: studio-rpc-usb-uart prospector-config
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"TOTEM\ PRSP\"
     artifact-name: totem_prospector_dongle
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: urchin_dongle prospector_adapter
     snippet: studio-rpc-usb-uart prospector-config
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Urchin\ PRSP\"
     artifact-name: urchin_prospector_dongle
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: corne_dongle prospector_adapter
     snippet: studio-rpc-usb-uart prospector-config
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Corne\ PRSP\"
     artifact-name: corne_prospector_dongle
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: eyelash_corne_dongle prospector_adapter
     snippet: studio-rpc-usb-uart prospector-config
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"ELCornePRSP\"
     artifact-name: eyelash_corne_prospector_dongle
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: sofle_dongle prospector_adapter
     snippet: studio-rpc-usb-uart prospector-config
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Sofle\ PRSP\"
     artifact-name: sofle_prospector_dongle
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: eyelash_sofle_dongle prospector_adapter
     snippet: studio-rpc-usb-uart prospector-config
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"ELSoflePRSP\"
     artifact-name: eyelash_sofle_prospector_dongle
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: delta_omega_dongle prospector_adapter
     snippet: studio-rpc-usb-uart prospector-config
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"DeltaOmegaPRSP\"
     artifact-name: delta_omega_prospector_dongle
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: cornix_dongle prospector_adapter
     snippet: studio-rpc-usb-uart prospector-config
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Cornix\ PRSP\"

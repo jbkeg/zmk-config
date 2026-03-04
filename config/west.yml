@@ -62,7 +62,7 @@ manifest:
     ## Yet Another Dongle Screen(YADS)
     - name: zmk-dongle-screen
       remote: janpfischer
-      revision: main
+      revision: upgrade-4.1
 
     ## RGB LED Widget
     - name: zmk-rgbled-widget
