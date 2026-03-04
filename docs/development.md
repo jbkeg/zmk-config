@@ -6,6 +6,17 @@ Related references:
 
 - Known non-blocking warning tracker: `docs/known_issues.md`
 
+## Branch Roles
+
+Use these branch roles when choosing where to develop and test:
+
+| Branch | Purpose |
+| --- | --- |
+| `main` | development |
+| `canary` | latest |
+| `v0.3` | zmk v0.3 |
+| `scanner` | scanner |
+
 ## CI Workflows
 
 Build and release are matrix-driven via `build.yaml`.
