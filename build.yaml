@@ -184,10 +184,10 @@ include:
   # Shared reset artifacts
   - board: nice_nano//zmk
     shield: settings_reset
-    artifact-name: reset_nice_nano_v2
+    artifact-name: reset_nice_nano_zmk
   - board: xiao_ble//zmk
     shield: settings_reset
-    artifact-name: reset_seeeduino_xiao_ble
+    artifact-name: reset_xiao_ble_zmk
 
   # Prospector Dongle
   - board: xiao_ble//zmk

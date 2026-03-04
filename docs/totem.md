@@ -16,12 +16,12 @@ Implemented matrix targets:
 
 | Target                   | Board                | Shield                                    | Snippet                             | Artifact Name            | Status |
 | ------------------------ | -------------------- | ----------------------------------------- | ----------------------------------- | ------------------------ | ------ |
-| Left half (direct split) | `seeeduino_xiao_ble` | `totem_left`                              | `common-config studio-rpc-usb-uart` | `totem_left`             | Active |
-| Right half               | `seeeduino_xiao_ble` | `totem_right`                             | none                                | `totem_right`            | Active |
-| Left half (dongle split) | `seeeduino_xiao_ble` | `totem_left_w_dongle`                     | none                                | `totem_left_w_dongle`    | Active |
-| Dongle (ZDD)             | `nice_nano_v2`       | `totem_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart`               | `totem_zdd_dongle`       | Active |
-| Keyboard reset           | `seeeduino_xiao_ble` | `settings_reset`                          | none                                | `totem_reset`            | Active |
-| Dongle reset (ZDD)       | `nice_nano_v2`       | `settings_reset`                          | none                                | `totem_zdd_dongle_reset` | Active |
+| Left half (direct split) | `xiao_ble//zmk` | `totem_left`                              | `common-config studio-rpc-usb-uart` | `totem_left`             | Active |
+| Right half               | `xiao_ble//zmk` | `totem_right`                             | none                                | `totem_right`            | Active |
+| Left half (dongle split) | `xiao_ble//zmk` | `totem_left_w_dongle`                     | none                                | `totem_left_w_dongle`    | Active |
+| Dongle (ZDD)             | `nice_nano//zmk`       | `totem_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart`               | `totem_zdd_dongle`       | Active |
+| Keyboard reset           | `xiao_ble//zmk` | `settings_reset`                          | none                                | `totem_reset`            | Active |
+| Dongle reset (ZDD)       | `nice_nano//zmk`       | `settings_reset`                          | none                                | `totem_zdd_dongle_reset` | Active |
 
 ## Reference Material
 

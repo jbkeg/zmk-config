@@ -12,12 +12,12 @@ Implemented matrix targets:
 
 | Target | Board | Shield | Snippet | Artifact Name | Status |
 | --- | --- | --- | --- | --- | --- |
-| Left half (direct split) | `nice_nano_v2` | `urchin_left nice_view_adapter nice_view_gem` | `common-config studio-rpc-usb-uart` | `urchin_left` | Active |
-| Right half | `nice_nano_v2` | `urchin_right nice_view_adapter nice_view_gem` | none | `urchin_right` | Active |
-| Left half (dongle split) | `nice_nano_v2` | `urchin_left_w_dongle nice_view_adapter nice_view_gem` | none | `urchin_left_w_dongle` | Active |
-| Dongle (single keyboard) | `nice_nano_v2` | `urchin_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart` | `urchin_zdd_dongle` | Active |
-| Keyboard reset | `nice_nano_v2` | `settings_reset` | none | `urchin_reset` | Active |
-| Dongle reset | `nice_nano_v2` | `settings_reset` | none | `urchin_zdd_dongle_reset` | Active |
+| Left half (direct split) | `nice_nano//zmk` | `urchin_left nice_view_adapter nice_view_gem` | `common-config studio-rpc-usb-uart` | `urchin_left` | Active |
+| Right half | `nice_nano//zmk` | `urchin_right nice_view_adapter nice_view_gem` | none | `urchin_right` | Active |
+| Left half (dongle split) | `nice_nano//zmk` | `urchin_left_w_dongle nice_view_adapter nice_view_gem` | none | `urchin_left_w_dongle` | Active |
+| Dongle (single keyboard) | `nice_nano//zmk` | `urchin_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart` | `urchin_zdd_dongle` | Active |
+| Keyboard reset | `nice_nano//zmk` | `settings_reset` | none | `urchin_reset` | Active |
+| Dongle reset | `nice_nano//zmk` | `settings_reset` | none | `urchin_zdd_dongle_reset` | Active |
 
 ## Reference Material
 

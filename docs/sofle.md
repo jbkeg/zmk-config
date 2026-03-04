@@ -10,11 +10,11 @@ Implemented matrix targets:
 
 | Target                   | Board                | Shield                                    | Snippet                                 | Artifact Name             | Status |
 | ------------------------ | -------------------- | ----------------------------------------- | --------------------------------------- | ------------------------- | ------ |
-| Left half                | `nice_nano_v2`       | `sofle_left nice_view_adapter nice_view`  | `common-config studio-rpc-usb-uart`     | `sofle_left`              | Active |
-| Right half               | `nice_nano_v2`       | `sofle_right nice_view_adapter nice_view` | none                                    | `sofle_right`             | Active |
-| Left half (dongle split) | `nice_nano_v2`       | `sofle_left nice_view_adapter nice_view`  | none                                    | `sofle_left_w_dongle`     | Active |
-| Dongle (ZDD)             | `nice_nano_v2`       | `sofle_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart`                   | `sofle_zdd_dongle`        | Active |
-| Dongle (Prospector)      | `seeeduino_xiao_ble` | `sofle_dongle prospector_adapter`         | `studio-rpc-usb-uart prospector-config` | `sofle_prospector_dongle` | Active |
+| Left half                | `nice_nano//zmk`       | `sofle_left nice_view_adapter nice_view`  | `common-config studio-rpc-usb-uart`     | `sofle_left`              | Active |
+| Right half               | `nice_nano//zmk`       | `sofle_right nice_view_adapter nice_view` | none                                    | `sofle_right`             | Active |
+| Left half (dongle split) | `nice_nano//zmk`       | `sofle_left nice_view_adapter nice_view`  | none                                    | `sofle_left_w_dongle`     | Active |
+| Dongle (ZDD)             | `nice_nano//zmk`       | `sofle_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart`                   | `sofle_zdd_dongle`        | Active |
+| Dongle (Prospector)      | `xiao_ble//zmk` | `sofle_dongle prospector_adapter`         | `studio-rpc-usb-uart prospector-config` | `sofle_prospector_dongle` | Active |
 
 Related implemented targets for Eyelash Sofle:
 
@@ -23,10 +23,10 @@ Related implemented targets for Eyelash Sofle:
 | Left half                | `eyelash_sofle_left`  | `nice_view`                                       | `common-config studio-rpc-usb-uart`     | `eyelash_sofle_left`              | Active |
 | Right half               | `eyelash_sofle_right` | `nice_view`                                       | none                                    | `eyelash_sofle_right`             | Active |
 | Left half (dongle split) | `eyelash_sofle_left`  | `nice_view`                                       | none                                    | `eyelash_sofle_left_w_dongle`     | Active |
-| Dongle (ZDD)             | `nice_nano_v2`        | `eyelash_sofle_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart`                   | `eyelash_sofle_zdd_dongle`        | Active |
-| Dongle (Prospector)      | `seeeduino_xiao_ble`  | `eyelash_sofle_dongle prospector_adapter`         | `studio-rpc-usb-uart prospector-config` | `eyelash_sofle_prospector_dongle` | Active |
+| Dongle (ZDD)             | `nice_nano//zmk`        | `eyelash_sofle_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart`                   | `eyelash_sofle_zdd_dongle`        | Active |
+| Dongle (Prospector)      | `xiao_ble//zmk`  | `eyelash_sofle_dongle prospector_adapter`         | `studio-rpc-usb-uart prospector-config` | `eyelash_sofle_prospector_dongle` | Active |
 
-Shared reset artifacts remain available at repo level: `reset_nice_nano_v2`, `reset_seeeduino_xiao_ble`.
+Shared reset artifacts remain available at repo level: `reset_nice_nano_zmk`, `reset_xiao_ble_zmk`.
 
 ## Reference Material
 
@@ -104,7 +104,7 @@ docker compose run --rm zmk-build-release --artifact-names sofle_left_w_dongle,e
 2. Enter bootloader mode (usually by double-tapping reset).
 3. Drag and drop the matching left UF2 file.
 4. Repeat for the right half with the matching right UF2 file.
-5. Use shared reset artifacts (`reset_nice_nano_v2` or `reset_seeeduino_xiao_ble`) when clearing settings and BLE bonds.
+5. Use shared reset artifacts (`reset_nice_nano_zmk` or `reset_xiao_ble_zmk`) when clearing settings and BLE bonds.
 
 Artifact-to-device mapping:
 

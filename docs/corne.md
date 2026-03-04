@@ -112,31 +112,31 @@ Current pattern:
 
 ```yaml
 include:
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: corne_left nice_view_adapter nice_view
     snippet: common-config studio-rpc-usb-uart
     artifact-name: corne_left
 
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: corne_right nice_view_adapter nice_view
     artifact-name: corne_right
 
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: corne_left nice_view_adapter nice_view
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: corne_left_w_dongle
 
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: corne_dongle
     snippet: studio-rpc-usb-uart
     artifact-name: corne_dongle
 
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: corne_dongle zdd_adapter dongle_display
     snippet: studio-rpc-usb-uart
     artifact-name: corne_zdd_dongle
 
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: corne_dongle prospector_adapter
     snippet: studio-rpc-usb-uart prospector-config
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Corne\ PRSP\"
@@ -156,13 +156,13 @@ include:
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: eyelash_corne_left_w_dongle
 
-  - board: nice_nano_v2
+  - board: nice_nano//zmk
     shield: eyelash_corne_dongle zdd_adapter dongle_display
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"EyelashCorneZDD\"
     artifact-name: eyelash_corne_zdd_dongle
 
-  - board: seeeduino_xiao_ble
+  - board: xiao_ble//zmk
     shield: eyelash_corne_dongle prospector_adapter
     snippet: studio-rpc-usb-uart prospector-config
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"ELCornePRSP\"
@@ -176,7 +176,7 @@ include:
 3. Enter bootloader mode (usually double-tap reset).
 4. Copy `corne_left.uf2` to the mounted drive.
 5. Repeat for right half with `corne_right.uf2`.
-6. Optional: flash shared reset artifacts (`reset_nice_nano_v2` or `reset_seeeduino_xiao_ble`) to clear stale bonds/settings.
+6. Optional: flash shared reset artifacts (`reset_nice_nano_zmk` or `reset_xiao_ble_zmk`) to clear stale bonds/settings.
 
 ## Status
 
@@ -187,4 +187,4 @@ include:
   - `corne_dongle`, `corne_zdd_dongle`, `corne_prospector_dongle`
   - `eyelash_corne_left`, `eyelash_corne_right`, `eyelash_corne_left_w_dongle`
   - `eyelash_corne_zdd_dongle`, `eyelash_corne_prospector_dongle`
-  - Shared reset artifacts: `reset_nice_nano_v2`, `reset_seeeduino_xiao_ble`
+  - Shared reset artifacts: `reset_nice_nano_zmk`, `reset_xiao_ble_zmk`

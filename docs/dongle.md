@@ -92,15 +92,15 @@ These examples are naming and matrix templates.
 Some are planned-only depending on current matrix coverage.
 
 1. `zdd` + `dongle` role (single keyboard)
-   - `board: nice_nano_v2`
+   - `board: nice_nano//zmk`
    - `shield: totem_dongle zdd_adapter dongle_display`
    - `artifact-name: totem_zdd_dongle`
 2. `prospector` + `dongle` role (single keyboard)
-   - `board: seeeduino_xiao_ble`
+   - `board: xiao_ble//zmk`
    - `shield: totem_dongle prospector_adapter`
    - `artifact-name: totem_prospector_dongle`
 3. `prospector` + `scanner` role
-   - `board: seeeduino_xiao_ble`
+   - `board: xiao_ble//zmk`
    - `shield: prospector_scanner`
    - `artifact-name: prospector_scanner`
 
@@ -111,7 +111,7 @@ Current state from `build.yaml`:
 - Active dongle-related entries:
   - Split targets for Totem, Urchin, Corne, Eyelash Corne, Sofle, Eyelash Sofle, Delta Omega, and Cornix.
   - Dedicated ZDD and Prospector dongle targets for Totem, Urchin, Corne, Eyelash Corne, Sofle, Eyelash Sofle, Delta Omega, and Cornix.
-  - Shared reset targets: `reset_nice_nano_v2`, `reset_seeeduino_xiao_ble`.
+  - Shared reset targets: `reset_nice_nano_zmk`, `reset_xiao_ble_zmk`.
 - Not active yet:
   - `prospector_scanner`
 

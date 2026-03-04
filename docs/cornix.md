@@ -34,8 +34,8 @@ This document covers the Cornix integration used in this repository.
 | Right half | `cornix_right` | none | none | `cornix_right` | Active |
 | Reset | `cornix_right` | `settings_reset` | none | `cornix_reset` | Active |
 | Left half (dongle split) | `cornix_left` | none | none | `cornix_left_w_dongle` | Active |
-| Dongle (single keyboard) | `nice_nano_v2` | `cornix_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart` | `cornix_zdd_dongle` | Active |
-| Dongle reset | `nice_nano_v2` | `settings_reset` | none | `cornix_zdd_dongle_reset` | Active |
+| Dongle (single keyboard) | `nice_nano//zmk` | `cornix_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart` | `cornix_zdd_dongle` | Active |
+| Dongle reset | `nice_nano//zmk` | `settings_reset` | none | `cornix_zdd_dongle_reset` | Active |
 
 ## Warning: device breakdown recovery
 
@@ -210,12 +210,12 @@ Use your preferred method to build
        cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
        artifact-name: cornix_left_w_dongle
 
-     - board: nice_nano_v2
+     - board: nice_nano//zmk
        shield: cornix_dongle zdd_adapter dongle_display
        snippet: studio-rpc-usb-uart
        artifact-name: cornix_zdd_dongle
 
-     - board: nice_nano_v2
+     - board: nice_nano//zmk
        shield: settings_reset
        artifact-name: cornix_zdd_dongle_reset
    ```
