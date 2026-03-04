@@ -40,14 +40,45 @@ jobs:
         shell: bash
         run: bash scripts/ci/check_config_policy.sh
 
-  split-right-sanity:
-    name: Build Right-Side Sanity Targets
+  random-sanity-selection:
+    name: Select Random Sanity Targets
     needs: policy-lint
+    runs-on: ubuntu-latest
+    outputs:
+      build_matrix: ${{ steps.select.outputs.build_matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select random firmware targets from build.yaml
+        id: select
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          matrix_json="$(
+            ruby -ryaml -rjson -e '
+              data = YAML.safe_load(File.read("build.yaml"), aliases: true)
+              include_entries = data.fetch("include")
+              abort("build.yaml include list must contain at least 2 entries") if include_entries.length < 2
+              selected = include_entries.sample(2)
+              print JSON.generate({ "include" => selected })
+            '
+          )"
+
+          echo "build_matrix=${matrix_json}" >> "$GITHUB_OUTPUT"
+
+      - name: Show selected targets
+        shell: bash
+        run: |
+          echo '${{ steps.select.outputs.build_matrix }}' | jq .
+
+  random-firmware-sanity:
+    name: Build Random Sanity Targets
+    needs:
+      - policy-lint
+      - random-sanity-selection
     uses: ./.github/workflows/build.yml
     with:
-      build_matrix: >
-        {"include":[
-          {"board":"seeeduino_xiao_ble","shield":"totem_right","artifact-name":"guard_totem_right"},
-          {"board":"eyelash_corne_right","shield":"nice_view","artifact-name":"guard_eyelash_corne_right"}
-        ]}
-      archive_name: guard-right-sanity
+      build_matrix: ${{ needs.random-sanity-selection.outputs.build_matrix }}
+      archive_name: guard-random-sanity
