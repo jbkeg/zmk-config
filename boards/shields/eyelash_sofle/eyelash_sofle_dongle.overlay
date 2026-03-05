@@ -62,6 +62,7 @@ RC(3,0) RC(3,1) RC(3,2) RC(3,3) RC(3,4) RC(3,5) RC(4,5) RC(4,6) RC(3,6) RC(3,7) 
 	compatible = "nordic,nrf-twi";
     pinctrl-0 = <&i2c0_default>;
     pinctrl-1 = <&i2c0_sleep>;
+    pinctrl-names = "default", "sleep";
 	oled: sh1106@3c {
         compatible = "sinowealth,sh1106";
         reg = <0x3c>;
