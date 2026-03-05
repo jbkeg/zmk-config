@@ -84,3 +84,28 @@ Release: [v1.0.0](https://github.com/jbkeg/zmk-config/releases/tag/v1.0.0)
 ### Firmware Behavior Follow-up
 
 - Expand behavior-impact notes as needed using `docs/changelog_template.md`.
+
+## v2.0.0-canary - 2026-03-05
+
+Release: [Firmware v2.0.0-canary](https://github.com/jbkeg/zmk-config/releases/tag/v2.0.0-canary)
+
+### Notes
+
+Automated ZMK firmware release for `v2.0.0-canary`.
+Firmware binaries are attached as release assets (`zmk-firmware-*.zip` and `SHA256SUMS`).
+GitHub auto-generates source code archives for every release; those links cannot be disabled.
+
+
+## What's Changed
+* docs(changelog): add v0.4.2 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/16
+* docs(changelog): add v1.0.0 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/17
+* chore(deps): bump actions/setup-python from 5 to 6 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/18
+* chore(deps): bump actions/upload-artifact from 4 to 7 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/19
+* chore(deps): bump actions/download-artifact from 4 to 8 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/20
+
+
+**Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v0.4.2...v2.0.0-canary
+
+### Firmware Behavior Follow-up
+
+- Expand behavior-impact notes as needed using `docs/changelog_template.md`.
