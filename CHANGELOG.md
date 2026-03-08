@@ -92,6 +92,13 @@ Release: [Firmware v1.0.2+scanner](https://github.com/jbkeg/zmk-config/releases/
 ### Notes
 
 Automated ZMK firmware release for `v1.0.2+scanner`.
+## v1.0.2 - 2026-03-05
+
+Release: [Firmware v1.0.2](https://github.com/jbkeg/zmk-config/releases/tag/v1.0.2)
+
+### Notes
+
+Automated ZMK firmware release for `v1.0.2`.
 Firmware binaries are attached as release assets (`zmk-firmware-*.zip` and `SHA256SUMS`).
 GitHub auto-generates source code archives for every release; those links cannot be disabled.
 
@@ -105,6 +112,7 @@ GitHub auto-generates source code archives for every release; those links cannot
 
 
 **Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v0.4.2...v1.0.2+scanner
+**Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v1.0.1...v1.0.2
 
 ### Firmware Behavior Follow-up
 

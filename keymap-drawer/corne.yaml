@@ -393,9 +393,9 @@ layers:
   - type: trans
   - type: trans
   - type: trans
-  - PgUp
+  - Left Click
   - Mouse ↑
-  - PgDn
+  - Right Click
   - type: trans
   - t: '['
     right: '{'
@@ -419,9 +419,9 @@ layers:
   - type: trans
   - type: trans
   - type: trans
-  - Left Click
+  - Scroll ↑
   - Middle Click
-  - Right Click
+  - Scroll ↓
   - type: trans
   - \
   - Alt
