@@ -85,6 +85,23 @@ Release: [v1.0.0](https://github.com/jbkeg/zmk-config/releases/tag/v1.0.0)
 
 - Expand behavior-impact notes as needed using `docs/changelog_template.md`.
 
+## v1.0.2 - 2026-03-05
+
+Release: [Firmware v1.0.2](https://github.com/jbkeg/zmk-config/releases/tag/v1.0.2)
+
+### Notes
+
+Automated ZMK firmware release for `v1.0.2`.
+Firmware binaries are attached as release assets (`zmk-firmware-*.zip` and `SHA256SUMS`).
+GitHub auto-generates source code archives for every release; those links cannot be disabled.
+
+
+**Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v1.0.1...v1.0.2
+
+### Firmware Behavior Follow-up
+
+- Expand behavior-impact notes as needed using `docs/changelog_template.md`.
+
 ## v2.0.0-canary - 2026-03-05
 
 Release: [Firmware v2.0.0-canary](https://github.com/jbkeg/zmk-config/releases/tag/v2.0.0-canary)
