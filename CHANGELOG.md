@@ -15,10 +15,9 @@ Automated ZMK firmware release for `v0.4.0`.
 Firmware binaries are attached as release assets (`zmk-firmware-*.zip` and `SHA256SUMS`).
 GitHub auto-generates source code archives for every release; those links cannot be disabled.
 
-
 ## What's Changed
-* [Draw] Refresh keymap diagrams by @jbkeg in https://github.com/jbkeg/zmk-config/pull/12
 
+- [Draw] Refresh keymap diagrams by @jbkeg in https://github.com/jbkeg/zmk-config/pull/12
 
 **Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v0.3.0...v0.4.0
 
@@ -36,11 +35,10 @@ Automated ZMK firmware release for `v0.4.1`.
 Firmware binaries are attached as release assets (`zmk-firmware-*.zip` and `SHA256SUMS`).
 GitHub auto-generates source code archives for every release; those links cannot be disabled.
 
-
 ## What's Changed
-* docs(changelog): add v0.4.0 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/13
-* [Draw] Refresh keymap diagrams by @jbkeg in https://github.com/jbkeg/zmk-config/pull/14
 
+- docs(changelog): add v0.4.0 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/13
+- [Draw] Refresh keymap diagrams by @jbkeg in https://github.com/jbkeg/zmk-config/pull/14
 
 **Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v0.4.0...v0.4.1
 
@@ -58,10 +56,9 @@ Automated ZMK firmware release for `v0.4.2`.
 Firmware binaries are attached as release assets (`zmk-firmware-*.zip` and `SHA256SUMS`).
 GitHub auto-generates source code archives for every release; those links cannot be disabled.
 
-
 ## What's Changed
-* docs(changelog): add v0.4.1 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/15
 
+- docs(changelog): add v0.4.1 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/15
 
 **Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v0.4.1...v0.4.2
 
@@ -76,8 +73,8 @@ Release: [v1.0.0](https://github.com/jbkeg/zmk-config/releases/tag/v1.0.0)
 ### Notes
 
 ## What's Changed
-* docs(changelog): add v0.4.2 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/16
 
+- docs(changelog): add v0.4.2 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/16
 
 **Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v0.4.2...v1.0.0
 
@@ -92,19 +89,27 @@ Release: [Firmware v1.0.2+scanner](https://github.com/jbkeg/zmk-config/releases/
 ### Notes
 
 Automated ZMK firmware release for `v1.0.2+scanner`.
+
+## v1.0.2 - 2026-03-05
+
+Release: [Firmware v1.0.2](https://github.com/jbkeg/zmk-config/releases/tag/v1.0.2)
+
+### Notes
+
+Automated ZMK firmware release for `v1.0.2`.
 Firmware binaries are attached as release assets (`zmk-firmware-*.zip` and `SHA256SUMS`).
 GitHub auto-generates source code archives for every release; those links cannot be disabled.
 
-
 ## What's Changed
-* docs(changelog): add v0.4.2 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/16
-* docs(changelog): add v1.0.0 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/17
-* chore(deps): bump actions/setup-python from 5 to 6 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/18
-* chore(deps): bump actions/upload-artifact from 4 to 7 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/19
-* chore(deps): bump actions/download-artifact from 4 to 8 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/20
 
+- docs(changelog): add v0.4.2 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/16
+- docs(changelog): add v1.0.0 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/17
+- chore(deps): bump actions/setup-python from 5 to 6 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/18
+- chore(deps): bump actions/upload-artifact from 4 to 7 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/19
+- chore(deps): bump actions/download-artifact from 4 to 8 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/20
 
 **Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v0.4.2...v1.0.2+scanner
+**Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v1.0.1...v1.0.2
 
 ### Firmware Behavior Follow-up
 
@@ -120,14 +125,13 @@ Automated ZMK firmware release for `v2.0.0-canary`.
 Firmware binaries are attached as release assets (`zmk-firmware-*.zip` and `SHA256SUMS`).
 GitHub auto-generates source code archives for every release; those links cannot be disabled.
 
-
 ## What's Changed
-* docs(changelog): add v0.4.2 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/16
-* docs(changelog): add v1.0.0 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/17
-* chore(deps): bump actions/setup-python from 5 to 6 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/18
-* chore(deps): bump actions/upload-artifact from 4 to 7 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/19
-* chore(deps): bump actions/download-artifact from 4 to 8 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/20
 
+- docs(changelog): add v0.4.2 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/16
+- docs(changelog): add v1.0.0 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/17
+- chore(deps): bump actions/setup-python from 5 to 6 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/18
+- chore(deps): bump actions/upload-artifact from 4 to 7 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/19
+- chore(deps): bump actions/download-artifact from 4 to 8 by @dependabot[bot] in https://github.com/jbkeg/zmk-config/pull/20
 
 **Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v0.4.2...v2.0.0-canary
 
