@@ -322,9 +322,9 @@ layers:
   - type: trans
   - type: trans
   - type: trans
-  - PgUp
+  - Left Click
   - Mouse ↑
-  - PgDn
+  - Right Click
   - type: trans
   - type: trans
   - type: trans
@@ -342,9 +342,9 @@ layers:
   - type: trans
   - type: trans
   - type: trans
-  - Left Click
+  - Scroll ↑
   - Middle Click
-  - Right Click
+  - Scroll ↓
   - type: trans
   - type: trans
   - type: held

@@ -531,9 +531,9 @@ layers:
   - type: trans
   - type: trans
   - type: trans
-  - PgUp
+  - Left Click
   - Mouse ↑
-  - PgDn
+  - Right Click
   - type: trans
   - t: '['
     right: '{'
@@ -559,9 +559,9 @@ layers:
   - $$mdi:volume-off$$
   - PrtSc
   - type: trans
-  - Left Click
+  - Scroll ↑
   - Middle Click
-  - Right Click
+  - Scroll ↓
   - type: trans
   - \
   - ''
