@@ -6,6 +6,8 @@ on:
     paths:
       - ".github/workflows/config-policy-guard.yml"
       - ".github/workflows/build.yml"
+      - "scripts/build_profiles.py"
+      - "scripts/build_runner.py"
       - "scripts/ci/check_config_policy.sh"
       - "boards/**"
       - "config/**"
@@ -15,6 +17,8 @@ on:
     paths:
       - ".github/workflows/config-policy-guard.yml"
       - ".github/workflows/build.yml"
+      - "scripts/build_profiles.py"
+      - "scripts/build_runner.py"
       - "scripts/ci/check_config_policy.sh"
       - "boards/**"
       - "config/**"
@@ -50,23 +54,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Python dependencies
+        run: python3 -m pip install --quiet pyyaml
+
       - name: Select random firmware targets from build.yaml
         id: select
-        shell: bash
         run: |
-          set -euo pipefail
-
-          matrix_json="$(
-            ruby -ryaml -rjson -e '
-              data = YAML.safe_load(File.read("build.yaml"), aliases: true)
-              include_entries = data.fetch("include")
-              abort("build.yaml include list must contain at least 2 entries") if include_entries.length < 2
-              selected = include_entries.sample(2)
-              print JSON.generate({ "include" => selected })
-            '
-          )"
-
-          echo "build_matrix=${matrix_json}" >> "$GITHUB_OUTPUT"
+          python3 scripts/build_runner.py select-matrix \
+            --build-matrix-path build.yaml \
+            --sample-count 2 \
+            --github-output "$GITHUB_OUTPUT"
 
       - name: Show selected targets
         shell: bash
@@ -80,5 +82,6 @@ jobs:
       - random-sanity-selection
     uses: ./.github/workflows/build.yml
     with:
+      profile: stable
       build_matrix: ${{ needs.random-sanity-selection.outputs.build_matrix }}
       archive_name: guard-random-sanity
