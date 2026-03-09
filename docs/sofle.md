@@ -86,16 +86,16 @@ Local Docker (recommended):
 
 ```bash
 # list artifacts
-docker compose run --rm zmk-build-release --list
+docker compose run --rm zmk-build-stable --list
 
 # build only Sofle and Eyelash Sofle split targets
-docker compose run --rm zmk-build-release --artifact-names sofle_left,sofle_right,eyelash_sofle_left,eyelash_sofle_right
+docker compose run --rm zmk-build-stable --artifact-names sofle_left,sofle_right,eyelash_sofle_left,eyelash_sofle_right
 
-# build display-backed dongle targets (ZDD + Prospector)
-docker compose run --rm zmk-build-release --artifact-names sofle_zdd_dongle,sofle_prospector_dongle,eyelash_sofle_zdd_dongle,eyelash_sofle_prospector_dongle
+# build dedicated dongle targets (ZDD + Prospector)
+docker compose run --rm zmk-build-stable --artifact-names sofle_zdd_dongle,sofle_prospector_dongle,eyelash_sofle_zdd_dongle,eyelash_sofle_prospector_dongle
 
 # build split-with-dongle-topology targets
-docker compose run --rm zmk-build-release --artifact-names sofle_left_w_dongle,eyelash_sofle_left_w_dongle
+docker compose run --rm zmk-build-stable --artifact-names sofle_left_w_dongle,eyelash_sofle_left_w_dongle
 ```
 
 ### Flashing

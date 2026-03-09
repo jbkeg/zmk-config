@@ -85,13 +85,13 @@ Local Docker (recommended):
 
 ```bash
 # list artifacts
-docker compose run --rm zmk-build-release --list
+docker compose run --rm zmk-build-stable --list
 
 # build direct split targets
-docker compose run --rm zmk-build-release --artifact-names urchin_left,urchin_right,urchin_reset
+docker compose run --rm zmk-build-stable --artifact-names urchin_left,urchin_right,urchin_reset
 
 # build dongle split targets
-docker compose run --rm zmk-build-release --artifact-names urchin_left_w_dongle,urchin_right,urchin_zdd_dongle,urchin_zdd_dongle_reset,urchin_reset
+docker compose run --rm zmk-build-stable --artifact-names urchin_left_w_dongle,urchin_right,urchin_zdd_dongle,urchin_zdd_dongle_reset,urchin_reset
 ```
 
 ### Flashing

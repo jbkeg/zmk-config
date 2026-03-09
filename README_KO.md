@@ -82,9 +82,8 @@ graph TD
 zmk-config/
 ├── .github/
 │   └── workflows/
-│       ├── build.yml                 # 재사용 가능한 빌드 매트릭스 + 병합 워크플로우
-│       ├── build-all.yml             # 전체 펌웨어 타겟 빌드
-│       ├── build-inputs.yml          # 선택한 펌웨어 타겟 빌드
+│       ├── build.yml                 # 재사용 가능한 펌웨어 빌드 워크플로우
+│       ├── config-policy-guard.yml   # 설정 정책 검사 + 랜덤 sanity 빌드
 │       └── release.yml               # 태그 릴리스 아티팩트 생성
 │
 ├── boards/

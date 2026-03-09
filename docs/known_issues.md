@@ -6,8 +6,8 @@ This document tracks warning-level issues that do not currently block firmware g
 
 - Date: 2026-02-28
 - Build command set:
-  - `docker compose run --rm zmk-build-release --skip-update --jobs 8 --artifact-names <studio-targets>`
-  - `docker compose run --rm zmk-build-release --skip-update --jobs 8 --artifact-names <non-studio-targets>`
+  - `docker compose run --rm zmk-build-stable --skip-update --jobs 8 --artifact-names <studio-targets>`
+  - `docker compose run --rm zmk-build-stable --skip-update --jobs 8 --artifact-names <non-studio-targets>`
 - Logs:
   - `.build/studio_targets.log`
   - `.build/non_studio_targets.log`
