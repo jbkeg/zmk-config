@@ -1,22 +1,26 @@
 services:
-  zmk-build-release:
-    image: zmkfirmware/zmk-build-arm:stable
-    working_dir: /workspace
-    entrypoint: ["python3", "scripts/local.py"]
-    volumes:
-      - .:/workspace
-      - ./.build/local/workspace:/tmp/zmk-config
-
-  zmk-build-main:
+  zmk-build-stable:
     image: zmkfirmware/zmk-build-arm:3.5
     working_dir: /workspace
     entrypoint:
       - python3
-      - scripts/local.py
-      - --zmk-revision
-      - main
-      - --base-dir
-      - /tmp/zmk-config-main
+      - scripts/build_runner.py
+      - build-many
+      - --profile
+      - stable
+    volumes:
+      - .:/workspace
+      - ./.build/local/workspace:/tmp/zmk-config
+
+  zmk-build-canary:
+    image: zmkfirmware/zmk-build-arm:4.1-branch
+    working_dir: /workspace
+    entrypoint:
+      - python3
+      - scripts/build_runner.py
+      - build-many
+      - --profile
+      - canary
     volumes:
       - .:/workspace
       - ./.build/local/workspace-main:/tmp/zmk-config-main
