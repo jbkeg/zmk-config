@@ -82,9 +82,8 @@ Canonical repository layout and responsibility boundaries.
 zmk-config/
 ├── .github/
 │   └── workflows/
-│       ├── build.yml                 # Reusable build matrix + merge workflow
-│       ├── build-all.yml             # Build all firmware targets
-│       ├── build-inputs.yml          # Build selected firmware targets
+│       ├── build.yml                 # Reusable firmware build workflow
+│       ├── config-policy-guard.yml   # Config guard + random sanity builds
 │       └── release.yml               # Tagged release artifact generation
 │
 ├── boards/

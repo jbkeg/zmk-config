@@ -78,13 +78,13 @@ Local Docker (recommended):
 
 ```bash
 # list artifacts
-docker compose run --rm zmk-build-release --list
+docker compose run --rm zmk-build-stable --list
 
 # build direct split targets
-docker compose run --rm zmk-build-release --artifact-names delta_omega_left,delta_omega_right,delta_omega_reset
+docker compose run --rm zmk-build-stable --artifact-names delta_omega_left,delta_omega_right,delta_omega_reset
 
 # build dongle split targets
-docker compose run --rm zmk-build-release --artifact-names delta_omega_left_w_dongle,delta_omega_right,delta_omega_zdd_dongle,delta_omega_zdd_dongle_reset,delta_omega_reset
+docker compose run --rm zmk-build-stable --artifact-names delta_omega_left_w_dongle,delta_omega_right,delta_omega_zdd_dongle,delta_omega_zdd_dongle_reset,delta_omega_reset
 ```
 
 CI/GitHub Actions:
@@ -129,7 +129,7 @@ Artifact-to-device mapping:
 ## Troubleshooting
 
 - Build cannot find target:
-  - Run `docker compose run --rm zmk-build-release --list` and confirm artifact names.
+  - Run `docker compose run --rm zmk-build-stable --list` and confirm artifact names.
 - If dongle is connected to host but halves do not connect, stale split bonds are the most common cause.
 - For stale split bonds, run full reset-first sequence on dongle and both halves, then flash runtime firmware again.
 - If BLE pairing fails after reflashing, remove host bond for the dongle and pair again.
