@@ -5,11 +5,11 @@ on:
   push:
     paths:
       - ".github/workflows/build.yml"
-      - ".github/workflows/build-all.yml"
-      - ".github/workflows/build-inputs.yml"
       - ".github/workflows/release.yml"
       - ".github/workflows/test-main.yml"
       - ".github/workflows/test-release.yml"
+      - "scripts/build_profiles.py"
+      - "scripts/build_runner.py"
       - "build.yaml"
       - "boards/**"
       - "config/**"
@@ -21,11 +21,11 @@ on:
   pull_request:
     paths:
       - ".github/workflows/build.yml"
-      - ".github/workflows/build-all.yml"
-      - ".github/workflows/build-inputs.yml"
       - ".github/workflows/release.yml"
       - ".github/workflows/test-main.yml"
       - ".github/workflows/test-release.yml"
+      - "scripts/build_profiles.py"
+      - "scripts/build_runner.py"
       - "build.yaml"
       - "boards/**"
       - "config/**"
