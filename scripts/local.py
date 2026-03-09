@@ -1,298 +1,19 @@
 #!/usr/bin/env python3
-"""Local Docker runner that mirrors ZMK build-user-config workflow behavior."""
+"""Compatibility wrapper for the shared build runner."""
 
 from __future__ import annotations
 
 import argparse
-from concurrent.futures import ThreadPoolExecutor, as_completed
-import fnmatch
-import os
-import shlex
-import shutil
-import subprocess
-import sys
-from pathlib import Path
-from typing import Any
 
-import yaml
+import build_runner
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-
-
-def run(cmd: list[str], cwd: Path | None = None) -> None:
-    print("+", " ".join(shlex.quote(part) for part in cmd), flush=True)
-    subprocess.run(cmd, cwd=str(cwd) if cwd else None, check=True)
-
-
-def load_matrix(build_matrix_path: Path) -> list[dict[str, Any]]:
-    data = yaml.safe_load(build_matrix_path.read_text(encoding="utf-8")) or {}
-    include = data.get("include", [])
-    if not isinstance(include, list):
-        raise ValueError(f"`include` must be a list in {build_matrix_path}")
-    return [entry for entry in include if isinstance(entry, dict)]
-
-
-def detect_physical_cores() -> int | None:
-    # Linux: lscpu provides reliable core/socket topology in containers.
-    try:
-        lscpu = subprocess.run(
-            ["lscpu", "-p=CORE,SOCKET"],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-        core_pairs: set[tuple[int, int]] = set()
-        for line in lscpu.stdout.splitlines():
-            line = line.strip()
-            if not line or line.startswith("#"):
-                continue
-            parts = [part.strip() for part in line.split(",")]
-            if len(parts) < 2:
-                continue
-            if parts[0].isdigit() and parts[1].isdigit():
-                core_pairs.add((int(parts[0]), int(parts[1])))
-        if core_pairs:
-            return len(core_pairs)
-    except (FileNotFoundError, subprocess.CalledProcessError):
-        pass
-
-    # Linux fallback if lscpu is unavailable.
-    cpuinfo = Path("/proc/cpuinfo")
-    if cpuinfo.exists():
-        try:
-            core_pairs: set[tuple[int, int]] = set()
-            physical_id = 0
-            core_id = None
-            for raw_line in cpuinfo.read_text(encoding="utf-8", errors="ignore").splitlines():
-                line = raw_line.strip()
-                if not line:
-                    if core_id is not None:
-                        core_pairs.add((physical_id, core_id))
-                    physical_id = 0
-                    core_id = None
-                    continue
-                if ":" not in line:
-                    continue
-                key, value = [part.strip() for part in line.split(":", 1)]
-                if key == "physical id" and value.isdigit():
-                    physical_id = int(value)
-                elif key == "core id" and value.isdigit():
-                    core_id = int(value)
-            if core_id is not None:
-                core_pairs.add((physical_id, core_id))
-            if core_pairs:
-                return len(core_pairs)
-        except OSError:
-            pass
-
-    return None
-
-
-def default_artifact_name(entry: dict[str, Any]) -> str:
-    shield = str(entry.get("shield", "")).strip()
-    board = str(entry.get("board", "")).strip().replace("/", "_")
-    if shield:
-        return f"{shield.replace(' ', '-')}-{board}-zmk"
-    return f"{board}-zmk"
-
-
-def artifact_name(entry: dict[str, Any]) -> str:
-    name = str(entry.get("artifact-name", "")).strip()
-    return name if name else default_artifact_name(entry)
-
-
-def filter_matrix(entries: list[dict[str, Any]], patterns: list[str]) -> list[dict[str, Any]]:
-    if not patterns:
-        return entries
-
-    names = [artifact_name(entry) for entry in entries]
-    unmatched_patterns = [
-        pattern for pattern in patterns if not any(fnmatch.fnmatchcase(name, pattern) for name in names)
-    ]
-    if unmatched_patterns:
-        raise ValueError(
-            "artifact-name pattern(s) matched nothing: "
-            + ", ".join(unmatched_patterns)
-            + ". Use --list to see valid names."
-        )
-
-    selected_entries = [
-        entry
-        for entry in entries
-        if any(fnmatch.fnmatchcase(artifact_name(entry), pattern) for pattern in patterns)
-    ]
-    return selected_entries
-
-
-def ensure_config_copy(src_config: Path, dst_base: Path, config_name: str) -> Path:
-    dst_config = dst_base / config_name
-    if dst_config.exists():
-        shutil.rmtree(dst_config)
-    dst_config.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copytree(src_config, dst_config)
-    return dst_config
-
-
-def stage_extra_modules_from_git(repo_root: Path, dst_base: Path) -> Path:
-    """Stage module files from git-visible paths, excluding ignored workspace noise."""
-    staged_root = dst_base / "_extra_modules" / "workspace-module"
-    if staged_root.exists():
-        shutil.rmtree(staged_root)
-    staged_root.mkdir(parents=True, exist_ok=True)
-
-    try:
-        listed = subprocess.run(
-            ["git", "ls-files", "-co", "--exclude-standard", "-z"],
-            cwd=str(repo_root),
-            check=True,
-            capture_output=True,
-        )
-    except (FileNotFoundError, subprocess.CalledProcessError):
-        return repo_root
-
-    rel_paths = [p for p in listed.stdout.decode("utf-8", errors="surrogateescape").split("\0") if p]
-    if not rel_paths:
-        return repo_root
-
-    for rel in rel_paths:
-        src = repo_root / rel
-        if not src.exists() or src.is_dir():
-            continue
-        dst = staged_root / rel
-        dst.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(src, dst)
-
-    return staged_root
-
-
-def override_zmk_revision(config_dir: Path, revision: str) -> None:
-    west_manifest = config_dir / "west.yml"
-    if not west_manifest.exists():
-        raise FileNotFoundError(f"Cannot override ZMK revision, missing: {west_manifest}")
-
-    data = yaml.safe_load(west_manifest.read_text(encoding="utf-8")) or {}
-    manifest = data.get("manifest")
-    if not isinstance(manifest, dict):
-        raise ValueError(f"Invalid west manifest format: {west_manifest}")
-
-    projects = manifest.get("projects")
-    if not isinstance(projects, list):
-        raise ValueError(f"Invalid west projects list: {west_manifest}")
-
-    updated = False
-    for project in projects:
-        if isinstance(project, dict) and project.get("name") == "zmk":
-            project["revision"] = revision
-            updated = True
-            break
-
-    if not updated:
-        raise ValueError(f"No 'zmk' project entry found in {west_manifest}")
-
-    west_manifest.write_text(
-        yaml.safe_dump(data, sort_keys=False, default_flow_style=False),
-        encoding="utf-8",
-    )
-
-
-def remove_stale_git_locks(base_dir: Path) -> list[Path]:
-    removed: list[Path] = []
-
-    for git_dir in base_dir.rglob(".git"):
-        if not git_dir.is_dir():
-            continue
-        for lock_file in git_dir.rglob("*.lock"):
-            if not lock_file.is_file():
-                continue
-            lock_file.unlink(missing_ok=True)
-            removed.append(lock_file)
-
-    return removed
-
-
-def ensure_west_ready(base_dir: Path, config_dir: Path, skip_update: bool) -> None:
-    if not (base_dir / ".west").exists():
-        run(["west", "init", "-l", str(config_dir)], cwd=base_dir)
-    else:
-        run(["west", "config", "manifest.path", config_dir.name], cwd=base_dir)
-
-    if not skip_update:
-        try:
-            run(["west", "update", "--fetch-opt=--filter=tree:0"], cwd=base_dir)
-        except subprocess.CalledProcessError:
-            removed = remove_stale_git_locks(base_dir)
-            if not removed:
-                raise
-            print(
-                f"Detected stale git lock files. Removed {len(removed)} lock file(s) and retrying west update.",
-                flush=True,
-            )
-            run(["west", "update", "--fetch-opt=--filter=tree:0"], cwd=base_dir)
-    run(["west", "zephyr-export"], cwd=base_dir)
-
-
-def build_entry(
-    *,
-    entry: dict[str, Any],
-    base_dir: Path,
-    build_root: Path,
-    output_dir: Path,
-    config_dir: Path,
-    fallback_binary: str,
-    extra_modules_dir: Path | None,
-) -> Path:
-    board = str(entry.get("board", "")).strip()
-    if not board:
-        raise ValueError(f"Missing board in matrix entry: {entry}")
-
-    shield = str(entry.get("shield", "")).strip()
-    snippet = str(entry.get("snippet", "")).strip()
-    cmake_args = str(entry.get("cmake-args", "")).strip()
-
-    artifact = artifact_name(entry)
-    build_dir = build_root / artifact
-    build_root.mkdir(parents=True, exist_ok=True)
-
-    cmd = ["west", "build", "-p", "-s", "zmk/app", "-d", str(build_dir), "-b", board]
-    if snippet:
-        for snippet_name in shlex.split(snippet):
-            cmd.extend(["-S", snippet_name])
-    cmd.append("--")
-    cmd.append(f"-DZMK_CONFIG={config_dir}")
-    if shield:
-        cmd.append(f"-DSHIELD={shield}")
-    if extra_modules_dir is not None:
-        cmd.append(f"-DZMK_EXTRA_MODULES={extra_modules_dir}")
-    if cmake_args:
-        cmd.extend(shlex.split(cmake_args))
-
-    run(cmd, cwd=base_dir)
-
-    zephyr_out = build_dir / "zephyr"
-    uf2 = zephyr_out / "zmk.uf2"
-    fallback = zephyr_out / f"zmk.{fallback_binary}"
-
-    output_dir.mkdir(parents=True, exist_ok=True)
-    if uf2.exists():
-        dst = output_dir / f"{artifact}.uf2"
-        shutil.copy2(uf2, dst)
-        return dst
-    if fallback.exists():
-        dst = output_dir / f"{artifact}.{fallback_binary}"
-        shutil.copy2(fallback, dst)
-        return dst
-
-    raise FileNotFoundError(
-        f"No build artifact found for {artifact} (expected zmk.uf2 or zmk.{fallback_binary})."
-    )
-
-
-def parse_args() -> argparse.Namespace:
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Build firmware locally using the same steps as build-user-config.yml."
+        description="Build firmware locally using the shared GitHub/local runner."
     )
     parser.add_argument("--build-matrix-path", default="build.yaml")
+    parser.add_argument("--build-matrix-json", default="")
     parser.add_argument("--config-path", default="config")
     parser.add_argument("--fallback-binary", default="bin")
     parser.add_argument("--output-dir", default="firmware")
@@ -304,21 +25,13 @@ def parse_args() -> argparse.Namespace:
             "(e.g. 'totem_*', '*_reset'). If omitted, build all entries."
         ),
     )
-    parser.add_argument(
-        "--base-dir",
-        default="/tmp/zmk-config",
-        help="Base west workspace dir in container (mirrors CI temp dir behavior).",
-    )
+    parser.add_argument("--base-dir", default="")
     parser.add_argument(
         "--zmk-revision",
         default="",
-        help="Override only the `zmk` project revision in config/west.yml (e.g. main, v0.3).",
+        help="Optional override for the `zmk` project revision in config/west.yml.",
     )
-    parser.add_argument(
-        "--skip-update",
-        action="store_true",
-        help="Skip west update for faster incremental builds.",
-    )
+    parser.add_argument("--skip-update", action="store_true")
     parser.add_argument(
         "--jobs",
         type=int,
@@ -328,148 +41,53 @@ def parse_args() -> argparse.Namespace:
             "Default: auto (min(selected entries, max(1, physical core count // 2)))."
         ),
     )
-    parser.add_argument("--list", action="store_true", help="List artifact-name values and exit.")
-    return parser.parse_args()
+    parser.add_argument("--list", action="store_true")
+    parser.add_argument(
+        "--profile",
+        default="stable",
+        help="Build profile. If omitted, defaults to stable unless --zmk-revision main is set.",
+    )
+    return parser.parse_args(argv)
 
 
-def main() -> int:
-    args = parse_args()
+def main(argv: list[str] | None = None) -> int:
+    args = parse_args(argv)
 
-    build_matrix_path = (REPO_ROOT / args.build_matrix_path).resolve()
-    src_config_path = (REPO_ROOT / args.config_path).resolve()
-    output_dir = (REPO_ROOT / args.output_dir).resolve()
-    base_dir = Path(args.base_dir).resolve()
-    build_root = (REPO_ROOT / ".build" / "local" / "build").resolve()
+    profile = args.profile
+    if args.zmk_revision.strip().lower() == "main" and args.profile == "stable":
+        profile = "canary"
 
-    if not build_matrix_path.exists():
-        raise FileNotFoundError(f"Build matrix path not found: {build_matrix_path}")
-    if not src_config_path.exists():
-        raise FileNotFoundError(f"Config path not found: {src_config_path}")
+    forwarded_args = [
+        "build-many",
+        "--profile",
+        profile,
+        "--build-matrix-path",
+        args.build_matrix_path,
+        "--build-matrix-json",
+        args.build_matrix_json,
+        "--config-path",
+        args.config_path,
+        "--fallback-binary",
+        args.fallback_binary,
+        "--output-dir",
+        args.output_dir,
+        "--artifact-names",
+        args.artifact_names,
+    ]
 
-    entries = load_matrix(build_matrix_path)
-    if not entries:
-        raise ValueError(f"No matrix entries found in {build_matrix_path}")
-
+    if args.base_dir:
+        forwarded_args.extend(["--base-dir", args.base_dir])
+    if args.zmk_revision:
+        forwarded_args.extend(["--zmk-revision-override", args.zmk_revision])
+    if args.skip_update:
+        forwarded_args.append("--skip-update")
+    if args.jobs is not None:
+        forwarded_args.extend(["--jobs", str(args.jobs)])
     if args.list:
-        print("Available artifact-name values:")
-        for entry in entries:
-            print(f"- {artifact_name(entry)}")
-        return 0
+        forwarded_args.append("--list")
 
-    patterns = [part.strip() for part in args.artifact_names.split(",") if part.strip()]
-    entries = filter_matrix(entries, patterns)
-
-    # Mirror build-user-config.yml behavior:
-    # if zephyr/module.yml exists in repo, build from isolated base_dir and load repo as extra module.
-    if (REPO_ROOT / "zephyr" / "module.yml").exists():
-        config_dir = ensure_config_copy(src_config_path, base_dir, src_config_path.name)
-        # Use a repo-local staging path so local runs also work on Windows hosts.
-        extra_modules_dir: Path | None = stage_extra_modules_from_git(
-            REPO_ROOT, REPO_ROOT / ".build" / "local" / "tmp"
-        )
-    else:
-        base_dir = REPO_ROOT
-        config_dir = src_config_path
-        extra_modules_dir = None
-
-    if args.zmk_revision.strip():
-        override_zmk_revision(config_dir, args.zmk_revision.strip())
-
-    ensure_west_ready(base_dir, config_dir, skip_update=args.skip_update)
-
-    logical_cores = max(1, os.cpu_count() or 1)
-    detected_physical_cores = detect_physical_cores()
-    physical_cores = logical_cores if detected_physical_cores is None else detected_physical_cores
-    # Physical cores should never exceed visible logical CPUs in this runtime.
-    physical_cores = max(1, min(physical_cores, logical_cores))
-    physical_core_cap = physical_cores
-    default_auto_cap = max(1, physical_cores // 2)
-
-    if args.jobs is None:
-        max_workers = min(len(entries), default_auto_cap)
-        print(
-            f"Auto-selected parallel jobs: {max_workers} "
-            f"(entries={len(entries)}, logical_cores={logical_cores}, "
-            f"physical_cores={physical_cores}, default_cap={default_auto_cap}).",
-            flush=True,
-        )
-    else:
-        if args.jobs < 1:
-            raise ValueError("--jobs must be >= 1")
-        max_workers = min(args.jobs, len(entries))
-        if max_workers > physical_core_cap:
-            print(
-                f"--jobs {args.jobs} exceeds physical core count ({physical_core_cap}); "
-                f"capping to {physical_core_cap}.",
-                flush=True,
-            )
-            max_workers = physical_core_cap
-
-    produced: list[Path] = []
-    if max_workers == 1:
-        for entry in entries:
-            name = artifact_name(entry)
-            print(f"\n=== Building {name} ===", flush=True)
-            out = build_entry(
-                entry=entry,
-                base_dir=base_dir,
-                build_root=build_root,
-                output_dir=output_dir,
-                config_dir=config_dir,
-                fallback_binary=args.fallback_binary,
-                extra_modules_dir=extra_modules_dir,
-            )
-            produced.append(out)
-            print(f"Built artifact: {out}", flush=True)
-    else:
-        print(
-            f"Running {len(entries)} build(s) with up to {max_workers} parallel job(s).",
-            flush=True,
-        )
-        build_failures: list[tuple[str, Exception]] = []
-        future_to_name: dict[Any, str] = {}
-        with ThreadPoolExecutor(max_workers=max_workers) as executor:
-            for entry in entries:
-                name = artifact_name(entry)
-                print(f"\n=== Queueing {name} ===", flush=True)
-                future = executor.submit(
-                    build_entry,
-                    entry=entry,
-                    base_dir=base_dir,
-                    build_root=build_root,
-                    output_dir=output_dir,
-                    config_dir=config_dir,
-                    fallback_binary=args.fallback_binary,
-                    extra_modules_dir=extra_modules_dir,
-                )
-                future_to_name[future] = name
-
-            for future in as_completed(future_to_name):
-                name = future_to_name[future]
-                try:
-                    out = future.result()
-                except Exception as exc:  # noqa: BLE001
-                    build_failures.append((name, exc))
-                    print(f"Build failed for {name}: {exc}", file=sys.stderr, flush=True)
-                else:
-                    produced.append(out)
-                    print(f"Built artifact: {out}", flush=True)
-
-        if build_failures:
-            print("\nBuild completed with failures:", file=sys.stderr, flush=True)
-            for name, exc in build_failures:
-                print(f"- {name}: {exc}", file=sys.stderr, flush=True)
-            return 1
-
-    print("\nBuild complete.", flush=True)
-    for out in produced:
-        print(f"- {out}")
-    return 0
+    return build_runner.main(forwarded_args)
 
 
 if __name__ == "__main__":
-    try:
-        raise SystemExit(main())
-    except subprocess.CalledProcessError as exc:
-        print(f"Command failed: {exc}", file=sys.stderr)
-        raise
+    raise SystemExit(main())
