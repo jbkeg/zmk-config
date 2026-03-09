@@ -94,13 +94,13 @@ Local Docker (recommended):
 
 ```bash
 # list artifacts
-docker compose run --rm zmk-build-release --list
+docker compose run --rm zmk-build-stable --list
 
 # build direct split targets
-docker compose run --rm zmk-build-release --artifact-names totem_left,totem_right,totem_reset
+docker compose run --rm zmk-build-stable --artifact-names totem_left,totem_right,totem_reset
 
 # build dongle split targets
-docker compose run --rm zmk-build-release --artifact-names totem_left_w_dongle,totem_right,totem_zdd_dongle,totem_zdd_dongle_reset,totem_reset
+docker compose run --rm zmk-build-stable --artifact-names totem_left_w_dongle,totem_right,totem_zdd_dongle,totem_zdd_dongle_reset,totem_reset
 ```
 
 Expected active artifacts:

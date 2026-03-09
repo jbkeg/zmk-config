@@ -21,16 +21,15 @@ Use these branch roles when choosing where to develop and test:
 
 Build and release are matrix-driven via `build.yaml`.
 
-- `.github/workflows/build.yml`: reusable matrix build + artifact merge
-- `.github/workflows/build-all.yml`: build all targets from `build.yaml`
-- `.github/workflows/build-inputs.yml`: build selected targets by `artifact-name`
-- `.github/workflows/release.yml`: build all + publish firmware release assets
+- `.github/workflows/build.yml`: the only reusable firmware build workflow; supports full matrix, filtered builds, and profile selection
+- `.github/workflows/release.yml`: calls `build.yml` with the `stable` profile and publishes firmware release assets
+- `.github/workflows/config-policy-guard.yml`: policy lint plus random matrix sanity builds through `build.yml`
 
 ## Recommended Workflow (GitHub Actions)
 
 1. Edit `config/*.keymap`, `config/*.conf`, `build.yaml`, or shield files.
 2. Commit and push your branch.
-3. Wait for CI (`Build All Firmware` or test workflows).
+3. Wait for CI (`Build ZMK firmware` or test workflows).
 4. Download build artifacts from Actions or release assets from Releases.
 5. Flash matching firmware files to target devices.
 
@@ -64,10 +63,10 @@ Guardrails:
 
 Two local services are provided in `docker-compose.yml`:
 
-- `zmk-build-release`: uses `zmkfirmware/zmk-build-arm:stable` and your pinned `config/west.yml` revision.
-- `zmk-build-main`: overrides only the `zmk` project revision to `main` via `--zmk-revision main`.
+- `zmk-build-stable`: uses `zmkfirmware/zmk-build-arm:3.5` for the stable ZMK `v0.3` / Zephyr `3.5` line.
+- `zmk-build-canary`: uses `zmkfirmware/zmk-build-arm:4.1-branch` for the canary ZMK `main` / Zephyr `4.1` line.
 
-Note: Docker image tags (`stable`, `3.5`, etc.) define the build environment/toolchain, not the ZMK firmware revision itself.
+Note: the image tag must still match the intended ZMK/Zephyr line. In this repo, `stable` maps to ZMK `v0.3` / Zephyr `3.5`, while `canary` maps to ZMK `main` / Zephyr `4.1`.
 
 ### Prerequisites
 
@@ -80,31 +79,31 @@ From repository root:
 
 ```bash
 # List valid artifact-name values from build.yaml
-docker compose run --rm zmk-build-release --list
+docker compose run --rm zmk-build-stable --list
 
 # Build selected targets
-docker compose run --rm zmk-build-release --artifact-names totem_left,totem_right,totem_reset
+docker compose run --rm zmk-build-stable --artifact-names totem_left,totem_right,totem_reset
 
 # Build with wildcard patterns (shell-style)
-docker compose run --rm zmk-build-release --artifact-names "totem_*"
-docker compose run --rm zmk-build-release --artifact-names "*_left,*_right"
+docker compose run --rm zmk-build-stable --artifact-names "totem_*"
+docker compose run --rm zmk-build-stable --artifact-names "*_left,*_right"
 
 # Build in parallel (up to 3 targets at a time)
-docker compose run --rm zmk-build-release --artifact-names "totem_*" --jobs 3
+docker compose run --rm zmk-build-stable --artifact-names "totem_*" --jobs 3
 
 # Build every target in build.yaml
-docker compose run --rm zmk-build-release
+docker compose run --rm zmk-build-stable
 
-# Build against ZMK main (local override of zmk project revision)
-docker compose run --rm zmk-build-main --artifact-names totem_left
+# Build against the canary ZMK main line
+docker compose run --rm zmk-build-canary --artifact-names totem_left
 ```
 
 Notes:
 
-- This uses `docker-compose.yml` and `scripts/local.py`.
+- This uses `docker-compose.yml`, `scripts/build_profiles.py`, and `scripts/build_runner.py`.
 - Output artifacts are written to `firmware/`.
 - Build directories are kept under `.build/local/build/`.
-- West workspace/cache state is kept under `.build/local/workspace/` (release) and `.build/local/workspace-main/` (main).
+- West workspace/cache state is kept under `.build/local/workspace/` (stable) and `.build/local/workspace-main/` (canary).
 - `--artifact-names` accepts exact names and wildcard patterns. If a pattern matches nothing, the script exits with an error.
 - `--jobs` controls matrix-level parallelism.
 - If `--jobs` is omitted, it auto-selects `min(selected entries, max(1, physical core count // 2))`.
@@ -115,10 +114,10 @@ Notes:
 If you prefer not to use Docker Compose:
 
 ```bash
-docker run --rm -it -v "${PWD}:/workspace" -w /workspace zmkfirmware/zmk-build-arm:stable python3 scripts/local.py --artifact-names "totem_left,totem_right"
+docker run --rm -it -v "${PWD}:/workspace" -w /workspace zmkfirmware/zmk-build-arm:3.5 python3 scripts/build_runner.py build-many --profile stable --artifact-names "totem_left,totem_right"
 
 # Parallel example
-docker run --rm -it -v "${PWD}:/workspace" -w /workspace zmkfirmware/zmk-build-arm:stable python3 scripts/local.py --artifact-names "totem_*" --jobs 3
+docker run --rm -it -v "${PWD}:/workspace" -w /workspace zmkfirmware/zmk-build-arm:3.5 python3 scripts/build_runner.py build-many --profile stable --artifact-names "totem_*" --jobs 3
 ```
 
 ### Why not plain CMake?
