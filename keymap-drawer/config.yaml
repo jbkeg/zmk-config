@@ -37,16 +37,10 @@ parse_config:
     "&swapper": Next Win
     "&dot_spc": Sentence
 
-    "&smart_num NUM 0":
-      { "tap": "NumWord", "hold": "Num", "shifted": "Sticky Num" }
     "&num_dance": { "tap": "NumWord", "shifted": "Sticky Num" }
     "&magic_shift LSHFT 0":
       { "tap": "Magic", "hold": "Shift", "shifted": "Caps Word" }
     "&magic_shift": { "tap": "Magic", "hold": "Shift", "shifted": "Caps Word" }
-
-    "&lt_spc NAV 0": { "tap": "Spc", "hold": "Nav", "shifted": "Sentence" }
-    "&lt_qxl SYM 0": { "tap": "?", "hold": "Sym", "shifted": "!" }
-    "&lt_btn BTN Z": { "tap": "Z", "hold": "Btn" }
 
     # bluetooth and output
     "&bt BT_SEL 0": BT 1
@@ -64,10 +58,8 @@ parse_config:
     "&out OUT_BLE": BLE
 
     # clipboard and window shortcuts
-    "&kp LC(INS)": Copy
     "&kp LC(C)": Copy
     "&kp LC(X)": Cut
-    "&kp LS(INS)": Paste
     "&kp LC(V)": Paste
     "&kp LC(Z)": Undo
     "&kp LC(Y)": Redo
@@ -92,7 +84,6 @@ parse_config:
     "&kp LA(F4)": Win Close
     "&kp LC(F4)": Tab Close
     "&kp LG(Q)": App Close
-    "&kp LG(L)": Lock
 
     "&kp LG(LC(LEFT))": Prev Desk
     "&kp LG(LC(RIGHT))": Next Desk
@@ -125,24 +116,8 @@ parse_config:
     "&mkp MB4": Back Click
     "&mkp MB5": Forward Click
 
-    # legacy extras kept for backward compatibility
-    "&rst_boot": Reset Bootloader
-    "&sleep": Sleep
+    # shared repo mappings used outside Continuum
     "&soft_off": BAT Save
-    "&hwp_won": ₩
-    "&hwp_tmp": ℃
-    "&hwp_pm": ±
-    "&hwp_phi": Ø
-    "&hwp_kg": kg
-    "&hwp_grm": g
-    "&hwp_mg": mg
-    "&hwp_vac": VAC
-    "&hwp_mm": mm
-    "&uni_mdot": Mid-dot
-    "&sel_ln": Sel-Line
-    "&sel_wrd": Sel-Word
-    "&ind_con": Conn status
-    "&ind_bat": Batt level
 
   trans_legend: { "tap": "", "type": "trans" }
 
