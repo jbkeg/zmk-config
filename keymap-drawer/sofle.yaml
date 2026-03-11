@@ -50,7 +50,7 @@ layers:
     right: '}'
   - Caps
   - t: Z
-    h: Btn
+    h: Tool
   - X
   - C
   - V
@@ -64,7 +64,7 @@ layers:
   - t: .
     s: ':'
   - t: '?'
-    h: Sym
+    h: Mouse
     s: '!'
   - \
   - ''
@@ -133,7 +133,7 @@ layers:
     right: '}'
   - Caps
   - t: Z
-    h: Btn
+    h: Tool
   - X
   - C
   - D
@@ -147,7 +147,7 @@ layers:
   - t: .
     s: ':'
   - t: '?'
-    h: Sym
+    h: Mouse
     s: '!'
   - \
   - ''
@@ -237,7 +237,7 @@ layers:
   - Enter
   - Bspc
   - Del
-  Btn:
+  Tool:
   - '`'
   - '1'
   - '2'
@@ -256,82 +256,19 @@ layers:
   - Copy
   - Paste
   - Redo
-  - Redo
-  - Paste
-  - Copy
-  - Cut
-  - Undo
-  - t: '['
-    right: '{'
-  - Tab
-  - Gui
-  - Alt
-  - Shift
-  - Ctrl
-  - PgUp
-  - PgUp
-  - Ctrl
-  - Shift
-  - Alt
-  - Gui
-  - t: ']'
-    right: '}'
-  - Caps
-  - type: trans
-  - Home
-  - End
-  - Tab
-  - PgDn
-  - $$mdi:volume-off$$
-  - PrtSc
-  - PgDn
-  - Tab
-  - End
-  - Home
-  - type: trans
-  - \
-  - ''
-  - Alt
-  - Gui
-  - type: trans
-  - type: trans
-  - type: trans
-  - Cancel
-  - Enter
-  - Bspc
-  - Del
-  Sym:
-  - '`'
-  - '1'
-  - '2'
-  - '3'
-  - '4'
-  - '5'
-  - '6'
-  - '7'
-  - '8'
-  - '9'
-  - '0'
-  - '-'
-  - Esc
-  - '~'
-  - '&'
-  - '*'
-  - (
-  - )
   - '`'
   - '-'
   - '='
-  - \
-  - ''''
+  - (
+  - )
   - t: '['
     right: '{'
   - Tab
-  - '{'
-  - $
-  - '%'
-  - ^
-  - '}'
+  - Gui
+  - Alt
+  - Shift
+  - Ctrl
+  - PgUp
   - '|'
   - t: '['
     h: Ctrl
@@ -344,15 +281,15 @@ layers:
   - t: ']'
     right: '}'
   - Caps
-  - type: trans
-  - '!'
-  - '@'
-  - '#'
-  - type: trans
+  - type: held
+  - Home
+  - End
+  - Tab
+  - PgDn
   - $$mdi:volume-off$$
   - PrtSc
   - ;
-  - ':'
+  - \
   - <
   - '>'
   - type: trans
@@ -364,6 +301,69 @@ layers:
   - type: trans
   - type: trans
   - Cancel
+  - Enter
+  - Bspc
+  - Del
+  Mouse:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - '-'
+  - Esc
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - Scroll ↑
+  - Mouse ↑
+  - Scroll ↓
+  - type: trans
+  - t: '['
+    right: '{'
+  - Tab
+  - Gui
+  - Alt
+  - Shift
+  - Ctrl
+  - PgUp
+  - Scroll ←
+  - Mouse ←
+  - Mouse ↓
+  - Mouse →
+  - Scroll →
+  - t: ']'
+    right: '}'
+  - Caps
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - $$mdi:volume-off$$
+  - PrtSc
+  - type: trans
+  - PgUp
+  - Middle Click
+  - PgDn
+  - type: held
+  - \
+  - ''
+  - Alt
+  - Gui
+  - type: trans
+  - type: trans
+  - Left Click
+  - Right Click
   - Enter
   - Bspc
   - Del
@@ -382,10 +382,10 @@ layers:
   - '-'
   - Esc
   - Win Close
-  - type: trans
   - TaskSW ←
-  - Next Win
   - TaskSW →
+  - Prev Win
+  - Next Win
   - PgUp
   - t: Bspc
     h: Ctrl+Bspc
@@ -433,7 +433,7 @@ layers:
   - ''
   - Alt
   - Gui
-  - type: trans
+  - type: held
   - type: trans
   - type: trans
   - Cancel
@@ -507,70 +507,7 @@ layers:
   - type: trans
   - type: held
   - type: trans
-  - type: trans
-  - Enter
-  - Bspc
-  - Del
-  Mouse:
-  - '`'
-  - '1'
-  - '2'
-  - '3'
-  - '4'
-  - '5'
-  - '6'
-  - '7'
-  - '8'
-  - '9'
-  - '0'
-  - '-'
-  - Esc
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - PgUp
-  - Mouse ↑
-  - PgDn
-  - type: trans
-  - t: '['
-    right: '{'
-  - Tab
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - Scroll ←
-  - Mouse ←
-  - Mouse ↓
-  - Mouse →
-  - Scroll →
-  - t: ']'
-    right: '}'
-  - Caps
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - $$mdi:volume-off$$
-  - PrtSc
-  - type: trans
-  - Left Click
-  - Middle Click
-  - Right Click
-  - type: trans
-  - \
-  - ''
-  - Alt
-  - Gui
-  - type: trans
-  - type: held
-  - Scroll ↑
-  - Scroll ↓
+  - Cancel
   - Enter
   - Bspc
   - Del
@@ -632,8 +569,8 @@ layers:
   - Gui
   - '0'
   - type: trans
-  - type: trans
-  - type: trans
+  - type: held
+  - Cancel
   - Enter
   - Bspc
   - Del
@@ -699,7 +636,7 @@ layers:
   - Gui
   - type: trans
   - type: held
-  - type: trans
+  - type: held
   - Cancel
   - Enter
   - Bspc
@@ -735,7 +672,7 @@ layers:
   - t: '['
     right: '{'
   - Tab
-  - Ctrl
+  - Shift
   - A
   - S
   - D
@@ -748,7 +685,7 @@ layers:
   - t: ']'
     right: '}'
   - Caps
-  - Shift
+  - Ctrl
   - Z
   - X
   - C
@@ -764,7 +701,7 @@ layers:
   - ''
   - Alt
   - Gui
-  - B
+  - Alt
   - Spc
   - type: trans
   - Cancel
@@ -1063,6 +1000,6 @@ combos:
 - p:
   - 17
   - 16
-  k: LANG1
+  k: LANG2
   l:
   - Combos
