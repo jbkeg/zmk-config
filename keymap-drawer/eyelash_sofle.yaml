@@ -535,7 +535,74 @@ layers:
   - type: trans
   - type: held
   - type: trans
-  - Cancel
+  - type: trans
+  - Enter
+  - Bspc
+  - Del
+  Mouse:
+  - '`'
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'
+  - '6'
+  - '7'
+  - '8'
+  - '9'
+  - '0'
+  - '-'
+  - Esc
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - ↑
+  - type: trans
+  - Left Click
+  - Mouse ↑
+  - Right Click
+  - type: trans
+  - t: '['
+    right: '{'
+  - Tab
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - ←
+  - Enter
+  - →
+  - Scroll ←
+  - Mouse ←
+  - Mouse ↓
+  - Mouse →
+  - Scroll →
+  - t: ']'
+    right: '}'
+  - Caps
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - $$mdi:volume-off$$
+  - ↓
+  - type: trans
+  - Scroll ↑
+  - Middle Click
+  - Scroll ↓
+  - type: trans
+  - \
+  - ''
+  - Alt
+  - Gui
+  - type: trans
+  - type: held
+  - Scroll ↑
+  - Scroll ↓
   - Enter
   - Bspc
   - Del

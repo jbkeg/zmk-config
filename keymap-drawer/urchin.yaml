@@ -314,7 +314,42 @@ layers:
   - type: trans
   - type: held
   - type: trans
-  - Cancel
+  - type: trans
+  Mouse:
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - Left Click
+  - Mouse ↑
+  - Right Click
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - Scroll ←
+  - Mouse ←
+  - Mouse ↓
+  - Mouse →
+  - Scroll →
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - Scroll ↑
+  - Middle Click
+  - Scroll ↓
+  - type: trans
+  - type: trans
+  - type: held
+  - Scroll ↑
+  - Scroll ↓
   Num:
   - /
   - '7'

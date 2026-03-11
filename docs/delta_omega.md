@@ -13,7 +13,7 @@ Implemented matrix targets:
 | Left half (direct split) | `seeeduino_xiao_ble` | `delta_omega_left` | `common-config studio-rpc-usb-uart` | `delta_omega_left` | Active |
 | Right half | `seeeduino_xiao_ble` | `delta_omega_right` | none | `delta_omega_right` | Active |
 | Left half (dongle split) | `seeeduino_xiao_ble` | `delta_omega_left_w_dongle` | none | `delta_omega_left_w_dongle` | Active |
-| Dongle (single keyboard) | `nice_nano_v2` | `delta_omega_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart` | `delta_omega_zdd_dongle` | Active |
+| Dongle (ZDD) | `nice_nano_v2` | `delta_omega_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart` | `delta_omega_zdd_dongle` | Active |
 | Keyboard reset | `seeeduino_xiao_ble` | `settings_reset` | none | `delta_omega_reset` | Active |
 | Dongle reset | `nice_nano_v2` | `settings_reset` | none | `delta_omega_zdd_dongle_reset` | Active |
 

@@ -341,7 +341,46 @@ layers:
   - type: trans
   - type: held
   - type: trans
-  - Cancel
+  - type: trans
+  - Del
+  Mouse:
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - Left Click
+  - Mouse ↑
+  - Right Click
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - Scroll ←
+  - Mouse ←
+  - Mouse ↓
+  - Mouse →
+  - Scroll →
+  - Esc
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - Scroll ↑
+  - Middle Click
+  - Scroll ↓
+  - type: trans
+  - Bspc
+  - Tab
+  - type: trans
+  - type: held
+  - Scroll ↑
+  - Scroll ↓
   - Del
   Num:
   - /

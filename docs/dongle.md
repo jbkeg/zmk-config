@@ -13,7 +13,9 @@ This document is the repository-specific technical guide for dongle operation.
 This repository defines two dongle roles:
 
 - `dongle`
-  - One dongle is dedicated to a single keyboard.
+  - Single-keyboard dongle role.
+  - The non-display variant is the headless dongle.
+  - Display-backed builds such as `zdd` and `prospector` still use the same `dongle` role.
   - Intended for single-keyboard daily use with a fixed pairing set.
 - `scanner`
   - Dongle passively scans keyboard status advertisements and renders status UI.
@@ -23,7 +25,7 @@ This repository defines two dongle roles:
 
 These diagrams are conceptual and describe firmware role topology only.
 
-### `dongle` role (single keyboard dedicated)
+### `dongle` role (single-keyboard; headless or display-backed)
 
 ```text
 [Keyboard Left] ----\
@@ -71,7 +73,7 @@ Role switching is a reflash workflow, not a runtime toggle.
 
 This repository uses a fixed naming policy for dongle targets:
 
-- Single keyboard role targets:
+- Single-keyboard dongle role targets:
   - `<keyboard>_<hardware>_<role>`
   - Examples:
     - `totem_zdd_dongle`
@@ -91,11 +93,11 @@ Frozen identifiers:
 These examples are naming and matrix templates.
 Some are planned-only depending on current matrix coverage.
 
-1. `zdd` + `dongle` role (single keyboard)
+1. `zdd` + `dongle` role (display-backed single-keyboard)
    - `board: nice_nano_v2`
    - `shield: totem_dongle zdd_adapter dongle_display`
    - `artifact-name: totem_zdd_dongle`
-2. `prospector` + `dongle` role (single keyboard)
+2. `prospector` + `dongle` role (display-backed single-keyboard)
    - `board: seeeduino_xiao_ble`
    - `shield: totem_dongle prospector_adapter`
    - `artifact-name: totem_prospector_dongle`
@@ -110,7 +112,7 @@ Current state from `build.yaml`:
 
 - Active dongle-related entries:
   - Split targets for Totem, Urchin, Corne, Eyelash Corne, Sofle, Eyelash Sofle, Delta Omega, and Cornix.
-  - Dedicated ZDD and Prospector dongle targets for Totem, Urchin, Corne, Eyelash Corne, Sofle, Eyelash Sofle, Delta Omega, and Cornix.
+  - Display-backed ZDD and Prospector dongle targets for Totem, Urchin, Corne, Eyelash Corne, Sofle, Eyelash Sofle, Delta Omega, and Cornix.
   - Shared reset targets: `reset_nice_nano_v2`, `reset_seeeduino_xiao_ble`.
 - Not active yet:
   - `prospector_scanner`
@@ -148,7 +150,7 @@ In this repo, dongle mode is mostly a role-based workaround, not a universal upg
 
 ### `dongle` role
 
-- Practical for a single keyboard setup when host BLE behavior is inconsistent.
+- Practical for a single-keyboard setup, whether headless or display-backed, when host BLE behavior is inconsistent.
 - Main gain is predictable reconnect behavior and stable host pathing.
 - Compared to wired master split, benefits are limited and you still carry an extra dependency.
 

@@ -113,13 +113,13 @@ Artifact-to-device mapping:
 | `sofle_left.uf2`                      | Sofle left half                             |
 | `sofle_right.uf2`                     | Sofle right half                            |
 | `sofle_left_w_dongle.uf2`             | Sofle left half for dongle topology         |
-| `sofle_zdd_dongle.uf2`                | Sofle dedicated ZDD dongle                  |
-| `sofle_prospector_dongle.uf2`         | Sofle dedicated Prospector dongle           |
+| `sofle_zdd_dongle.uf2`                | Sofle ZDD dongle                            |
+| `sofle_prospector_dongle.uf2`         | Sofle Prospector dongle                     |
 | `eyelash_sofle_left.uf2`              | Eyelash Sofle left half                     |
 | `eyelash_sofle_right.uf2`             | Eyelash Sofle right half                    |
 | `eyelash_sofle_left_w_dongle.uf2`     | Eyelash Sofle left half for dongle topology |
-| `eyelash_sofle_zdd_dongle.uf2`        | Eyelash Sofle dedicated ZDD dongle          |
-| `eyelash_sofle_prospector_dongle.uf2` | Eyelash Sofle dedicated Prospector dongle   |
+| `eyelash_sofle_zdd_dongle.uf2`        | Eyelash Sofle ZDD dongle                    |
+| `eyelash_sofle_prospector_dongle.uf2` | Eyelash Sofle Prospector dongle             |
 
 ## Configuration
 
@@ -138,4 +138,4 @@ Artifact-to-device mapping:
 
 - Sofle split targets are active in `build.yaml`.
 - Eyelash Sofle split targets are active in `build.yaml`.
-- Sofle and Eyelash Sofle dedicated dongle targets are active in `build.yaml` for both `zdd` and `prospector` hardware.
+- Sofle and Eyelash Sofle display-backed dongle targets are active in `build.yaml` for both `zdd` and `prospector` hardware.

@@ -34,7 +34,7 @@ This document covers the Cornix integration used in this repository.
 | Right half | `cornix_right` | none | none | `cornix_right` | Active |
 | Reset | `cornix_right` | `settings_reset` | none | `cornix_reset` | Active |
 | Left half (dongle split) | `cornix_left` | none | none | `cornix_left_w_dongle` | Active |
-| Dongle (single keyboard) | `nice_nano_v2` | `cornix_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart` | `cornix_zdd_dongle` | Active |
+| Dongle (ZDD) | `nice_nano_v2` | `cornix_dongle zdd_adapter dongle_display` | `studio-rpc-usb-uart` | `cornix_zdd_dongle` | Active |
 | Dongle reset | `nice_nano_v2` | `settings_reset` | none | `cornix_zdd_dongle_reset` | Active |
 
 ## Warning: device breakdown recovery

@@ -425,7 +425,58 @@ layers:
   - type: trans
   - type: held
   - type: trans
-  - Cancel
+  - type: trans
+  - Del
+  Mouse:
+  - Esc
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - ↑
+  - type: trans
+  - Left Click
+  - Mouse ↑
+  - Right Click
+  - type: trans
+  - t: '['
+    right: '{'
+  - Tab
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - ←
+  - Enter
+  - →
+  - Scroll ←
+  - Mouse ←
+  - Mouse ↓
+  - Mouse →
+  - Scroll →
+  - t: ']'
+    right: '}'
+  - Caps
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - $$mdi:volume-off$$
+  - ↓
+  - type: trans
+  - Scroll ↑
+  - Middle Click
+  - Scroll ↓
+  - type: trans
+  - \
+  - Alt
+  - type: trans
+  - type: held
+  - Scroll ↑
+  - Scroll ↓
   - Del
   Num:
   - Esc

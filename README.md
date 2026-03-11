@@ -155,7 +155,7 @@ Reference:
 
 ### Roles
 
-- `dongle`: one dongle dedicated to a single keyboard
+- `dongle`: single-keyboard dongle role; the non-display variant is the headless dongle
 - `scanner`: status observer role that listens to keyboard advertisements
 
 Role switching is firmware-based and requires reflashing the dongle, and sometimes matching keyboard firmware.
