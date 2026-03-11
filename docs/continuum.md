@@ -55,7 +55,7 @@ Continuum is primarily inspired by:
 
 `base.keymap` defines these layers:
 
-- `BASE`, `EXTRA`, `TAP`, `BTN`, `SYM`, `NAV`, `FN`, `MOUSE`, `NUM`, `SYS`, `GAME`
+- `BASE`, `EXTRA`, `TAP`, `TOOL`, `MOUSE`, `NAV`, `FN`, `NUM`, `SYS`, `GAME`
 
 Key mechanics included in the framework:
 
@@ -63,9 +63,11 @@ Key mechanics included in the framework:
 - Combo system with HRM-safe tap behavior
 - `MAGIC_SHIFT` behavior (repeat/caps-word/hold-shift)
 - `SMART_NUM` behavior (num-word, sticky num, held num layer)
-- Conditional layers:
+- `TOOL` layer combining editor shortcuts with symbol fallback
+- Default 34-key thumbs: `Space/Nav`, `Enter/Fn`, `NumWord/Num`, `Magic/Shift`
+- Default 34-key layer holds on alpha keys: `Z/Tool`, `?/Mouse`
+- Conditional layer:
   - `FN + NUM -> SYS`
-  - `NAV + FN -> MOUSE`
 - Optional wireless system controls (`CONFIG_WIRELESS`)
 
 ## Matrix Profiles
