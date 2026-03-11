@@ -32,7 +32,7 @@ layers:
     h: Gui
   - Esc
   - t: Z
-    h: Btn
+    h: Tool
   - X
   - C
   - V
@@ -44,7 +44,7 @@ layers:
   - t: .
     s: ':'
   - t: '?'
-    h: Sym
+    h: Mouse
     s: '!'
   - Bspc
   - Tab
@@ -91,7 +91,7 @@ layers:
     h: Gui
   - Esc
   - t: Z
-    h: Btn
+    h: Tool
   - X
   - C
   - D
@@ -103,7 +103,7 @@ layers:
   - t: .
     s: ':'
   - t: '?'
-    h: Sym
+    h: Mouse
     s: '!'
   - Bspc
   - Tab
@@ -165,61 +165,22 @@ layers:
     h: Shift
     s: Caps Word
   - Del
-  Btn:
+  Tool:
   - Undo
   - Cut
   - Copy
   - Paste
   - Redo
-  - Redo
-  - Paste
-  - Copy
-  - Cut
-  - Undo
-  - Gui
-  - Alt
-  - Shift
-  - Ctrl
-  - PgUp
-  - PgUp
-  - Ctrl
-  - Shift
-  - Alt
-  - Gui
-  - Esc
-  - type: trans
-  - Home
-  - End
-  - Tab
-  - PgDn
-  - PgDn
-  - Tab
-  - End
-  - Home
-  - type: trans
-  - Bspc
-  - Tab
-  - type: trans
-  - type: trans
-  - type: trans
-  - Cancel
-  - Del
-  Sym:
-  - '~'
-  - '&'
-  - '*'
-  - (
-  - )
   - '`'
   - '-'
   - '='
-  - \
-  - ''''
-  - '{'
-  - $
-  - '%'
-  - ^
-  - '}'
+  - (
+  - )
+  - Gui
+  - Alt
+  - Shift
+  - Ctrl
+  - PgUp
   - '|'
   - t: '['
     h: Ctrl
@@ -230,13 +191,13 @@ layers:
   - t: ']'
     h: Gui
   - Esc
-  - type: trans
-  - '!'
-  - '@'
-  - '#'
-  - type: trans
+  - type: held
+  - Home
+  - End
+  - Tab
+  - PgDn
   - ;
-  - ':'
+  - \
   - <
   - '>'
   - type: trans
@@ -247,12 +208,51 @@ layers:
   - type: trans
   - Cancel
   - Del
+  Mouse:
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - Scroll ↑
+  - Mouse ↑
+  - Scroll ↓
+  - type: trans
+  - Gui
+  - Alt
+  - Shift
+  - Ctrl
+  - PgUp
+  - Scroll ←
+  - Mouse ←
+  - Mouse ↓
+  - Mouse →
+  - Scroll →
+  - Esc
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - type: trans
+  - PgUp
+  - Middle Click
+  - PgDn
+  - type: held
+  - Bspc
+  - Tab
+  - type: trans
+  - type: trans
+  - Left Click
+  - Right Click
+  - Del
   Nav:
   - Win Close
-  - type: trans
   - TaskSW ←
-  - Next Win
   - TaskSW →
+  - Prev Win
+  - Next Win
   - PgUp
   - t: Bspc
     h: Ctrl+Bspc
@@ -291,7 +291,7 @@ layers:
   - type: trans
   - Bspc
   - Tab
-  - type: trans
+  - type: held
   - type: trans
   - type: trans
   - Cancel
@@ -341,46 +341,7 @@ layers:
   - type: trans
   - type: held
   - type: trans
-  - type: trans
-  - Del
-  Mouse:
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - PgUp
-  - Mouse ↑
-  - PgDn
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - Scroll ←
-  - Mouse ←
-  - Mouse ↓
-  - Mouse →
-  - Scroll →
-  - Esc
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - type: trans
-  - Left Click
-  - Middle Click
-  - Right Click
-  - type: trans
-  - Bspc
-  - Tab
-  - type: trans
-  - type: held
-  - Scroll ↑
-  - Scroll ↓
+  - Cancel
   - Del
   Num:
   - /
@@ -418,8 +379,8 @@ layers:
   - Tab
   - '0'
   - type: trans
-  - type: trans
-  - type: trans
+  - type: held
+  - Cancel
   - Del
   Sys:
   - BT 1
@@ -461,7 +422,7 @@ layers:
   - Tab
   - type: trans
   - type: held
-  - type: trans
+  - type: held
   - Cancel
   - Del
   Game:
@@ -479,7 +440,7 @@ layers:
   - t: Game
     h: toggle
   - type: trans
-  - Ctrl
+  - Shift
   - A
   - S
   - D
@@ -490,7 +451,7 @@ layers:
   - type: trans
   - type: trans
   - Esc
-  - Shift
+  - Ctrl
   - Z
   - X
   - C
@@ -502,7 +463,7 @@ layers:
   - type: trans
   - Bspc
   - Tab
-  - B
+  - Alt
   - Spc
   - type: trans
   - Cancel
@@ -777,6 +738,6 @@ combos:
 - p:
   - 4
   - 3
-  k: LANG1
+  k: LANG2
   l:
   - Combos
