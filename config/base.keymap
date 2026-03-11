@@ -1,0 +1,16 @@
+// Keymap-drawer-only wrapper for the shared Continuum base layout.
+// Not intended as a firmware build target.
+
+#define CONFIG_WIRELESS
+
+#define ZMK_BASE_LAYER(name, LT, RT, LM, RM, LB, RB, LH, RH)                   \
+    ZMK_LAYER(                                                                 \
+        name,                                                                  \
+          LT  RT                                                               \
+          LM  RM                                                               \
+          LB  RB                                                               \
+          LH  RH                                                               \
+    )
+
+#include "continuum/matrix/34.h"
+#include "continuum/base.keymap"
