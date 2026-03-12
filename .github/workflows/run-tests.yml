@@ -1,0 +1,127 @@
+name: Run ZMK tests
+
+on:
+  workflow_call:
+    inputs:
+      artifact-name:
+        description: "Name of the uploaded log archive"
+        type: string
+        required: false
+        default: "log-files"
+      test-dir:
+        description: "Path to the tests directory"
+        type: string
+        required: false
+        default: "tests"
+      zmk-version:
+        description: "Version of ZMK to test with (default: read from VERSION)"
+        type: string
+        required: false
+        default: ""
+      verbose:
+        description: "Show detailed build logs"
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    container:
+      image: docker.io/zmkfirmware/zmk-build-arm:3.5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set ZMK version
+        shell: bash
+        env:
+          INPUT_ZMK_VERSION: ${{ inputs.zmk-version }}
+          TEST_DIR: ${{ inputs.test-dir }}
+        run: |
+          set -euo pipefail
+
+          ZMK_VERSION="${INPUT_ZMK_VERSION:-}"
+          export ZMK_VERSION="${ZMK_VERSION:-$(cat VERSION)}"
+          yq e -i '(.manifest.projects[] | select(.name=="zmk") | .revision) = env(ZMK_VERSION)' "${TEST_DIR}/west.yml"
+          cat "${TEST_DIR}/west.yml"
+
+      - name: Prepare isolated workspace
+        id: workspace
+        shell: bash
+        env:
+          TEST_DIR: ${{ inputs.test-dir }}
+        run: |
+          set -euo pipefail
+
+          workspace="${RUNNER_TEMP}/tests"
+          echo "workspace=${workspace}" >> "$GITHUB_OUTPUT"
+          mkdir -p "${workspace}/${TEST_DIR}"
+          cp -R "${TEST_DIR}/." "${workspace}/${TEST_DIR}/"
+
+      - name: Cache west modules
+        id: cache-west
+        uses: actions/cache@v5
+        with:
+          path: |
+            ${{ steps.workspace.outputs.workspace }}/modules/
+            ${{ steps.workspace.outputs.workspace }}/tools/
+            ${{ steps.workspace.outputs.workspace }}/zephyr/
+            ${{ steps.workspace.outputs.workspace }}/bootloader/
+            ${{ steps.workspace.outputs.workspace }}/zmk/
+          key: zephyr-${{ hashFiles(format('{0}/west.yml', inputs.test-dir)) }}
+          restore-keys: zephyr-
+
+      - name: Initialize west workspace
+        shell: bash
+        working-directory: ${{ steps.workspace.outputs.workspace }}
+        env:
+          TEST_DIR: ${{ inputs.test-dir }}
+        run: |
+          set -euo pipefail
+
+          west init -l "${TEST_DIR}"
+          if [ "${{ steps.cache-west.outputs.cache-hit }}" != "true" ]; then
+            west update --fetch-opt=--filter=tree:0
+          fi
+          west zephyr-export
+
+      - name: Export ZMK source directory
+        id: zmkpath
+        shell: bash
+        working-directory: ${{ steps.workspace.outputs.workspace }}
+        run: |
+          set -euo pipefail
+          echo "zmk-src-dir=$(find -path '*/zmk/app/west.yml' -printf '%h\n' -quit)" >> "$GITHUB_OUTPUT"
+
+      - name: Export test environment
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          echo "ZMK_BUILD_DIR=$(mktemp -p ${RUNNER_TEMP} -d build.XXXXXXXXXX)" >> "$GITHUB_ENV"
+          echo "ZMK_SRC_DIR=${{ steps.zmkpath.outputs.zmk-src-dir }}" >> "$GITHUB_ENV"
+          if [ -e "${GITHUB_WORKSPACE}/zephyr/module.yml" ]; then
+            echo "ZMK_EXTRA_MODULES=${GITHUB_WORKSPACE}" >> "$GITHUB_ENV"
+          fi
+          if [ "${{ inputs.verbose }}" = "true" ]; then
+            echo "ZMK_TESTS_VERBOSE=true" >> "$GITHUB_ENV"
+          fi
+
+      - name: Run tests
+        shell: bash
+        working-directory: ${{ steps.workspace.outputs.workspace }}
+        env:
+          TEST_DIR: ${{ inputs.test-dir }}
+        run: bash "${GITHUB_WORKSPACE}/scripts/ci/run-zmk-tests.sh" "${TEST_DIR}"
+
+      - name: Archive logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ inputs.artifact-name }}
+          path: ${{ env.ZMK_BUILD_DIR }}/**/*.log

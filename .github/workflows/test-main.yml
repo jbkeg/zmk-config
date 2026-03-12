@@ -4,10 +4,12 @@ on:
   workflow_dispatch:
   push:
     paths:
+      - ".github/workflows/run-tests.yml"
       - ".github/workflows/build.yml"
       - ".github/workflows/release.yml"
       - ".github/workflows/test-main.yml"
       - ".github/workflows/test-release.yml"
+      - "scripts/ci/run-zmk-tests.sh"
       - "scripts/build_profiles.py"
       - "scripts/build_runner.py"
       - "build.yaml"
@@ -20,10 +22,12 @@ on:
       - "tests/**"
   pull_request:
     paths:
+      - ".github/workflows/run-tests.yml"
       - ".github/workflows/build.yml"
       - ".github/workflows/release.yml"
       - ".github/workflows/test-main.yml"
       - ".github/workflows/test-release.yml"
+      - "scripts/ci/run-zmk-tests.sh"
       - "scripts/build_profiles.py"
       - "scripts/build_runner.py"
       - "build.yaml"
@@ -43,7 +47,6 @@ concurrency:
 
 jobs:
   test:
-    uses: urob/zmk-actions/.github/workflows/run-tests.yml@main
+    uses: ./.github/workflows/run-tests.yml
     with:
-      toolchain: gnuarmemb
       zmk-version: main
