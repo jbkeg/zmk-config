@@ -148,3 +148,26 @@ GitHub auto-generates source code archives for every release; those links cannot
 ### Firmware Behavior Follow-up
 
 - Expand behavior-impact notes as needed using `docs/changelog_template.md`.
+
+## v1.0.3 - 2026-03-12
+
+Release: [Firmware v1.0.3](https://github.com/jbkeg/zmk-config/releases/tag/v1.0.3)
+
+### Notes
+
+Automated ZMK firmware release for `v1.0.3`.
+Firmware binaries are attached as release assets (`zmk-firmware-*.zip` and `SHA256SUMS`).
+GitHub auto-generates source code archives for every release; those links cannot be disabled.
+
+## What's Changed
+* docs(changelog): add v2.0.0-canary release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/21
+* docs(changelog): add v1.0.2 release notes by @jbkeg in https://github.com/jbkeg/zmk-config/pull/22
+* [Draw] Refresh keymap diagrams by @jbkeg in https://github.com/jbkeg/zmk-config/pull/24
+* [Draw] Refresh keymap diagrams by @jbkeg in https://github.com/jbkeg/zmk-config/pull/26
+
+
+**Full Changelog**: https://github.com/jbkeg/zmk-config/compare/v1.0.2...v1.0.3
+
+### Firmware Behavior Follow-up
+
+- Expand behavior-impact notes as needed using `docs/changelog_template.md`.
