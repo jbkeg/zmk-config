@@ -97,10 +97,10 @@ jobs:
       selected_count: ${{ steps.select.outputs.selected_count }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.x"
 
@@ -157,10 +157,10 @@ jobs:
       BUILD_DIR: /tmp/zmk-build/build/${{ matrix.artifact_name }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Cache west modules
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         continue-on-error: true
         with:
           path: |
@@ -213,7 +213,7 @@ jobs:
           fi
 
       - name: Archive (${{ matrix.artifact_name }})
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: artifact-${{ matrix.artifact_name }}
           path: ${{ env.ARTIFACT_ROOT }}
@@ -224,7 +224,7 @@ jobs:
     name: Merge Output Artifacts
     steps:
       - name: Merge Artifacts
-        uses: actions/upload-artifact/merge@v4
+        uses: actions/upload-artifact/merge@v7
         with:
           name: ${{ inputs.archive_name }}
           pattern: artifact-*

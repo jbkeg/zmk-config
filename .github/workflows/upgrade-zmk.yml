@@ -2,11 +2,33 @@ name: Check for new ZMK releases
 
 on:
   workflow_dispatch:
+    inputs:
+      upstream:
+        description: "Upstream repository to track"
+        required: false
+        default: "zmkfirmware/zmk"
+        type: string
+      tag_name:
+        description: "Optional release tag override (example: v0.3.0)"
+        required: false
+        default: ""
+        type: string
+      pr_branch:
+        description: "Branch to push the PR to"
+        required: false
+        default: "prepare-zmk-release"
+        type: string
+      pr_label:
+        description: "Optional label to add to the PR"
+        required: false
+        default: ""
+        type: string
   schedule:
     - cron: "0 22 * * 3" # Run weekly on Wednesday at 22:00 UTC
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: upgrade-zmk
@@ -14,7 +36,108 @@ concurrency:
 
 jobs:
   upgrade-zmk:
-    uses: urob/zmk-actions/.github/workflows/upgrade-zmk.yml@main
-    secrets:
-      # PAT requires write access to pull requests
-      token: ${{ secrets.ZMK_ACTIONS_TOKEN }}
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.ZMK_ACTIONS_TOKEN != '' && secrets.ZMK_ACTIONS_TOKEN || github.token }}
+      UPSTREAM_REPOSITORY: ${{ github.event.inputs.upstream || 'zmkfirmware/zmk' }}
+      PR_BRANCH: ${{ github.event.inputs.pr_branch || 'prepare-zmk-release' }}
+      PR_LABEL: ${{ github.event.inputs.pr_label || '' }}
+      INPUT_TAG_NAME: ${{ github.event.inputs.tag_name || '' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.ZMK_ACTIONS_TOKEN != '' && secrets.ZMK_ACTIONS_TOKEN || github.token }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+
+      - name: Resolve latest ZMK release
+        id: release
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tag="${INPUT_TAG_NAME}"
+          if [ -z "${tag}" ]; then
+            tag="$(gh api "repos/${UPSTREAM_REPOSITORY}/releases/latest" --jq .tag_name)"
+          fi
+
+          if ! [[ "${tag}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::Expected a stable ZMK release tag like v0.3.0, got '${tag}'."
+            exit 1
+          fi
+
+          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
+          echo "minor=${tag%.*}" >> "$GITHUB_OUTPUT"
+
+      - name: Update repo ZMK pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/ci/prepare_zmk_upgrade.py --tag "${{ steps.release.outputs.tag }}"
+
+      - name: Detect changes
+        id: changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "count=$(git status --porcelain=v1 -- VERSION config/west.yml tests/west.yml scripts/build_profiles.py | wc -l)" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push changes
+        if: steps.changes.outputs.count > 0
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add VERSION config/west.yml tests/west.yml scripts/build_profiles.py
+          git commit -m "Prepare ZMK release ${RELEASE_TAG}"
+          git push -f origin "HEAD:${PR_BRANCH}"
+
+      - name: Open pull request if needed
+        if: steps.changes.outputs.count > 0
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ steps.release.outputs.tag }}
+          RELEASE_MINOR: ${{ steps.release.outputs.minor }}
+        run: |
+          set -euo pipefail
+
+          pr_number="$(gh pr list --head "${PR_BRANCH}" --json number -q '.[0].number')"
+          if [ -n "${pr_number}" ]; then
+            echo "Pull request already exists (#${pr_number}), skipped creating a new one."
+            exit 0
+          fi
+
+          body=$(cat <<EOF
+          Automated ZMK upgrade to ${RELEASE_TAG}.
+
+          Updated files:
+          - \`VERSION\`
+          - \`config/west.yml\`
+          - \`tests/west.yml\`
+          - \`scripts/build_profiles.py\`
+
+          Manual review:
+          - Confirm the stable build container in \`scripts/build_profiles.py\` still matches ZMK ${RELEASE_MINOR}.
+
+          Source run: https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+          EOF
+          )
+
+          label_args=()
+          if [ -n "${PR_LABEL}" ]; then
+            label_args+=(--label "${PR_LABEL}")
+          fi
+
+          gh pr create \
+            --base "${{ github.event.repository.default_branch }}" \
+            --head "${PR_BRANCH}" \
+            --title "Prepare ZMK release ${RELEASE_TAG}" \
+            "${label_args[@]}" \
+            --body "${body}"

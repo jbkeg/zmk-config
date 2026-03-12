@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Resolve release metadata
         id: meta
@@ -127,7 +127,7 @@ jobs:
 
       - name: Create or update changelog PR
         if: steps.changelog.outputs.skip != 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.ZMK_ACTIONS_TOKEN != '' && secrets.ZMK_ACTIONS_TOKEN || github.token }}
           branch: changelog/${{ steps.meta.outputs.safe_tag }}
