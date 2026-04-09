@@ -22,7 +22,7 @@ Use these branch roles when choosing where to develop and test:
 Build and release are matrix-driven via `build.yaml`.
 
 - `.github/workflows/build.yml`: the only reusable firmware build workflow; supports full matrix, filtered builds, and profile selection
-- `.github/workflows/release.yml`: calls `build.yml` with the `stable` profile and publishes firmware release assets
+- `.github/workflows/release.yml`: resolves `stable` or `canary` from the tag/branch (or manual override), then publishes firmware release assets
 - `.github/workflows/config-policy-guard.yml`: policy lint plus random matrix sanity builds through `build.yml`
 
 ## Recommended Workflow (GitHub Actions)

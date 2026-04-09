@@ -37,18 +37,17 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Set ZMK version
+      - name: Resolve ZMK version
+        id: zmk-version
         shell: bash
         env:
           INPUT_ZMK_VERSION: ${{ inputs.zmk-version }}
-          TEST_DIR: ${{ inputs.test-dir }}
         run: |
           set -euo pipefail
 
           ZMK_VERSION="${INPUT_ZMK_VERSION:-}"
-          export ZMK_VERSION="${ZMK_VERSION:-$(cat VERSION)}"
-          yq e -i '(.manifest.projects[] | select(.name=="zmk") | .revision) = env(ZMK_VERSION)' "${TEST_DIR}/west.yml"
-          cat "${TEST_DIR}/west.yml"
+          ZMK_VERSION="${ZMK_VERSION:-$(cat VERSION)}"
+          echo "version=${ZMK_VERSION}" >> "$GITHUB_OUTPUT"
 
       - name: Prepare isolated workspace
         id: workspace
@@ -58,10 +57,54 @@ jobs:
         run: |
           set -euo pipefail
 
-          workspace="${RUNNER_TEMP}/tests"
+          workspace="$(mktemp -d -p "${RUNNER_TEMP}" tests.XXXXXXXXXX)"
           echo "workspace=${workspace}" >> "$GITHUB_OUTPUT"
           mkdir -p "${workspace}/${TEST_DIR}"
           cp -R "${TEST_DIR}/." "${workspace}/${TEST_DIR}/"
+
+      - name: Set ZMK version in isolated workspace
+        shell: bash
+        env:
+          TEST_DIR: ${{ inputs.test-dir }}
+          WORKSPACE: ${{ steps.workspace.outputs.workspace }}
+          ZMK_VERSION: ${{ steps.zmk-version.outputs.version }}
+        run: |
+          set -euo pipefail
+
+          manifest_path="${WORKSPACE}/${TEST_DIR}/west.yml"
+
+          python3 - "${manifest_path}" <<'PY'
+          import os
+          import re
+          import sys
+          from pathlib import Path
+
+          path = Path(sys.argv[1])
+          version = os.environ["ZMK_VERSION"]
+          lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
+
+          found_revision = False
+          in_zmk_project = False
+
+          for index, line in enumerate(lines):
+              stripped = line.strip()
+              if stripped == "- name: zmk":
+                  in_zmk_project = True
+                  continue
+
+              if in_zmk_project and re.fullmatch(r"\s*revision:\s*.+\s*", stripped):
+                  indent = re.match(r"\s*", line).group(0)
+                  newline = "\n" if line.endswith("\n") else ""
+                  lines[index] = f"{indent}revision: {version}{newline}"
+                  found_revision = True
+                  break
+
+          if not found_revision:
+              raise SystemExit(f"Could not find the zmk project revision in {path}.")
+
+          path.write_text("".join(lines), encoding="utf-8")
+          print(path.read_text(encoding="utf-8"), end="")
+          PY
 
       - name: Cache west modules
         id: cache-west
@@ -73,7 +116,7 @@ jobs:
             ${{ steps.workspace.outputs.workspace }}/zephyr/
             ${{ steps.workspace.outputs.workspace }}/bootloader/
             ${{ steps.workspace.outputs.workspace }}/zmk/
-          key: zephyr-${{ hashFiles(format('{0}/west.yml', inputs.test-dir)) }}
+          key: zephyr-${{ steps.zmk-version.outputs.version }}-${{ hashFiles(format('{0}/west.yml', inputs.test-dir)) }}
           restore-keys: zephyr-
 
       - name: Initialize west workspace
@@ -99,11 +142,14 @@ jobs:
           echo "zmk-src-dir=$(find -path '*/zmk/app/west.yml' -printf '%h\n' -quit)" >> "$GITHUB_OUTPUT"
 
       - name: Export test environment
+        id: test-env
         shell: bash
         run: |
           set -euo pipefail
 
-          echo "ZMK_BUILD_DIR=$(mktemp -p ${RUNNER_TEMP} -d build.XXXXXXXXXX)" >> "$GITHUB_ENV"
+          build_dir="$(mktemp -d -p "${RUNNER_TEMP}" build.XXXXXXXXXX)"
+          echo "build_dir=${build_dir}" >> "$GITHUB_OUTPUT"
+          echo "ZMK_BUILD_DIR=${build_dir}" >> "$GITHUB_ENV"
           echo "ZMK_SRC_DIR=${{ steps.zmkpath.outputs.zmk-src-dir }}" >> "$GITHUB_ENV"
           if [ -e "${GITHUB_WORKSPACE}/zephyr/module.yml" ]; then
             echo "ZMK_EXTRA_MODULES=${GITHUB_WORKSPACE}" >> "$GITHUB_ENV"
@@ -124,4 +170,4 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: ${{ inputs.artifact-name }}
-          path: ${{ env.ZMK_BUILD_DIR }}/**/*.log
+          path: ${{ steps.test-env.outputs.build_dir }}/**/*.log

@@ -10,6 +10,11 @@ on:
         description: "Tag to release for manual runs (example: v1.2.3)"
         required: false
         type: string
+      profile:
+        description: "Optional build profile override (`stable` or `canary`)"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: write
@@ -19,22 +24,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yml
-    with:
-      profile: stable
-      archive_name: firmware
-
-  release:
-    needs: build
+  prepare:
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+      profile: ${{ steps.meta.outputs.profile }}
+      prerelease: ${{ steps.meta.outputs.prerelease }}
+      make_latest: ${{ steps.meta.outputs.make_latest }}
     steps:
-      - name: Resolve release tag
-        id: tag
+      - name: Resolve release settings
+        id: meta
         shell: bash
         env:
-          REF_TYPE: ${{ github.ref_type }}
           REF_NAME: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
+          INPUT_PROFILE: ${{ github.event.inputs.profile }}
           INPUT_TAG_NAME: ${{ github.event.inputs.tag_name }}
         run: |
           set -euo pipefail
@@ -45,13 +49,66 @@ jobs:
           fi
 
           if [ -z "${tag}" ]; then
-            echo "::error::No release tag resolved. For manual dispatch, set 'tag_name'."
+            echo "::error::No release tag resolved. For manual runs, set 'tag_name'."
             exit 1
           fi
 
-          echo "tag=${tag}" >> "$GITHUB_OUTPUT"
-          echo "Using release tag: ${tag}"
+          profile="${INPUT_PROFILE:-}"
+          if [ -z "${profile}" ]; then
+            case "${tag}" in
+              *canary*)
+                profile="canary"
+                ;;
+              *)
+                if [ "${REF_TYPE}" = "branch" ] && [ "${REF_NAME}" = "canary" ]; then
+                  profile="canary"
+                else
+                  profile="stable"
+                fi
+                ;;
+            esac
+          fi
 
+          case "${profile}" in
+            stable|canary)
+              ;;
+            *)
+              echo "::error::Unsupported profile '${profile}'. Expected 'stable' or 'canary'."
+              exit 1
+              ;;
+          esac
+
+          if [[ "${tag}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            prerelease=false
+            make_latest=true
+          else
+            prerelease=true
+            make_latest=false
+          fi
+
+          {
+            echo "tag=${tag}"
+            echo "profile=${profile}"
+            echo "prerelease=${prerelease}"
+            echo "make_latest=${make_latest}"
+          } >> "$GITHUB_OUTPUT"
+
+          echo "Using release tag: ${tag}"
+          echo "Using build profile: ${profile}"
+
+  build:
+    needs: prepare
+    uses: ./.github/workflows/build.yml
+    with:
+      profile: ${{ needs.prepare.outputs.profile }}
+      archive_name: firmware
+
+  release:
+    needs:
+      - prepare
+      - build
+    runs-on: ubuntu-latest
+    steps:
       - name: Download built firmware artifacts
         uses: actions/download-artifact@v8
         with:
@@ -64,7 +121,7 @@ jobs:
       - name: Package firmware files into release assets
         id: package
         env:
-          RELEASE_TAG: ${{ steps.tag.outputs.tag }}
+          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
         run: |
           set -euo pipefail
           mapfile -t firmware_files < <(find ./artifacts -type f \( -name "*.uf2" -o -name "*.bin" -o -name "*.hex" \) | sort)
@@ -102,26 +159,13 @@ jobs:
 
           echo "zip_file=${zip_file}" >> "$GITHUB_OUTPUT"
           echo "sha_file=release-assets/SHA256SUMS" >> "$GITHUB_OUTPUT"
-
-      - name: Determine release type
-        id: reltype
-        run: |
-          TAG="${{ steps.tag.outputs.tag }}"
-          if [[ "$TAG" =~ [a-zA-Z] ]]; then
-            echo "prerelease=true" >> "$GITHUB_OUTPUT"
-            echo "make_latest=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "prerelease=false" >> "$GITHUB_OUTPUT"
-            echo "make_latest=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Publish GitHub release
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.ZMK_ACTIONS_TOKEN != '' && secrets.ZMK_ACTIONS_TOKEN || secrets.GITHUB_TOKEN }}
-          RELEASE_TAG: ${{ steps.tag.outputs.tag }}
-          RELEASE_PRERELEASE: ${{ steps.reltype.outputs.prerelease }}
-          RELEASE_MAKE_LATEST: ${{ steps.reltype.outputs.make_latest }}
+          RELEASE_TAG: ${{ needs.prepare.outputs.tag }}
+          RELEASE_PRERELEASE: ${{ needs.prepare.outputs.prerelease }}
+          RELEASE_MAKE_LATEST: ${{ needs.prepare.outputs.make_latest }}
           RELEASE_ZIP_FILE: ${{ steps.package.outputs.zip_file }}
           RELEASE_SHA_FILE: ${{ steps.package.outputs.sha_file }}
         run: |

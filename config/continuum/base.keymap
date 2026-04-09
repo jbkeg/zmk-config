@@ -10,10 +10,13 @@
   #include <dt-bindings/zmk/outputs.h>
   #define _BT_SEL_KEYS_                                                        \
       &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_CLR
+  #define _BT_DIS_KEYS_                                                        \
+      &bt BT_DISC 0 &bt BT_DISC 1 &bt BT_DISC 2 &bt BT_DISC 3 &bt BT_CLR_ALL
   #define _BT_NAV_KEYS_ &bt BT_PRV &bt BT_NXT &bt BT_CLR
   #define _OUT_KEYS_    &out OUT_TOG &out OUT_USB &out OUT_BLE
 #else
   #define _BT_SEL_KEYS_ &trans &trans &trans &trans &trans
+  #define _BT_DIS_KEYS_ &trans &trans &trans &trans &trans
   #define _BT_NAV_KEYS_ &trans &trans &trans
   #define _OUT_KEYS_    &trans &trans &trans
 #endif
