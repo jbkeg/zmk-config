@@ -25,6 +25,10 @@ manifest:
       url-base: https://github.com/mctechnology17
     - name: m165437
       url-base: https://github.com/M165437
+    - name: zzeneg
+      url-base: https://github.com/zzeneg
+    - name: srwi
+      url-base: https://github.com/srwi
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -73,6 +77,14 @@ manifest:
     ## RGB LED Widget
     - name: zmk-rgbled-widget
       remote: caksoylar
+
+    ## KeyPeek support
+    - name: zmk-raw-hid
+      remote: zzeneg
+      revision: main
+    - name: zmk-keypeek-layer-notifier
+      remote: srwi
+      revision: master
 
     ## NiceView Widget Modules
     - name: zmk-nice-oled

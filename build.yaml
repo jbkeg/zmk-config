@@ -21,7 +21,7 @@
 include:
   # TOTEM
   - board: seeeduino_xiao_ble
-    shield: totem_left
+    shield: totem_left raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     artifact-name: totem_left
   - board: seeeduino_xiao_ble
@@ -31,18 +31,18 @@ include:
     shield: totem_left_w_dongle
     artifact-name: totem_left_w_dongle
   - board: nice_nano_v2
-    shield: totem_dongle
+    shield: totem_dongle raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     artifact-name: totem_dongle
   - board: nice_nano_v2
-    shield: totem_dongle zdd_adapter dongle_display
+    shield: totem_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"TOTEM\ ZDD\"
     artifact-name: totem_zdd_dongle
 
   # Urchin
   - board: nice_nano_v2
-    shield: urchin_left nice_view_adapter nice_view_gem
+    shield: urchin_left raw_hid_adapter nice_view_adapter nice_view_gem
     snippet: common-config studio-rpc-usb-uart
     artifact-name: urchin_left
   - board: nice_nano_v2
@@ -52,19 +52,19 @@ include:
     shield: urchin_left_w_dongle nice_view_adapter nice_view_gem
     artifact-name: urchin_left_w_dongle
   - board: nice_nano_v2
-    shield: urchin_dongle
+    shield: urchin_dongle raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_DISPLAY=n -DCONFIG_DISPLAY=n -DCONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM=n
     artifact-name: urchin_dongle
   - board: nice_nano_v2
-    shield: urchin_dongle zdd_adapter dongle_display
+    shield: urchin_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Urchin\ ZDD\"
     artifact-name: urchin_zdd_dongle
 
   # Corne
   - board: nice_nano_v2
-    shield: corne_left nice_view_adapter nice_view
+    shield: corne_left raw_hid_adapter nice_view_adapter nice_view
     snippet: common-config studio-rpc-usb-uart
     artifact-name: corne_left
   - board: nice_nano_v2
@@ -75,18 +75,18 @@ include:
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: corne_left_w_dongle
   - board: nice_nano_v2
-    shield: corne_dongle
+    shield: corne_dongle raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     artifact-name: corne_dongle
   - board: nice_nano_v2
-    shield: corne_dongle zdd_adapter dongle_display
+    shield: corne_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Corne\ ZDD\"
     artifact-name: corne_zdd_dongle
 
   # Eyelash Corne
   - board: eyelash_corne_left
-    shield: nice_view
+    shield: nice_view raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     artifact-name: eyelash_corne_left
   - board: eyelash_corne_right
@@ -97,19 +97,19 @@ include:
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: eyelash_corne_left_w_dongle
   - board: nice_nano_v2
-    shield: eyelash_corne_dongle
+    shield: eyelash_corne_dongle raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_DISPLAY=n -DCONFIG_DISPLAY=n -DCONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM=n
     artifact-name: eyelash_corne_dongle
   - board: nice_nano_v2
-    shield: eyelash_corne_dongle zdd_adapter dongle_display
+    shield: eyelash_corne_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"EyelashCorneZDD\"
     artifact-name: eyelash_corne_zdd_dongle
 
   # Sofle
   - board: nice_nano_v2
-    shield: sofle_left nice_view_adapter nice_view
+    shield: sofle_left raw_hid_adapter nice_view_adapter nice_view
     snippet: common-config sofle-sides-config studio-rpc-usb-uart
     artifact-name: sofle_left
   - board: nice_nano_v2
@@ -122,19 +122,19 @@ include:
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: sofle_left_w_dongle
   - board: nice_nano_v2
-    shield: sofle_dongle
+    shield: sofle_dongle raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_DISPLAY=n -DCONFIG_DISPLAY=n -DCONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM=n
     artifact-name: sofle_dongle
   - board: nice_nano_v2
-    shield: sofle_dongle zdd_adapter dongle_display
+    shield: sofle_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Sofle\ ZDD\"
     artifact-name: sofle_zdd_dongle
 
   # Eyelash Sofle
   - board: eyelash_sofle_left
-    shield: nice_view
+    shield: nice_view raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     artifact-name: eyelash_sofle_left
   - board: eyelash_sofle_right
@@ -145,19 +145,19 @@ include:
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: eyelash_sofle_left_w_dongle
   - board: nice_nano_v2
-    shield: eyelash_sofle_dongle
+    shield: eyelash_sofle_dongle raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_DISPLAY=n -DCONFIG_DISPLAY=n -DCONFIG_ZMK_DISPLAY_STATUS_SCREEN_CUSTOM=n
     artifact-name: eyelash_sofle_dongle
   - board: nice_nano_v2
-    shield: eyelash_sofle_dongle zdd_adapter dongle_display
+    shield: eyelash_sofle_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"EyelashSofleZDD\"
     artifact-name: eyelash_sofle_zdd_dongle
 
   # Delta Omega
   - board: seeeduino_xiao_ble
-    shield: delta_omega_left
+    shield: delta_omega_left raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     artifact-name: delta_omega_left
   - board: seeeduino_xiao_ble
@@ -167,18 +167,18 @@ include:
     shield: delta_omega_left_w_dongle
     artifact-name: delta_omega_left_w_dongle
   - board: nice_nano_v2
-    shield: delta_omega_dongle
+    shield: delta_omega_dongle raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     artifact-name: delta_omega_dongle
   - board: nice_nano_v2
-    shield: delta_omega_dongle zdd_adapter dongle_display
+    shield: delta_omega_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Delta\ Omega\ ZDD\"
     artifact-name: delta_omega_zdd_dongle
 
   # Cornix
   - board: cornix_left
-    # shield: cornix_indicator
+    shield: raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     artifact-name: cornix_left
   - board: cornix_right
@@ -188,11 +188,11 @@ include:
     cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
     artifact-name: cornix_left_w_dongle
   - board: nice_nano_v2
-    shield: cornix_dongle
+    shield: cornix_dongle raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart
     artifact-name: cornix_dongle
   - board: nice_nano_v2
-    shield: cornix_dongle zdd_adapter dongle_display
+    shield: cornix_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Cornix\ ZDD\"
     artifact-name: cornix_zdd_dongle
@@ -218,83 +218,84 @@ include:
 
   # Scanner target keyboard
   - board: seeeduino_xiao_ble
-    shield: totem_left
+    shield: totem_left raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"TOTEM\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: totem_left_w_scanner
   - board: nice_nano_v2
-    shield: urchin_left nice_view_adapter nice_view_gem
+    shield: urchin_left raw_hid_adapter nice_view_adapter nice_view_gem
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"URCHIN\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: urchin_left_w_scanner
   - board: nice_nano_v2
-    shield: corne_left nice_view_adapter nice_view
+    shield: corne_left raw_hid_adapter nice_view_adapter nice_view
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"CORNE\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: corne_left_w_scanner
   - board: eyelash_corne_left
-    shield: nice_view
+    shield: nice_view raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"ELCORNE\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: eyelash_corne_left_w_scanner
   - board: nice_nano_v2
-    shield: sofle_left nice_view_adapter nice_view
+    shield: sofle_left raw_hid_adapter nice_view_adapter nice_view
     snippet: common-config sofle-sides-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"SOFLE\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: sofle_left_w_scanner
   - board: eyelash_sofle_left
-    shield: nice_view
+    shield: nice_view raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"ELSOFLE\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: eyelash_sofle_left_w_scanner
   - board: seeeduino_xiao_ble
-    shield: delta_omega_left
+    shield: delta_omega_left raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"DOMEGA\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: delta_omega_left_w_scanner
   - board: cornix_left
+    shield: raw_hid_adapter
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"CORNIX\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: cornix_left_w_scanner
 
   # Scanner target dongle (ZDD)
   - board: nice_nano_v2
-    shield: totem_dongle zdd_adapter dongle_display
+    shield: totem_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"TOTEM\ ZDD\" -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"TOTEM\ ZDD\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: totem_zdd_w_scanner
   - board: nice_nano_v2
-    shield: urchin_dongle zdd_adapter dongle_display
+    shield: urchin_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Urchin\ ZDD\" -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"Urchin\ ZDD\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: urchin_zdd_w_scanner
   - board: nice_nano_v2
-    shield: corne_dongle zdd_adapter dongle_display
+    shield: corne_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Corne\ ZDD\" -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"Corne\ ZDD\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: corne_zdd_w_scanner
   - board: nice_nano_v2
-    shield: eyelash_corne_dongle zdd_adapter dongle_display
+    shield: eyelash_corne_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"EyelashCorneZDD\" -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"EyelashCorneZDD\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: eyelash_corne_zdd_w_scanner
   - board: nice_nano_v2
-    shield: sofle_dongle zdd_adapter dongle_display
+    shield: sofle_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Sofle\ ZDD\" -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"Sofle\ ZDD\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: sofle_zdd_w_scanner
   - board: nice_nano_v2
-    shield: eyelash_sofle_dongle zdd_adapter dongle_display
+    shield: eyelash_sofle_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"EyelashSofleZDD\" -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"EyelashSofleZDD\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: eyelash_sofle_zdd_w_scanner
   - board: nice_nano_v2
-    shield: delta_omega_dongle zdd_adapter dongle_display
+    shield: delta_omega_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Delta\ Omega\ ZDD\" -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"Delta\ Omega\ ZDD\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: delta_omega_zdd_w_scanner
   - board: nice_nano_v2
-    shield: cornix_dongle zdd_adapter dongle_display
+    shield: cornix_dongle raw_hid_adapter zdd_adapter dongle_display
     snippet: common-config studio-rpc-usb-uart scanner-target
     cmake-args: -DCONFIG_ZMK_KEYBOARD_NAME=\"Cornix\ ZDD\" -DCONFIG_ZMK_STATUS_ADV_KEYBOARD_NAME=\"Cornix\ ZDD\" -DCONFIG_ZMK_STATUS_ADV_CENTRAL_SIDE=\"LEFT\"
     artifact-name: cornix_zdd_w_scanner
