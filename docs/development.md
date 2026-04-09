@@ -14,7 +14,7 @@ Use these branch roles when choosing where to develop and test:
 | --- | --- |
 | `main` | development |
 | `canary` | latest |
-| `v0.3` | zmk v0.3 |
+| `v0.3` | versioned ZMK v0.3 maintenance branch |
 | `scanner` | scanner |
 
 ## CI Workflows
@@ -23,6 +23,7 @@ Build and release are matrix-driven via `build.yaml`.
 
 - `.github/workflows/build.yml`: the only reusable firmware build workflow; supports full matrix, filtered builds, and profile selection
 - `.github/workflows/release.yml`: resolves `stable` or `canary` from the tag/branch (or manual override), then publishes firmware release assets
+- `.github/workflows/run-tests.yml`: resolves the target ZMK version, patches the test manifest inside an isolated temporary workspace, and uploads build logs from the isolated build directory
 - `.github/workflows/config-policy-guard.yml`: policy lint plus random matrix sanity builds through `build.yml`
 
 ## Recommended Workflow (GitHub Actions)
@@ -34,6 +35,15 @@ Build and release are matrix-driven via `build.yaml`.
 5. Flash matching firmware files to target devices.
 
 This keeps builds aligned with pinned dependencies in `config/west.yml`.
+
+## External Modules
+
+The active non-versioning branches now depend on additional west modules for Raw HID and KeyPeek layer notifications:
+
+- `zmk-raw-hid`
+- `zmk-keypeek-layer-notifier`
+
+If you switch to one of those branches locally after working on `v0.3`, run `west update` before building so the workspace matches the branch manifest.
 
 ## Configuration Policy (Split Role)
 

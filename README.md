@@ -172,6 +172,8 @@ Current in-repo matrix coverage:
 - Active in `build.yaml`: keyboard-specific Prospector dongle targets (`*_prospector_dongle`)
 - Planned/external track: Prospector scanner targets
 
+USB-facing targets on the active non-versioning branches also include `raw_hid_adapter` so Raw HID clients such as KeyPeek can observe live layer state. After switching branches, run `west update` so the local workspace picks up any manifest changes.
+
 ### Supported variants by firmware family
 
 - [ZMK Dongle Display](https://github.com/englmaxi/zmk-dongle-display): dongle firmware with 1.3-inch OLED screen support

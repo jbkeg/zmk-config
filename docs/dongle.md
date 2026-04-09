@@ -93,11 +93,11 @@ Some are planned-only depending on current matrix coverage.
 
 1. `zdd` + `dongle` role (single keyboard)
    - `board: nice_nano//zmk`
-   - `shield: totem_dongle zdd_adapter dongle_display`
+   - `shield: totem_dongle raw_hid_adapter zdd_adapter dongle_display`
    - `artifact-name: totem_zdd_dongle`
 2. `prospector` + `dongle` role (single keyboard)
    - `board: xiao_ble//zmk`
-   - `shield: totem_dongle prospector_adapter`
+   - `shield: totem_dongle raw_hid_adapter prospector_adapter`
    - `artifact-name: totem_prospector_dongle`
 3. `prospector` + `scanner` role
    - `board: xiao_ble//zmk`
@@ -111,9 +111,9 @@ Current state from `build.yaml`:
 - Active dongle-related entries:
   - Split targets for Totem, Urchin, Corne, Eyelash Corne, Sofle, Eyelash Sofle, Delta Omega, and Cornix.
   - Dedicated ZDD and Prospector dongle targets for Totem, Urchin, Corne, Eyelash Corne, Sofle, Eyelash Sofle, Delta Omega, and Cornix.
+  - USB-facing dongle targets on the active non-versioning branches include `raw_hid_adapter` for Raw HID consumers such as KeyPeek.
   - Shared reset targets: `reset_nice_nano_zmk`, `reset_xiao_ble_zmk`.
-- Not active yet:
-  - `prospector_scanner`
+- Scanner-specific entries may differ by branch; check the current branch `build.yaml` before assuming scanner coverage.
 
 ## `scanner` Role: Status Observer Model
 
