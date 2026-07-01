@@ -97,7 +97,7 @@ jobs:
       selected_count: ${{ steps.select.outputs.selected_count }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup Python
         uses: actions/setup-python@v6
@@ -157,7 +157,7 @@ jobs:
       BUILD_DIR: /tmp/zmk-build/build/${{ matrix.artifact_name }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Cache west modules
         uses: actions/cache@v5
